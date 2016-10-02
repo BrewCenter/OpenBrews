@@ -1,6 +1,6 @@
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "OpenBrews",
+  "short_name": "OpenBrews",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

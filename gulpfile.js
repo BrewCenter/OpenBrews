@@ -2,32 +2,62 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
+var clean = require('gulp-clean');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var jshint = require('gulp-jshint');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./openbrews/**/*.scss'],
+  js: ['./openbrews/**/*.js', '!./openbrews/lib/**']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('clean', function() {
+  gulp.src('./dist')
+    .pipe(clean());
+});
+
+gulp.task('default', ['sass', 'js', 'static']);
+
+gulp.task('jshint', [], function(done) {
+  gulp.src(paths.js)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .on('end', done);
+});
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src('./openbrews/openbrews.app.scss')
     .pipe(sass())
     .on('error', sass.logError)
-    .pipe(gulp.dest('./www/css/'))
+    .pipe(gulp.dest('./openbrews/'))
+    .pipe(gulp.dest('./dist/'))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
+    .pipe(gulp.dest('./openbrews/'))
+    .pipe(gulp.dest('./dist/'))
     .on('end', done);
 });
 
+gulp.task('js', function(done) {
+  gulp.src('./openbrews/**/*.js')
+      .pipe(gulp.dest('./dist/'))
+      .on('end', done);
+
+});
+
+gulp.task('static', function(done) {
+  gulp.src(['./openbrews/**/*','!./openbrews/**/*.js', '!./openbrews/**/*.scss'])
+      .pipe(gulp.dest('./dist/'))
+      .on('end', done);
+});
+
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.sass, ['sass', 'js', 'static']);
 });
 
 gulp.task('install', ['git-check'], function() {
