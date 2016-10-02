@@ -1,0 +1,11 @@
+{
+  "name": "OpenBrews",
+  "short_name": "OpenBrews",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
