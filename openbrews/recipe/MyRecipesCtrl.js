@@ -5,7 +5,18 @@
 (function(){
 	'use strict';
   angular.module('openbrews.myRecipes', [])
-    .controller('MyRecipesCtrl', function() {
+    .controller('MyRecipesCtrl', function($scope) {
+
+    	$scope.recipes = [
+    		{
+    			name: 'Citra Pale Ale',
+    			type: 'American Pale Ale'
+    		},
+    		{
+    			name: 'Dark Chocolate Porter',
+    			type: 'American Porter'
+    		}
+    	];
 
     });
 })();
