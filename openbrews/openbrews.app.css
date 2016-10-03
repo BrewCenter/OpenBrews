@@ -9814,3 +9814,10 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.recipe-row:hover {
+  background-color: #EEE; }
+
+/* shared classes */
+.clickable {
+  cursor: pointer; }
