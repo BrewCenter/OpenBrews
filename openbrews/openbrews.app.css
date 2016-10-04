@@ -9814,27 +9814,3 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
-
-.recipe-row:hover {
-  background-color: #EEE; }
-
-.add-recipe .list .item input {
-  padding-left: 20px !important; }
-
-/* shared classes */
-.clickable {
-  cursor: pointer; }
-
-/* spacing classes */
-.space-40 {
-  height: 40px; }
-
-/* responsive classes */
-@media screen and (min-width: 1080px) {
-  .container {
-    width: 60%;
-    margin-left: 20%; } }
-
-@media screen and (max-width: 1080px) {
-  .hide-on-mobile {
-    display: none; } }

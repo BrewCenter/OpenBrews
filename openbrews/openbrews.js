@@ -7,8 +7,7 @@
   angular.module('openbrews', 
     [
       'ionic',
-      'openbrews.myRecipes',
-      'openbrews.addRecipe'
+      'openbrews.myRecipes'
     ])
 
   .run(function($ionicPlatform) {
@@ -43,14 +42,7 @@
       url: '/recipes',
       templateUrl: 'recipe/list.html',
       controller: 'MyRecipesCtrl'
-    })
-
-    .state('add-recipe', {
-      url: '/recipes/add',
-      templateUrl: 'recipe/add/add-recipe.html',
-      controller: 'AddRecipeCtrl'
     });
-
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/recipes');
