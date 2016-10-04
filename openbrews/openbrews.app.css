@@ -9818,6 +9818,9 @@ a.button {
 .recipe-row:hover {
   background-color: #EEE; }
 
+.add-recipe .list .item input {
+  padding-left: 20px !important; }
+
 /* shared classes */
 .clickable {
   cursor: pointer; }

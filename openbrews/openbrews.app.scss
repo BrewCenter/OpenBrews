@@ -21,6 +21,7 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "./lib/ionic/scss/ionic";
 @import "./recipe/list";
+@import "./recipe/add/add-recipe";
 
 /* shared classes */
 .clickable {
