@@ -20,4 +20,30 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "./lib/ionic/scss/ionic";
+@import "./recipe/list";
+@import "./recipe/add/add-recipe";
+
+/* shared classes */
+.clickable {
+	cursor: pointer;
+}
+
+/* spacing classes */
+.space-40 {
+	height: 40px;
+}
+
+/* responsive classes */
+@media screen and (min-width: 1080px) {
+	.container {
+		width: 60%;
+		margin-left: 20%;
+	}
+}
+
+@media screen and (max-width: 1080px) {
+	.hide-on-mobile {
+		display: none;
+	}
+}
 

@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
   angular.module('openbrews.myRecipes', [])
-    .controller('MyRecipesCtrl', function($scope) {
+    .controller('MyRecipesCtrl', function($scope, $state) {
 
     	$scope.recipes = [
     		{
@@ -17,6 +17,10 @@
     			type: 'American Porter'
     		}
     	];
+
+        $scope.addRecipe = function() {
+            $state.go("add-recipe");
+        };
 
     });
 })();
