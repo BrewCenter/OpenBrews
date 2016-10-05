@@ -3,22 +3,44 @@
 	</ion-nav-buttons>
 	<ion-content>
 		<div class="container">
+			<div class="space-40 hide-on-mobile"></div>
 			<form>
 				<div class="list">
 					<label for="name" class="item item-input">
-						Name <input type="text" name="name" ng-model="recipe.name">
+						Name <input type="text" name="name" ng-model="recipe.name" class="text-right">
 					</label>
 					<label for="style" class="item item-input">
-						Style <input type="text" name="style" ng-model="recipe.style">
+						Style <input type="text" name="style" ng-model="recipe.style" class="text-right">
 					</label>
 					<label for="boilSize" class="item item-input">
-						Boil Size <input type="text" name="boilSize" ng-model="recipe.boilSize">
+						Boil Size <input type="text" name="boilSize" ng-model="recipe.boilSize" class="text-right">
 					</label>
-					<label for="boilSizeUnits" class="item item-input">
-						Boil Size Units <input type="text" name="boilSizeUnits" ng-model="recipe.boilSizeUnits">
+					<label for="boilSizeUnits" class="item item-input item-select">
+						Boil Size Units
+						<select name="boilSizeUnits" ng-model="recipe.boilSizeUnits">
+					      <option selected>Gal</option>
+					      <option>L</option>
+					    </select>
 					</label>
-					<label for="boilTime" class="item item-input">
-						Boil Time <input type="text" name="boilTime" ng-model="recipe.boilTime">
+					<label for="boilTime" class="item item-input item-input-group">
+						Boil Time
+						<input type="text" name="boilTime" ng-model="recipe.boilTime" class="text-right">
+						<span class="input-addon">Minutes</span>
+					</label>
+					<label for="estFermentationDays" class="item item-input item-input-group">
+						Estimated Fermentation Time
+						<input type="text" name="estFermentationDays" ng-model="recipe.estFermentationDays" class="text-right">
+						<span class="input-addon">Days</span>
+					</label>
+					<label for="secondaryTimeDays" class="item item-input item-input-group">
+						Secondary Fermentation Time
+						<input type="text" name="secondaryTimeDays" ng-model="recipe.secondaryTimeDays" class="text-right">
+						<span class="input-addon">Days</span>
+					</label>
+					<label for="mashEfficency" class="item item-input item-input-group">
+						Mash Efficiency
+						<input type="text" name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right">
+						<span class="input-addon">%</span>
 					</label>
 				</div>
 			</form>

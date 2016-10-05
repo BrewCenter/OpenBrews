@@ -23,6 +23,23 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 @import "./recipe/list";
 @import "./recipe/add/add-recipe";
 
+/* form styles */
+.item-input-group input {
+	padding-right: 5px;
+}
+
+.input-addon {
+	padding-right: 15px;
+}
+
+/* hide number spinner because it's just ugly */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 /* shared classes */
 .clickable {
 	cursor: pointer;

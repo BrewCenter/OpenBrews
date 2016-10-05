@@ -13,9 +13,9 @@
           boilSize: 5,
           boilSizeUnits: "Gal",
           boilTime: 60,
-          estFermTimeDays: 7,
+          estFermentationDays: 7,
           secondaryTimeDays: 7,
-          mashEfficiency: 0.68,
+          mashEfficiency: 68,
           fermentables: [
             {
               name: "Pale Liquid Extract",
@@ -60,7 +60,7 @@
               name: "Orange Peel",
               amount: 5.0,
               amountUnits: "OZ",
-              stage: "Boil"
+              stage: "Boil",
               addTime: "60"
             },
             {
