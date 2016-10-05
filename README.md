@@ -25,4 +25,4 @@ I can add you as a contributor to this repository.
 To run the app, clone this repository, `cd` into the repository folder, and run
 `gulp && ionic serve [--lab]`.
 
-Message me for an invitation to our slack team.
+Message me (mike) for an invitation to our slack team.
