@@ -62,6 +62,14 @@
 					  Add Hop
 					</button>
 				</div>
+				<h4>Yeasts</h4>
+
+				<yeast ng-repeat="yeast in recipe.yeasts" info="yeast" index="$index"></yeast>
+				<div class="padded">
+					<button class="button button-block button-balanced" ng-click="addYeast()" ng-tap="addYeast()">
+					  Add Yeast
+					</button>
+				</div>
 
 				<div class="padded">
 					<button class="button button-block button-balanced"

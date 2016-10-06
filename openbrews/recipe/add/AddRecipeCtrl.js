@@ -4,7 +4,7 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
 	'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective'])
+  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective', 'openbrews.yeastDirective'])
     .controller('AddRecipeCtrl', function($scope) {
 
       /* remove the fermentable at the given index */
@@ -56,6 +56,19 @@
         );
       }
 
+      /* Add a new yeast */
+      $scope.addYeast = function() {
+        $scope.recipe.yeasts.push(
+          {
+            name: "WY1056 American Ale",
+            attenuation: 0.75,
+            flocculation: "Medium-Low",
+            amount: "13.5",
+            amountUnits: "G"
+          }
+        );
+      }
+
       $scope.recipe = {
         name: "Citra Pale Ale",
         style: "American Pale Ale",
@@ -95,7 +108,7 @@
             stage: "Secondary"
           }
         ],
-        yeast: [
+        yeasts: [
           {
             name: "WY1056 American Ale",
             attenuation: 0.75,

@@ -1,0 +1,24 @@
+<div class="list list-inset">
+	<label for="yeast[{{index}}].name" class="item item-input">
+		Name <input type="text" name="yeast[{{index}}].name" ng-model="yeast.name" class="text-right">
+	</label>
+	<label for="yeast[{{index}}].attenuation" class="item item-input">
+		Attenuation <input type="number" name="yeast[{{index}}].attenuation" ng-model="yeast.attenuation" class="text-right">
+	</label>
+	<!--<label for="yeast[{{index}}].weightUnits" class="item item-input item-select">-->
+		<!--Weight Units-->
+		<!--<select name="yeast[{{index}}].weightUnits" ng-model="yeast.weightUnits">-->
+				<!--<option>Lbs</option>-->
+				<!--<option>Kg</option>-->
+			<!--</select>-->
+	<!--</label>-->
+	<label for="yeast[{{index}}].amount" class="item item-input item-input-group">
+		Amount <input type="number" name="yeast[{{index}}].amount" ng-model="yeast.amount" class="text-right">
+	</label>
+	<!--<label for="yeast[{{index}}].ppg" class="item item-input">-->
+		<!--PPG <input type="number" name="yeast[{{index}}].ppg" ng-model="yeast.ppg" class="text-right">-->
+	<!--</label>-->
+	<div class="item item-button">
+		<button class="button button-assertive button-block button-full" ng-click="deleteyeast(index)" ng-tap="deleteyeast(index)">Delete {{yeast.name}}</button>
+	</div>
+</div>
