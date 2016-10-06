@@ -1,0 +1,40 @@
+<div class="list list-inset">
+	<label for="hop[{{index}}].name" class="item item-input">
+		Name <input type="text" name="hop[{{index}}].name" ng-model="hop.name" class="text-right">
+	</label>
+	<label for="hop[{{index}}].type" class="item item-input item-select">
+		Hop Type
+		<select name="hop[{{index}}].type" ng-model="hop.type">
+      <option>Pellet</option>
+    </select>
+	</label>
+	<label for="hop[{{index}}].weight" class="item item-input">
+		Weight <input type="number" name="hop[{{index}}].weight" ng-model="hop.weight" class="text-right">
+	</label>
+	<label for="hop[{{index}}].weightUnits" class="item item-input item-select">
+		Weight Units
+		<select name="hop[{{index}}].weightUnits" ng-model="hop.weightUnits">
+	      <option>OZ</option>
+	      <option>g</option>
+	    </select>
+	</label>
+	<label for="hop[{{index}}].aa" class="item item-input">
+		Alpha Acid <input type="number" name="hop[{{index}}].aa" ng-model="hop.aa" class="text-right">
+	</label>
+	<label for="hop[{{index}}].stage" class="item item-input item-select">
+		Stage
+		<select name="hop[{{index}}].stage" ng-model="hop.stage">
+      <option>Boil</option>
+      <option>Secondary</option>
+    </select>
+	</label>
+	<label for="hop[{{index}}].addTime" class="item item-input item-input-group">
+		Add Time <input type="number" name="hop[{{index}}].addTime" ng-model="hop.addTime" class="text-right">
+		<span class="input-addon">Minutes Left</span>
+	</label>
+	<div class="item item-button">
+		<button class="button button-assertive button-block button-full"
+      ng-click="deleteHop(index)" ng-tap="deleteHop(index)">Delete
+      {{hop.name}}</button>
+	</div>
+</div>

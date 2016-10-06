@@ -4,10 +4,8 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
 	'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective'])
-    .controller('AddRecipeCtrl', function($scope, $state) {
-
-      var LOCAL_STORAGE_KEY = "recipes";
+  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective'])
+    .controller('AddRecipeCtrl', function($scope) {
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -39,6 +37,23 @@
         history.push($scope.recipe);
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
         $state.go("recipes");
+      }
+
+      /* remove the Hop at the given index */
+      $scope.deleteHop = function(index) {
+        $scope.recipe.hops.splice(index,1);
+      };
+
+      /* Add a new Hop */
+      $scope.addHop = function() {
+        $scope.recipe.hops.push(
+          {
+            weight: 0,
+            aa: 0,
+            stage: "Boil",
+            addTime: 60
+          }
+        );
       }
 
       $scope.recipe = {
