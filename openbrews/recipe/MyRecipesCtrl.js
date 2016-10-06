@@ -7,20 +7,18 @@
   angular.module('openbrews.myRecipes', [])
     .controller('MyRecipesCtrl', function($scope, $state) {
 
-    	$scope.recipes = [
-    		{
-    			name: 'Citra Pale Ale',
-    			type: 'American Pale Ale'
-    		},
-    		{
-    			name: 'Dark Chocolate Porter',
-    			type: 'American Porter'
-    		}
-    	];
+      var LOCAL_STORAGE_KEY = "recipes";
+      var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+      var history = [];
+      if (oldItems) {
+        history = JSON.parse(oldItems);
+      }
 
-        $scope.addRecipe = function() {
-            $state.go("add-recipe");
-        };
+      $scope.recipes = history
+
+      $scope.addRecipe = function() {
+          $state.go("add-recipe");
+      };
 
     });
 })();
