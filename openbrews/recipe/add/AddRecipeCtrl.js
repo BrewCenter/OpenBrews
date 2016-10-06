@@ -4,7 +4,7 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
 	'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective'])
+  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.otherIngredientDirective'])
     .controller('AddRecipeCtrl', function($scope) {
 
       /* remove the fermentable at the given index */
@@ -25,6 +25,22 @@
           }
         );
       }
+
+	  /* Add other ingredient. */
+	  $scope.addOther = function() {
+		$scope.recipe.others.push({
+		  name: "Orange Peel",
+		  amount: 5.0,
+		  amountUnits: "OZ",
+		  stage: "Boil",
+		  addTime: "60"
+		});
+	  };
+
+	  /* Delete other ingredient. */
+	  $scope.deleteOther = function(index) {
+		  $scope.recipe.others.splice(index,1);
+	  };
 
       $scope.recipe = {
         name: "Citra Pale Ale",

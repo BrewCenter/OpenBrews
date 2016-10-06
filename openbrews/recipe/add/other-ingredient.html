@@ -1,0 +1,20 @@
+<div class="list list-inset">
+	<label for="other[{{$index}}].name" class="item item-input">
+		Name <input type="text" name="other[{{$index}}].name" ng-model="other.name" class="text-right">
+	</label>
+	<label for="other[{{$index}}].amount" class="item item-input">
+		Amount <input type="number" name="other[{{$index}}].amount" ng-model="other.amount" class="text-right">
+	</label>
+    <label for="other[{{$index}}].amountUnits" class="item item-input">
+        Amount Units <input type="text" amountUnits="other[{{$index}}].amountUnits" ng-model="other.amountUnits" class="text-right">
+    </label>
+    <label for="other[{{$index}}].stage" class="item item-input">
+        Stage <input type="text" name="other[{{$index}}].stage" ng-model="other.stage" class="text-right">
+    </label>
+    <label for="other[{{$index}}].addTime" class="item item-input">
+        Add Time <input type="text" name="other[{{$index}}].addTime" ng-model="other.addTime" class="text-right">
+    </label>
+	<div class="item item-button">
+		<button class="button button-assertive button-block button-full" ng-click="deleteOther($index)" ng-tap="deleteOther($index)">Delete {{other.name}}</button>
+	</div>
+</div>

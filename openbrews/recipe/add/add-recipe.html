@@ -53,7 +53,16 @@
 					</button>
 				</div>
 
+				<h4>Others</h4>
+
+				<other-ingredient ng-repeat="other in recipe.others track by $index" model="other"></other-ingredient>
+				<div class="padded">
+					<button class="button button-block button-balanced" ng-click="addOther()" ng-tap="addOther()">
+					  Add Other Ingredient
+					</button>
+				</div>
+
 			</form>
-		</div>		
+		</div>
 	</ion-content>
 </ion-view>
