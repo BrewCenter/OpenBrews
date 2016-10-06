@@ -9818,12 +9818,30 @@ a.button {
 .recipe-row:hover {
   background-color: #EEE; }
 
-.add-recipe .item input {
-  padding-left: 20px !important; }
+.add-recipe {
+  /* fix inset lists */ }
+  .add-recipe .item input {
+    padding-left: 20px !important; }
+  .add-recipe h4 {
+    padding-left: 20px; }
+  .add-recipe .padded {
+    padding-left: 10px;
+    padding-right: 10px; }
+  .add-recipe .list-inset {
+    margin-top: 0;
+    margin-bottom: 20; }
+  .add-recipe .list-inset:last-child {
+    margin-bottom: 20px; }
+  .add-recipe .list-inset .item.item-input input {
+    padding-right: 15px !important; }
+  .add-recipe .list-inset .item-button {
+    padding: 0px; }
+  .add-recipe .list-inset .item-button button {
+    margin: 0px; }
 
 /* form styles */
-.item-input-group input {
-  padding-right: 5px; }
+.list .item.item-input.item-input-group input {
+  padding-right: 5px !important; }
 
 .input-addon {
   padding-right: 15px; }

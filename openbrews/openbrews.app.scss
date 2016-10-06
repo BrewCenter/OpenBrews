@@ -24,8 +24,8 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 @import "./recipe/add/add-recipe";
 
 /* form styles */
-.item-input-group input {
-	padding-right: 5px;
+.list .item.item-input.item-input-group input {
+	padding-right: 5px !important;
 }
 
 .input-addon {
