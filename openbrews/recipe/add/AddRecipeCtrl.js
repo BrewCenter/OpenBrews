@@ -5,7 +5,9 @@
 (function(){
 	'use strict';
   angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective', 'openbrews.yeastDirective'])
-    .controller('AddRecipeCtrl', function($scope) {
+    .controller('AddRecipeCtrl', function($scope, $state) {
+
+      var LOCAL_STORAGE_KEY = "recipesInStorage";
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -26,19 +28,6 @@
         );
       }
 
-      /* Save a recipe in LocalStorage */
-      $scope.saveRecipe = function() {
-        console.log("Saving this recipe!");
-        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-        var history = [];
-        if (oldItems) {
-          history = JSON.parse(oldItems);
-        }
-        history.push($scope.recipe);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
-        $state.go("recipes");
-      }
-
       /* remove the Hop at the given index */
       $scope.deleteHop = function(index) {
         $scope.recipe.hops.splice(index,1);
@@ -56,22 +45,32 @@
         );
       }
 
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      }
+
       /* Add a new yeast */
       $scope.addYeast = function() {
         $scope.recipe.yeasts.push(
           {
-            name: "WY1056 American Ale",
-            attenuation: 0.75,
+            attenuation: 0,
             flocculation: "Medium-Low",
-            amount: "13.5",
             amountUnits: "G"
           }
         );
       }
 
-      /* Delete the yeast at supplied index */
-      $scope.deleteYeast = function(index) {
-        $scope.recipe.yeasts.splice(index, 1);
+      /* Save a recipe in LocalStorage */
+      $scope.saveRecipe = function() {
+        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        var history = [];
+        if (oldItems) {
+          history = JSON.parse(oldItems);
+        }
+        history.push($scope.recipe);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        $state.go("recipes");
       }
 
       $scope.recipe = {
