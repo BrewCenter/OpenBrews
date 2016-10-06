@@ -69,6 +69,11 @@
         );
       }
 
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      }
+
       $scope.recipe = {
         name: "Citra Pale Ale",
         style: "American Pale Ale",
