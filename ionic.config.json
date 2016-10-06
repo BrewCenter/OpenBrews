@@ -1,6 +1,6 @@
 {
   "name": "openbrews",
-  "app_id": "6c4e1c3a",
+  "app_id": "",
   "documentRoot": "./openbrews",
   "gulpStartupTasks": [
     "sass",
