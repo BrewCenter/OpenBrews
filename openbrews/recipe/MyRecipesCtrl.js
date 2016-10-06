@@ -20,5 +20,15 @@
           $state.go("add-recipe");
       };
 
+      $scope.data = { showDelete: false };
+
+      $scope.deleteRecipe = function(recipe){
+        console.log("Deleting...");
+      };
+
+      $scope.editRecipe = function(recipe){
+        console.log("Editing...");
+      };
+
     });
 })();
