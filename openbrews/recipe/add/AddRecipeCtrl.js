@@ -5,7 +5,9 @@
 (function(){
 	'use strict';
   angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective'])
-    .controller('AddRecipeCtrl', function($scope) {
+    .controller('AddRecipeCtrl', function($scope, $state) {
+
+      var LOCAL_STORAGE_KEY = "recipes";
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -24,6 +26,19 @@
             srm: 0
           }
         );
+      }
+
+      /* Save a recipe in LocalStorage */
+      $scope.saveRecipe = function() {
+        console.log("Saving this recipe!");
+        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        var history = [];
+        if (oldItems) {
+          history = JSON.parse(oldItems);
+        }
+        history.push($scope.recipe);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        $state.go("recipes");
       }
 
       $scope.recipe = {
