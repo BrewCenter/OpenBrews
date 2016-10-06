@@ -4,8 +4,10 @@
 	</label>
 	<label for="hop[{{index}}].type" class="item item-input item-select">
 		Hop Type
-		<select name="hop[{{index}}].type" ng-model="hop.type">
+    <select name="hop[{{index}}].type" ng-model="hop.type">
+      <option>Leaf</option>
       <option>Pellet</option>
+      <option>Plug</option>
     </select>
 	</label>
 	<label for="hop[{{index}}].weight" class="item item-input">
@@ -14,8 +16,8 @@
 	<label for="hop[{{index}}].weightUnits" class="item item-input item-select">
 		Weight Units
 		<select name="hop[{{index}}].weightUnits" ng-model="hop.weightUnits">
-	      <option>OZ</option>
-	      <option>g</option>
+	      <option>oz</option>
+	      <option>G</option>
 	    </select>
 	</label>
 	<label for="hop[{{index}}].aa" class="item item-input">
