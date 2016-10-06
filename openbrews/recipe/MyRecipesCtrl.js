@@ -7,7 +7,7 @@
   angular.module('openbrews.myRecipes', [])
     .controller('MyRecipesCtrl', function($scope, $state) {
 
-      var LOCAL_STORAGE_KEY = "recipes";
+      var LOCAL_STORAGE_KEY = "recipesInStorage";
       var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
       var history = [];
       if (oldItems) {

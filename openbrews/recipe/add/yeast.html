@@ -1,0 +1,40 @@
+<div class="list list-inset">
+	<label for="yeast[{{index}}].name" class="item item-input">
+		Name <input type="text" name="yeast[{{index}}].name" ng-model="yeast.name" class="text-right">
+	</label>
+	<label for="yeast[{{index}}].attenuation" class="item item-input">
+		Attenuation <input type="number" step="any" name="yeast[{{index}}].attenuation" ng-model="yeast.attenuation" class="text-right">
+	</label>
+	<label for="yeast[{{index}}].flocculation" class="item item-input
+    item-select">
+		Flocculation
+    <select name="yeast[{{index}}].flocculation" ng-model="yeast.flocculation"
+      class="text-right">
+      <option>Low to Medium</option>
+      <option>Medium</option>
+      <option>Medium-Low</option>
+      <option>Medium to High</option>
+      <option>High</option>
+      <option>Very High</option>
+    </select>
+	</label>
+	<label for="yeast[{{index}}].amount" class="item item-input">
+		Amount <input type="text" name="yeast[{{index}}].amount" ng-model="yeast.amount" class="text-right">
+	</label>
+	<label for="yeast[{{index}}].amountUnits" class="item item-input
+    item-select">
+		Amount Units
+    <select name="yeast[{{index}}].amountUnits" ng-model="yeast.amountUnits"
+      class="text-right">
+      <option>oz</option>
+      <option>fl oz</option>
+      <option>G</option>
+      <option>mL</option>
+    </select>
+	</label>
+	<div class="item item-button">
+		<button class="button button-assertive button-block button-full"
+      ng-click="deleteYeast(index)" ng-tap="deleteYeast(index)">Delete
+      {{yeast.name}}</button>
+	</div>
+</div>

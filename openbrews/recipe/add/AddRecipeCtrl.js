@@ -4,8 +4,10 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
 	'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective'])
-    .controller('AddRecipeCtrl', function($scope) {
+  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective', 'openbrews.yeastDirective'])
+    .controller('AddRecipeCtrl', function($scope, $state) {
+
+      var LOCAL_STORAGE_KEY = "recipesInStorage";
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -26,19 +28,6 @@
         );
       }
 
-      /* Save a recipe in LocalStorage */
-      $scope.saveRecipe = function() {
-        console.log("Saving this recipe!");
-        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-        var history = [];
-        if (oldItems) {
-          history = JSON.parse(oldItems);
-        }
-        history.push($scope.recipe);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
-        $state.go("recipes");
-      }
-
       /* remove the Hop at the given index */
       $scope.deleteHop = function(index) {
         $scope.recipe.hops.splice(index,1);
@@ -54,6 +43,34 @@
             addTime: 60
           }
         );
+      }
+
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      }
+
+      /* Add a new yeast */
+      $scope.addYeast = function() {
+        $scope.recipe.yeasts.push(
+          {
+            attenuation: 0,
+            flocculation: "Medium-Low",
+            amountUnits: "G"
+          }
+        );
+      }
+
+      /* Save a recipe in LocalStorage */
+      $scope.saveRecipe = function() {
+        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        var history = [];
+        if (oldItems) {
+          history = JSON.parse(oldItems);
+        }
+        history.push($scope.recipe);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        $state.go("recipes");
       }
 
       $scope.recipe = {
@@ -95,7 +112,7 @@
             stage: "Secondary"
           }
         ],
-        yeast: [
+        yeasts: [
           {
             name: "WY1056 American Ale",
             attenuation: 0.75,
