@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
   angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective'])
-    .controller('AddRecipeCtrl', function($scope) {
+    .controller('AddRecipeCtrl', function($scope, $state) {
 
       var LOCAL_STORAGE_KEY = "recipes";
 
@@ -38,6 +38,7 @@
         }
         history.push($scope.recipe);
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        $state.go("recipes");
       }
 
       $scope.recipe = {
