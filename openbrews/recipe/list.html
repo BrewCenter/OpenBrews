@@ -4,7 +4,7 @@
 	</ion-nav-buttons>
 	<ion-content>
 
-		<ul class="list">
+		<!-- <ul class="list">
 			<ng-repeat ng-repeat="recipe in recipes">
 			<li class="item">
 				<div class="row">
@@ -16,7 +16,28 @@
 					</div>
 			</li>
 			</ng-repeat>
-		</ul>
+		</ul> -->
+		<ion-list>
+            <ion-item ng-repeat="recipe in recipes">
+                
+                <div class="row">
+					<div class="col text-left">
+						{{recipe.name}}
+					</div>
+					<div class="col text-right">
+						{{recipe.type}}
+					</div>
+				</div>
+                
+                <ion-option-button class="button-calm" ng-click="editRecipe(recipe)">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteRecipe(recipe)">
+                    Delete
+                </ion-option-button>
+                </ion-item>
+
+        </ion-list>
 		
 	</ion-content>
 </ion-view>
