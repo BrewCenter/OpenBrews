@@ -5,14 +5,26 @@
 	<label for="other[{{$index}}].amount" class="item item-input">
 		Amount <input type="number" name="other[{{$index}}].amount" ng-model="other.amount" class="text-right">
 	</label>
-    <label for="other[{{$index}}].amountUnits" class="item item-input">
-        Amount Units <input type="text" amountUnits="other[{{$index}}].amountUnits" ng-model="other.amountUnits" class="text-right">
+    <label for="other[{{$index}}].amountUnits" class="item item-input item-select">
+        Amount Units
+        <select name="other[{{$index}}].amountUnits" ng-model="other.amountUnits">
+          <option>oz</option>
+          <option>fl oz</option>
+          <option>G</option>
+          <option>mL</option>
+        </select>
     </label>
-    <label for="other[{{$index}}].stage" class="item item-input">
-        Stage <input type="text" name="other[{{$index}}].stage" ng-model="other.stage" class="text-right">
+    <label for="other[{{$index}}].stage" class="item item-input item-select">
+        Stage
+        <select name="other[{{$index}}].stage" ng-model="other.stage">
+          <option>Boil</option>
+          <option>Secondary</option>
+        </select>
     </label>
-    <label for="other[{{$index}}].addTime" class="item item-input">
-        Add Time <input type="text" name="other[{{$index}}].addTime" ng-model="other.addTime" class="text-right">
+    <label for="other[{{$index}}].addTime" class="item item-input item-input-group">
+        Add Time
+        <input type="text" name="other[{{$index}}].addTime" ng-model="other.addTime" class="text-right">
+        <span class="input-addon">Minutes Left</span>
     </label>
 	<div class="item item-button">
 		<button class="button button-assertive button-block button-full" ng-click="deleteOther($index)" ng-tap="deleteOther($index)">Delete {{other.name}}</button>

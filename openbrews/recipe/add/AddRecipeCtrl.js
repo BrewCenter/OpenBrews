@@ -3,9 +3,11 @@
 */
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
-	'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.otherIngredientDirective'])
-    .controller('AddRecipeCtrl', function($scope) {
+  'use strict';
+  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective', 'openbrews.yeastDirective', 'openbrews.otherIngredientDirective'])
+    .controller('AddRecipeCtrl', ['$scope', '$state', function($scope, $state) {
+
+      var LOCAL_STORAGE_KEY = "recipesInStorage";
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -24,23 +26,68 @@
             srm: 0
           }
         );
-      }
+      };
 
-	  /* Add other ingredient. */
-	  $scope.addOther = function() {
-		$scope.recipe.others.push({
-		  name: "Orange Peel",
-		  amount: 5.0,
-		  amountUnits: "OZ",
-		  stage: "Boil",
-		  addTime: "60"
-		});
-	  };
+      /* Add other ingredient. */
+      $scope.addOther = function() {
+        $scope.recipe.others.push({
+          name: "Orange Peel",
+          amount: 5.0,
+          amountUnits: "oz",
+          stage: "Boil",
+          addTime: 60
+        });
+      };
 
-	  /* Delete other ingredient. */
-	  $scope.deleteOther = function(index) {
-		  $scope.recipe.others.splice(index,1);
-	  };
+      /* Delete other ingredient. */
+      $scope.deleteOther = function(index) {
+        $scope.recipe.others.splice(index,1);
+      };
+
+      /* remove the Hop at the given index */
+      $scope.deleteHop = function(index) {
+        $scope.recipe.hops.splice(index,1);
+      };
+
+      /* Add a new Hop */
+      $scope.addHop = function() {
+        $scope.recipe.hops.push(
+          {
+            weight: 0,
+            aa: 0,
+            stage: "Boil",
+            addTime: 60
+          }
+        );
+      };
+
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      };
+
+      /* Add a new yeast */
+      $scope.addYeast = function() {
+        $scope.recipe.yeasts.push(
+          {
+            attenuation: 0,
+            flocculation: "Medium-Low",
+            amountUnits: "G"
+          }
+        );
+      };
+
+      /* Save a recipe in LocalStorage */
+      $scope.saveRecipe = function() {
+        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        var history = [];
+        if (oldItems) {
+          history = JSON.parse(oldItems);
+        }
+        history.push($scope.recipe);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        $state.go("recipes");
+      };
 
       $scope.recipe = {
         name: "Citra Pale Ale",
@@ -67,7 +114,7 @@
             name: "Citra",
             type: "Pellet",
             weight: 1,
-            weightUnits: "OZ",
+            weightUnits: "oz",
             aa: 0.125,
             stage: "Boil",
             addTime: 60
@@ -76,12 +123,13 @@
             name: "Citra",
             type: "Pellet",
             weight: 1,
-            weightUnits: "OZ",
+            weightUnits: "oz",
             aa: 0.125,
-            stage: "Secondary"
+            stage: "Secondary",
+            addTime: 0
           }
         ],
-        yeast: [
+        yeasts: [
           {
             name: "WY1056 American Ale",
             attenuation: 0.75,
@@ -94,15 +142,16 @@
           {
             name: "Orange Peel",
             amount: 5.0,
-            amountUnits: "OZ",
+            amountUnits: "oz",
             stage: "Boil",
-            addTime: "60"
+            addTime: 60
           },
           {
             name: "Orange Peel",
             amount: 5.0,
-            amountUnits: "OZ",
-            stage: "Secondary"
+            amountUnits: "oz",
+            stage: "Secondary",
+            addTime: 0
           }
         ],
         notes: [
@@ -110,5 +159,5 @@
         ]
       };
 
-    });
+    }]);
 })();
