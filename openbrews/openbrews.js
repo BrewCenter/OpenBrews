@@ -41,6 +41,7 @@
 
     .state('recipes', {
       url: '/recipes',
+      cache: false,
       templateUrl: 'recipe/list.html',
       controller: 'MyRecipesCtrl'
     })
