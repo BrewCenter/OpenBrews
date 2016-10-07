@@ -6,3 +6,6 @@ platforms/
 plugins/
 dist/
 openbrews/lib
+*.zip
+resources/
+www/
