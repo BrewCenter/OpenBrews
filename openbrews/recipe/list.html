@@ -2,9 +2,6 @@
 	<ion-nav-buttons side="right">
 		<button class="button" ng-click="addRecipe()" ng-tap="addRecipe()"><i class="icon ion-plus"></i></button>
 	</ion-nav-buttons>
-	<ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
-    </ion-nav-buttons>
 	<ion-content>
 
 		<!-- <ul class="list">
@@ -20,7 +17,7 @@
 			</li>
 			</ng-repeat>
 		</ul> -->
-		<ion-list show-delete="data.showDelete">
+		<ion-list>
             <ion-item ng-repeat="recipe in recipes">
                 
                 <div class="row">
@@ -32,10 +29,11 @@
 					</div>
 				</div>
                 
-                <ion-delete-button class="ion-minus-circled" ng-click="deleteRecipe(recipe)"> 
-                </ion-delete-button>
                 <ion-option-button class="button-calm" ng-click="editRecipe(recipe)">
                     Edit
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteRecipe(recipe)">
+                    Delete
                 </ion-option-button>
                 </ion-item>
 
