@@ -28,5 +28,9 @@
         console.log("Editing...");
       };
 
+      $scope.viewRecipe = function(index) {
+        console.log("We are going to view recipe #" + index);
+      };
+
     });
 })();
