@@ -12,3 +12,4 @@ www/
 .*.json
 *.css
 *.min.css
+openbrews/config.json
