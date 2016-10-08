@@ -4,10 +4,14 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
   'use strict';
-  angular.module('openbrews.addRecipe', ['openbrews.fermentableDirective', 'openbrews.hopDirective', 'openbrews.yeastDirective', 'openbrews.otherIngredientDirective'])
-    .controller('AddRecipeCtrl', ['$scope', '$state', function($scope, $state) {
-
-      var LOCAL_STORAGE_KEY = "recipesInStorage";
+  angular.module('openbrews.addRecipe', [
+    'openbrews.fermentableDirective',
+    'openbrews.hopDirective',
+    'openbrews.yeastDirective',
+    'openbrews.otherIngredientDirective',
+    'openbrews.recipeStore'
+  ])
+    .controller('AddRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
 
       $scope.recipe = {
         name: "",
@@ -98,13 +102,7 @@
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
-        var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-        var history = [];
-        if (oldItems) {
-          history = JSON.parse(oldItems);
-        }
-        history.push($scope.recipe);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+        RecipeStore.insert($scope.recipe);
         $state.go("recipes");
       };
 

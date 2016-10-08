@@ -9,7 +9,8 @@
       'ionic',
       'openbrews.myRecipes',
       'openbrews.addRecipe',
-      'openbrews.viewRecipe'
+      'openbrews.viewRecipe',
+      'openbrews.recipeStore'
     ])
 
   .constant('localStorageKey', "recipesInStorage")
@@ -56,7 +57,7 @@
     })
 
     .state('view-recipe', {
-      url: '/recipes/view/:recipeIndex',
+      url: '/recipes/view/:recipeId',
       templateUrl: 'recipe/view/view-recipe.html',
       controller: 'ViewRecipeCtrl'
     });
