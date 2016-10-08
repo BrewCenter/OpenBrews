@@ -30,7 +30,7 @@
           <option>Secondary</option>
         </select>
     </label>
-    <label for="hop[{{index}}].addTime" class="item item-input item-input-group">
+    <label ng-if="hop.stage.toLowerCase() === 'boil'" for="hop[{{index}}].addTime" class="item item-input item-input-group">
         Add Time <input type="number" name="hop[{{index}}].addTime" ng-model="hop.addTime" class="text-right">
         <span class="input-addon">Minutes Left</span>
     </label>
