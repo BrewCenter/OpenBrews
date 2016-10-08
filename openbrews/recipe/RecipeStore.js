@@ -1,7 +1,16 @@
-angular.module('openbrews.recipeStore', ['uuid'])
-.service('RecipeStore', function (uuid4) {
+angular.module('openbrews.recipeStore', [])
+.service('RecipeStore', function () {
 
   const LOCAL_STORAGE_KEY = "recipesInStorage";
+
+  var uuid = function() {
+    /* http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523 */
+    const fmt = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+    return fmt.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+    });
+  };
 
   this.get = function(id) {
     var items = this.all();
@@ -18,7 +27,7 @@ angular.module('openbrews.recipeStore', ['uuid'])
   };
 
   this.insert = function(recipe) {
-    recipe.id = uuid4.generate();
+    recipe.id = uuid();
 
     var items = this.all();
     items.push(recipe);
