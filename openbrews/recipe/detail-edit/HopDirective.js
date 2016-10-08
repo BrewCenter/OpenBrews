@@ -4,6 +4,6 @@ angular.module('openbrews.hopDirective', [])
     restrict: 'E',
     hop: '=model',
     index: '=index',
-    templateUrl: 'recipe/add/hop.html'
+    templateUrl: 'recipe/detail-edit/hop.html'
   };
 });

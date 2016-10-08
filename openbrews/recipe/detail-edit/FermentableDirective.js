@@ -4,6 +4,6 @@ angular.module('openbrews.fermentableDirective', [])
   	restrict: 'E',
 	fermentable: '=model',
 	index: '=index',
-    templateUrl: 'recipe/add/fermentable.html'
+    templateUrl: 'recipe/detail-edit/fermentable.html'
   };
 });

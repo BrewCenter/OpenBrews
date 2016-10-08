@@ -9,7 +9,7 @@
       'ionic',
       'uuid',
       'openbrews.myRecipes',
-      'openbrews.addRecipe',
+      'openbrews.editRecipe',
       'openbrews.viewRecipe',
       'openbrews.recipeStore'
     ])
@@ -53,8 +53,20 @@
 
     .state('add-recipe', {
       url: '/recipes/add',
-      templateUrl: 'recipe/add/add-recipe.html',
-      controller: 'AddRecipeCtrl'
+      templateUrl: 'recipe/detail-edit/edit-recipe.html',
+      controller: 'EditRecipeCtrl',
+      params: {
+        isNew: true
+      }
+    })
+
+    .state('edit-recipe', {
+      url: '/recipes/edit/:recipeId',
+      templateUrl: 'recipe/detail-edit/edit-recipe.html',
+      controller: 'EditRecipeCtrl',
+      params: {
+        isNew: false
+      }
     })
 
     .state('view-recipe', {

@@ -4,14 +4,14 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
   'use strict';
-  angular.module('openbrews.addRecipe', [
+  angular.module('openbrews.editRecipe', [
     'openbrews.fermentableDirective',
     'openbrews.hopDirective',
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
     'openbrews.recipeStore'
   ])
-    .controller('AddRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
 
       /* remove the fermentable at the given index */
       $scope.deleteFermentable = function(index) {
@@ -83,11 +83,15 @@
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
-        RecipeStore.insert($scope.recipe);
+        if ($state.params.isNew) {
+          RecipeStore.insert($scope.recipe);
+        } else {
+          RecipeStore.update($scope.recipe);
+        }
         $state.go("recipes");
       };
 
-      $scope.recipe = {
+      const defaultRecipe = {
         name: "Citra Pale Ale",
         style: "American Pale Ale",
         boilSize: 5,
@@ -156,6 +160,29 @@
           "Don't boil over!"
         ]
       };
+
+      // Initializer
+      (function () {
+        // Differentiate between add or edit
+        if ($state.params.recipeId) {
+            const recipe = RecipeStore.get($state.params.recipeId);
+            if (recipe) {
+              $scope.recipe = recipe;
+              $scope.pageTitle = 'Edit Recipe';
+            } else {
+              // This Recipe doesn't exist
+              $state.go("recipes");
+            }
+        } else {
+          if ($state.params.isNew) {
+            $scope.recipe = defaultRecipe;
+            $scope.pageTitle = 'Add Recipe';
+          } else {
+            // Wrong state: Has no recipe id and is not new
+            $state.go("recipes");
+          }
+        }
+      })();
 
     }]);
 })();

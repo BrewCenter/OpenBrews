@@ -4,6 +4,6 @@ angular.module('openbrews.yeastDirective', [])
     restrict: 'E',
     yeast: '=info',
     index: '=index',
-    templateUrl: 'recipe/add/yeast.html'
+    templateUrl: 'recipe/detail-edit/yeast.html'
   };
 });
