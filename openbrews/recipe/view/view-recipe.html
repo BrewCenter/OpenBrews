@@ -1,0 +1,108 @@
+<ion-view title="View Recipe" class="view-recipe">
+
+<ion-nav-buttons side="right">
+</ion-nav-buttons>
+
+<ion-content>
+
+<div class="container">
+  <h3>Recipe for {{recipe.name}}</h3>
+  <ion-list>
+
+  <ion-item>
+  <span class="view-label">Name:</span> {{recipe.name}}
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Style:</span> {{recipe.style}}
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Boiler size:</span> {{recipe.boilSize}} {{recipe.boilSizeUnits}}
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Boil time:</span> {{recipe.boilTime}} minutes
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Estimated time for fermentation:</span> {{recipe.estFermentationDays}} days
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Estimated time for secondary:</span> {{recipe.secondaryTimeDays}} days
+  </ion-item>
+  <ion-item>
+  <span class="view-label">Mash efficiency:</span> {{recipe.mashEfficiency}}%
+  </ion-item>
+
+  </ion-list>
+
+  <h3>Ingredients</h3>
+
+  <h4>Fermentables</h4>
+
+  <ion-list ng-repeat="fermentable in recipe.fermentables">
+
+  <ion-item class="item-text-wrap">
+
+  {{fermentable.name}},
+  {{fermentable.method}},
+  {{fermentable.weight}} {{fermentable.weightUnits}},
+  Add when {{fermentable.addTime}} minutes left,
+  <b>{{fermentable.ppg}} PPG</b>,
+  <b>{{fermentable.srm}} SRM</b>
+
+  </ion-item>
+
+  </ion-list>
+
+  <h4>Hops</h4>
+
+  <ion-list ng-repeat="hop in recipe.hops">
+
+  <ion-item class="item-text-wrap">
+
+  {{hop.name}},
+  {{hop.type}},
+  {{hop.weight}} {{hop.weightUnits}},
+  {{hop.aa}} alpha acid,
+  {{hop.stage}} stage<span ng-if="hop.stage.toLowerCase() === 'boil'">, Add when {{hop.addTime}}
+    minutes left</span>
+
+  </ion-item>
+
+  </ion-list>
+
+  <h4>Yeasts</h4>
+
+  <ion-list ng-repeat="yeast in recipe.yeasts">
+
+  <ion-item class="item-text-wrap">
+
+  {{yeast.name}}
+  <br>
+  Attenuation: {{yeast.attenuation}}
+  <br>
+  Flocculation: {{yeast.flocculation}}
+  <br>
+  Amount: {{yeast.amount}} {{yeast.amountUnits}}
+
+  </ion-item>
+
+  </ion-list>
+
+  <h4>Other Ingredients</h4>
+
+  <ion-list ng-repeat="other in recipe.others">
+
+  <ion-item class="item-text-wrap">
+
+  {{other.name}},
+  {{other.amount}} {{other.amountUnits}},
+  <b>{{other.stage}} stage</b><span ng-if="other.stage.toLowerCase() === 'boil'">,
+    Add when <b>{{other.addTime}} minutes</b> left</span>
+
+  </ion-item>
+
+  </ion-list>
+
+</div>
+</ion-content>
+
+</ion-view>

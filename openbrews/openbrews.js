@@ -4,12 +4,15 @@
 (function() {
   'use strict';
 
-  angular.module('openbrews', 
+  angular.module('openbrews',
     [
       'ionic',
       'openbrews.myRecipes',
-      'openbrews.addRecipe'
+      'openbrews.addRecipe',
+      'openbrews.viewRecipe'
     ])
+
+  .constant('localStorageKey', "recipesInStorage")
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -50,6 +53,12 @@
       url: '/recipes/add',
       templateUrl: 'recipe/add/add-recipe.html',
       controller: 'AddRecipeCtrl'
+    })
+
+    .state('view-recipe', {
+      url: '/recipes/view/:recipeIndex',
+      templateUrl: 'recipe/view/view-recipe.html',
+      controller: 'ViewRecipeCtrl'
     });
 
 
