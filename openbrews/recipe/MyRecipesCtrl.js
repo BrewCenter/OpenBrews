@@ -22,9 +22,8 @@
         console.log("Editing...");
       };
 
-      $scope.viewRecipe = function(index) {
-        console.log("We are going to view recipe #" + index);
-        $state.go("view-recipe", { recipeIndex: index });
+      $scope.viewRecipe = function(recipe) {
+        $state.go("view-recipe", { recipeId: recipe.id });
       };
 
     });

@@ -5,8 +5,8 @@
 	<ion-content>
 
 		<ion-list>
-            <ion-item ng-repeat="recipe in recipes" ng-tap="viewRecipe($index)"
-            ng-click="viewRecipe($index)">
+            <ion-item ng-repeat="recipe in recipes" ng-tap="viewRecipe(recipe)"
+            ng-click="viewRecipe(recipe)">
 
                 <div class="row">
 					<div class="col text-left">

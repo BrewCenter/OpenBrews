@@ -3,6 +3,11 @@ angular.module('openbrews.recipeStore', ['uuid'])
 
   const LOCAL_STORAGE_KEY = "recipesInStorage";
 
+  this.get = function(id) {
+    var items = this.all();
+    return items.filter(function(element) { return element.id === id; })[0];
+  };
+
   this.all = function() {
     var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
     var items = [];

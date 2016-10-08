@@ -58,7 +58,7 @@
     })
 
     .state('view-recipe', {
-      url: '/recipes/view/:recipeIndex',
+      url: '/recipes/view/:recipeId',
       templateUrl: 'recipe/view/view-recipe.html',
       controller: 'ViewRecipeCtrl'
     });
