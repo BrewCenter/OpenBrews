@@ -5,11 +5,11 @@ angular.module('openbrews.recipeStore', [])
 
   this.all = function() {
     var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-    var history = [];
-    if (oldItems) {
-      history = JSON.parse(oldItems);
+    var items = [];
+    if (items) {
+      items = JSON.parse(oldItems);
     }
-    return history;
+    return items;
   };
 
   this.insert = function(recipe) {
