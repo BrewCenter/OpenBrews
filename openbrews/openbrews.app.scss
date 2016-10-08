@@ -22,7 +22,7 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 @import "./lib/ionic/scss/ionic";
 @import "./recipe/list";
 @import "./recipe/detail-edit/edit-recipe";
-@import "./recipe/view/view-recipe";
+@import "./recipe/detail-readonly/view-recipe";
 
 /* form styles */
 .list .item.item-input.item-input-group input {

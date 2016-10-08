@@ -71,7 +71,7 @@
 
     .state('view-recipe', {
       url: '/recipes/view/:recipeId',
-      templateUrl: 'recipe/view/view-recipe.html',
+      templateUrl: 'recipe/detail-readonly/view-recipe.html',
       controller: 'ViewRecipeCtrl'
     });
 
