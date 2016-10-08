@@ -11,7 +11,7 @@
     'openbrews.otherIngredientDirective',
     'openbrews.recipeStore'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', '$http', function($scope, $state, RecipeStore, $http) {
 
       const defaultRecipe = {
         name: "",
@@ -131,6 +131,15 @@
             $state.go("recipes");
           }
         }
+        //load beer data
+        var api = "http://api.brewerydb.com/v2/"
+        var key = "?key="+$scope.config["BREWERY_DB_KEY"];
+        $http.get(api + "styles" + key)
+        .success(function(response) {
+          $scope.types = response.data;
+          console.log($scope.types);
+        });
+
       })();
 
     }]);
