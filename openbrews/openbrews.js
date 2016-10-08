@@ -7,7 +7,6 @@
   angular.module('openbrews',
     [
       'ionic',
-      'uuid',
       'openbrews.myRecipes',
       'openbrews.editRecipe',
       'openbrews.viewRecipe',
