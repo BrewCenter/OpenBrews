@@ -1,5 +1,5 @@
-angular.module('openbrews.recipeStore', [])
-.service('RecipeStore', function () {
+angular.module('openbrews.recipeStore', ['uuid'])
+.service('RecipeStore', function (uuid4) {
 
   const LOCAL_STORAGE_KEY = "recipesInStorage";
 
@@ -13,14 +13,11 @@ angular.module('openbrews.recipeStore', [])
   };
 
   this.insert = function(recipe) {
-    console.log('insert ' + recipe);
-    var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-    var history = [];
-    if (oldItems) {
-      history = JSON.parse(oldItems);
-    }
-    history.push(recipe);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+    recipe.id = uuid4.generate();
+
+    var items = this.all();
+    items.push(recipe);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
   };
 
 });
