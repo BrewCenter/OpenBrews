@@ -9,3 +9,6 @@ openbrews/lib
 *.zip
 resources/
 www/
+.*.json
+*.css
+*.min.css
