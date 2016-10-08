@@ -9,20 +9,25 @@ Down the line, I would like to have an Web App and an API that allows
 persistance of recipes across devices, public sharing of recipes, and more!
 
 ## Developers
+
+### Tech Stack
 This app is built using [Ionic Framework](http://ionicframework.com/), which is
 built on AngularJS. If you have no idea what Ionic is, and only know AngularJS,
 you'll probably be fine. We are also leveraging Ionic CSS (rather than
 Bootstrap (for now). Other than that, the project uses GULP, Bower, and SCSS.
 
-In the future I hope to add an API to support synchronization across devices and
-sharing of recipes.
+### Contributing
+Anybody is welcome to contribute to OpenBrews. Just check out the issues for 
+current bugs and tasks. If you find one you like, please try to self-assign
+the task, or leave a comment on the issue. When you're ready to start working,
+branch off develop, code a little, and submit your PR. If you end up contributing
+regularly, I can add you as a collaborator to this repository.
 
-Anybody is welcome to contribute to OpenBrews. Just check the issues and Project
-boards for current bugs and tasks. When you're ready to start working, fork the
-project, code a little, and submit your PR. If you end up contributing regularly,
-I can add you as a contributor to this repository.
-
+### Building and Running
 To run the app, clone this repository, `cd` into the repository folder, and run
 `gulp && ionic serve [--lab]`.
 
+### Misc
 Message me (mike) for an invitation to our slack team.
+Also, contact me for the development API key if you would like to use the
+brewerydb based features.
