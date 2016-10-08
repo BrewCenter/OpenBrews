@@ -21,7 +21,7 @@
           <option>Secondary</option>
         </select>
     </label>
-    <label for="other[{{$index}}].addTime" class="item item-input item-input-group">
+    <label ng-if="other.stage.toLowerCase() === 'boil'" for="other[{{$index}}].addTime" class="item item-input item-input-group">
         Add Time
         <input type="text" name="other[{{$index}}].addTime" ng-model="other.addTime" class="text-right">
         <span class="input-addon">Minutes Left</span>
