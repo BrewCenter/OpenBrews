@@ -21,7 +21,7 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "./lib/ionic/scss/ionic";
 @import "./recipe/list";
-@import "./recipe/add/add-recipe";
+@import "./recipe/detail-edit/edit-recipe";
 @import "./recipe/view/view-recipe";
 
 /* form styles */
@@ -64,4 +64,3 @@ input::-webkit-inner-spin-button {
 		display: none;
 	}
 }
-
