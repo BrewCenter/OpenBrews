@@ -20,4 +20,14 @@ angular.module('openbrews.recipeStore', ['uuid'])
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
   };
 
+  this.update = function(recipe) {
+
+  }
+
+  this.delete = function(recipe) {
+    var items = this.all();
+    items = items.filter(function(element) { return element.id != recipe.id; });
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
+  }
+
 });

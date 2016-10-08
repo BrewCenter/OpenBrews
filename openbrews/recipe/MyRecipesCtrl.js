@@ -10,11 +10,12 @@
       $scope.recipes = RecipeStore.all()
 
       $scope.addRecipe = function() {
-          $state.go("add-recipe");
+        $state.go("add-recipe");
       };
 
       $scope.deleteRecipe = function(recipe){
-        console.log("Deleting...");
+        RecipeStore.delete(recipe);
+				$scope.recipes = RecipeStore.all();
       };
 
       $scope.editRecipe = function(recipe){
