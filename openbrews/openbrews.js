@@ -9,7 +9,8 @@
       'ionic',
       'openbrews.myRecipes',
       'openbrews.addRecipe',
-      'openbrews.viewRecipe'
+      'openbrews.viewRecipe',
+      'openbrews.recipeStore'
     ])
 
   .constant('localStorageKey', "recipesInStorage")
