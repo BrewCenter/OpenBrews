@@ -3,6 +3,6 @@ angular.module('openbrews.otherIngredientDirective', [])
   return {
   	restrict: 'E',
 	otherIngredient: '=model',
-    templateUrl: 'recipe/add/other-ingredient.html'
+    templateUrl: 'recipe/detail-edit/other-ingredient.html'
   };
 });

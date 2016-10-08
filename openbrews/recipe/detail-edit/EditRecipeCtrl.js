@@ -4,24 +4,24 @@
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
   'use strict';
-  angular.module('openbrews.addRecipe', [
+  angular.module('openbrews.editRecipe', [
     'openbrews.fermentableDirective',
     'openbrews.hopDirective',
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
     'openbrews.recipeStore'
   ])
-    .controller('AddRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
 
-      $scope.recipe = {
+      const defaultRecipe = {
         name: "",
         style: "",
         boilSize: 0,
         boilSizeUnits: "Gal",
-        boilTime: 0,
-        estFermentationDays: 0,
+        boilTime: 60,
+        estFermentationDays: 7,
         secondaryTimeDays: 0,
-        mashEfficiency: 0,
+        mashEfficiency: 68,
         fermentables: [],
         hops: [],
         yeasts: [],
@@ -102,9 +102,36 @@
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
-        RecipeStore.insert($scope.recipe);
+        if ($state.params.isNew) {
+          RecipeStore.insert($scope.recipe);
+        } else {
+          RecipeStore.update($scope.recipe);
+        }
         $state.go("recipes");
       };
+
+      // Initializer
+      (function () {
+        // Differentiate between add or edit
+        if ($state.params.recipeId) {
+            const recipe = RecipeStore.get($state.params.recipeId);
+            if (recipe) {
+              $scope.recipe = recipe;
+              $scope.pageTitle = 'Edit Recipe';
+            } else {
+              // This Recipe doesn't exist
+              $state.go("recipes");
+            }
+        } else {
+          if ($state.params.isNew) {
+            $scope.recipe = defaultRecipe;
+            $scope.pageTitle = 'Add Recipe';
+          } else {
+            // Wrong state: Has no recipe id and is not new
+            $state.go("recipes");
+          }
+        }
+      })();
 
     }]);
 })();
