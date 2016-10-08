@@ -19,7 +19,7 @@
       };
 
       $scope.editRecipe = function(recipe){
-        console.log("Editing...");
+        $state.go("edit-recipe", { recipeId: recipe.id });
       };
 
       $scope.viewRecipe = function(recipe) {
