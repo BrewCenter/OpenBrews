@@ -27,7 +27,8 @@ regularly, I can add you as a collaborator to this repository.
 To run the app, clone this repository, `cd` into the repository folder, and run
 `gulp && ionic serve [--lab]`.
 
+If you would like to use features which utilize the brewerydb API, please create an account and get your own API key [here](http://www.brewerydb.com/developers). This should be added to your `config.json` file.
+
 ### Misc
 Message me (mike) for an invitation to our slack team.
-Also, contact me for the development API key if you would like to use the
-brewerydb based features.
+
