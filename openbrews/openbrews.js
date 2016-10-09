@@ -15,8 +15,14 @@
 
   .constant('localStorageKey', "recipesInStorage")
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform, $http, $rootScope) {
     $ionicPlatform.ready(function() {
+      // Read in configuration data
+      $http.get('config.json')
+      .success(function(data, status, headers, config) {
+        $rootScope.config = data;
+      });
+
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
