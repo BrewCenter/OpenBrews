@@ -17,13 +17,21 @@
 
   .run(function($ionicPlatform, $http, $rootScope) {
     $ionicPlatform.ready(function() {
-      // Read in configuration data
-      /*
+      /* try to get the configuration file */
       $http.get('config.json')
-      .success(function(data, status, headers, config) {
-        $rootScope.config = data;
+      .then(function successCallback(response) {
+        /* if successful, save the data */
+        $rootScope.config = response.data;
+      }, function errorCallback(response) {
+        /* otherwise, try to get the example config instead as a fallback for
+         development to avoid errors */
+         $http.get('example.config.json')
+         .then(function successCallback(response) {
+           $rootScope.config = response.data;
+         }, function errorCallback(response) {
+           console.log("Missing Configuration File 'config.json'");
+         });
       });
-      */
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
