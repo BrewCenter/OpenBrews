@@ -102,6 +102,18 @@
 
   </ion-list>
 
+  <h4 ng-if="recipe.notes.length > 0">Notes</h4>
+
+  <ion-list ng-repeat="note in recipe.notes">
+
+  <ion-item class="item-text-wrap">
+
+  {{note.text}}
+
+  </ion-item>
+
+  </ion-list>
+
 </div>
 </ion-content>
 
