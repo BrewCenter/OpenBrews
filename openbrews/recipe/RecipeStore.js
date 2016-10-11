@@ -20,7 +20,7 @@ angular.module('openbrews.recipeStore', [])
   this.all = function() {
     var oldItems = localStorage.getItem(LOCAL_STORAGE_KEY);
     var items = [];
-    if (items) {
+    if (oldItems) {
       items = JSON.parse(oldItems);
     }
     return items;
