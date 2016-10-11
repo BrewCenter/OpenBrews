@@ -106,12 +106,10 @@
         $scope.recipe.notes.push({
           "text": ""
         });
-        console.log("Add a new note!");
       }
 
       /* Delete the given note */
       $scope.deleteNote = function(index) {
-        console.log("Delete the note at index " + index);
         $scope.recipe.notes.splice(index, 1);
       }
 
