@@ -33,7 +33,8 @@
 
   </ion-list>
 
-  <h3>Ingredients</h3>
+  <h3 ng-if="(recipe.fermentables.length + recipe.yeasts.length +
+    recipe.hops.length + recipe.others.length) > 0">Ingredients</h3>
 
   <h4 ng-if="recipe.fermentables.length > 0">Fermentables</h4>
 
@@ -102,7 +103,7 @@
 
   </ion-list>
 
-  <h4 ng-if="recipe.notes.length > 0">Notes</h4>
+  <h3 ng-if="recipe.notes.length > 0">Notes</h3>
 
   <ion-list ng-repeat="note in recipe.notes">
 
