@@ -33,9 +33,10 @@
 
   </ion-list>
 
-  <h3>Ingredients</h3>
+  <h3 ng-if="(recipe.fermentables.length + recipe.yeasts.length +
+    recipe.hops.length + recipe.others.length) > 0">Ingredients</h3>
 
-  <h4>Fermentables</h4>
+  <h4 ng-if="recipe.fermentables.length > 0">Fermentables</h4>
 
   <ion-list ng-repeat="fermentable in recipe.fermentables">
 
@@ -52,7 +53,7 @@
 
   </ion-list>
 
-  <h4>Hops</h4>
+  <h4 ng-if="recipe.hops.length > 0">Hops</h4>
 
   <ion-list ng-repeat="hop in recipe.hops">
 
@@ -69,7 +70,7 @@
 
   </ion-list>
 
-  <h4>Yeasts</h4>
+  <h4 ng-if="recipe.yeasts.length > 0">Yeasts</h4>
 
   <ion-list ng-repeat="yeast in recipe.yeasts">
 
@@ -87,7 +88,7 @@
 
   </ion-list>
 
-  <h4>Other Ingredients</h4>
+  <h4 ng-if="recipe.others.length > 0">Other Ingredients</h4>
 
   <ion-list ng-repeat="other in recipe.others">
 
@@ -97,6 +98,18 @@
   {{other.amount}} {{other.amountUnits}},
   <b>{{other.stage}} stage</b><span ng-if="other.stage.toLowerCase() === 'boil'">,
     Add when <b>{{other.addTime}} minutes</b> left</span>
+
+  </ion-item>
+
+  </ion-list>
+
+  <h3 ng-if="recipe.notes.length > 0">Notes</h3>
+
+  <ion-list ng-repeat="note in recipe.notes">
+
+  <ion-item class="item-text-wrap">
+
+  {{note.text}}
 
   </ion-item>
 

@@ -9,6 +9,7 @@
     'openbrews.hopDirective',
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
+    'openbrews.noteDirective',
     'openbrews.recipeStore'
   ])
     .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', '$http', function($scope, $state, RecipeStore, $http) {
@@ -99,6 +100,18 @@
           }
         );
       };
+
+      /* Add a new note */
+      $scope.addNote = function() {
+        $scope.recipe.notes.push({
+          "text": ""
+        });
+      }
+
+      /* Delete the given note */
+      $scope.deleteNote = function(index) {
+        $scope.recipe.notes.splice(index, 1);
+      }
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
