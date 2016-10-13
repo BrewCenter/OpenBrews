@@ -145,12 +145,17 @@
           }
         }
         //load beer data
-        var api = "http://api.brewerydb.com/v2/"
-        var key = "?key="+$scope.config["BREWERY_DB_KEY"];
-        $http.get(api + "styles" + key)
-        .success(function(response) {
-          $scope.types = response.data;
-          console.log($scope.types);
+        $http({
+          method: 'GET',
+          url: "http://api.brewerydb.com/v2/styles",
+          params: {
+            key: $scope.config.BREWERY_DB_KEY
+          }
+        }).then(function successCallback(response) {
+          $scope.styles = response.data.data;
+          console.log($scope.styles);
+        }, function failureCallback(response) {
+          console.log("Failed to get styles");
         });
 
       })();
