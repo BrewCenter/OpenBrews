@@ -13,7 +13,11 @@
                         Style
                           <input-dropdown
                             selected-item="recipe.style"
-                            default-dropdown-items="styles">
+                            default-dropdown-items="styles"
+                            allow-custom-input="true"
+                            input-name="style"
+                            item-selected-method="setStyle(item)"
+                            filter-list-method="filterStyles(userInput)">
                           </input-dropdown>
 <!--                         Style <input type="text" name="style" ng-model="recipe.style" class="text-right"> -->
                     </label>

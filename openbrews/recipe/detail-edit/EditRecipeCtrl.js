@@ -12,7 +12,7 @@
     'openbrews.noteDirective',
     'openbrews.recipeStore'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', '$http', function($scope, $state, RecipeStore, $http) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', '$http', '$filter', '$q', function($scope, $state, RecipeStore, $http, $filter, $q) {
 
       const defaultRecipe = {
         name: "",
@@ -152,14 +152,33 @@
             key: $scope.config.BREWERY_DB_KEY
           }
         }).then(function successCallback(response) {
-          $scope.styles = [];
-          angular.forEach(response.data.data, function(value, key) {
-            $scope.styles.push(value.name);
+          var styles = response.data.data;
+          $scope.styles = styles.map(function(styleObject) {
+            styleObject.readableName = styleObject.name;
+            return styleObject;
           });
           console.log($scope.styles);
         }, function failureCallback(response) {
           console.log("Failed to get styles");
         });
+
+        /* set the style selected */
+        $scope.setStyle = function(item){
+          console.log(item);
+          $scope.recipe.style = item;
+        };
+
+        $scope.filterStyles = function(userInput) {
+          return $q(function(resolve, reject) {
+            var filter = $filter('filter');
+            var items = filter($scope.styles, userInput, false);
+            if(items.length > 0) {
+              resolve(items);
+            } else {
+              reject(items);
+            }
+          });
+        };
 
       })();
 
