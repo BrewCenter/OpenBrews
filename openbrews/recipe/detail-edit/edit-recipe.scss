@@ -29,4 +29,15 @@
 	.list-inset .item-button button {
 		margin: 0px;
 	}
+
+	.list .item-input-dropdown {
+		overflow: visible;
+		z-index: 10;
+	}
+
+	.list .item-input-dropdown input-dropdown,
+	.list .item-input-dropdown .input-dropdown {
+		text-align: right;
+		width: 100%;
+	}
 }

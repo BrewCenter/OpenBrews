@@ -152,7 +152,10 @@
             key: $scope.config.BREWERY_DB_KEY
           }
         }).then(function successCallback(response) {
-          $scope.styles = response.data.data;
+          $scope.styles = [];
+          angular.forEach(response.data.data, function(value, key) {
+            $scope.styles.push(value.name);
+          });
           console.log($scope.styles);
         }, function failureCallback(response) {
           console.log("Failed to get styles");

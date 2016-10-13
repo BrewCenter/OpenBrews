@@ -9,8 +9,13 @@
                     <label for="name" class="item item-input">
                         Name <input type="text" name="name" ng-model="recipe.name" class="text-right">
                     </label>
-                    <label for="style" class="item item-input">
-                        Style <input type="text" name="style" ng-model="recipe.style" class="text-right">
+                    <label for="style" class="item item-input item-input-dropdown">
+                        Style
+                          <input-dropdown
+                            selected-item="recipe.style"
+                            default-dropdown-items="styles">
+                          </input-dropdown>
+<!--                         Style <input type="text" name="style" ng-model="recipe.style" class="text-right"> -->
                     </label>
                     <label for="boilSize" class="item item-input">
                         Boil Size <input type="text" name="boilSize" ng-model="recipe.boilSize" class="text-right">

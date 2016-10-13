@@ -7,6 +7,7 @@
   angular.module('openbrews',
     [
       'ionic',
+      'inputDropdown',
       'openbrews.myRecipes',
       'openbrews.editRecipe',
       'openbrews.viewRecipe',
