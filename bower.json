@@ -5,6 +5,5 @@
     "ionic": "driftyco/ionic-bower#1.3.1"
   },
   "dependencies": {
-    "angular-input-dropdown": "^1.1.0"
   }
 }

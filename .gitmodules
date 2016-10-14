@@ -1,0 +1,3 @@
+[submodule "openbrews/lib/angular-input-dropdown"]
+	path = openbrews/lib/angular-input-dropdown
+	url = https://github.com/OpenBrews/angular-input-dropdown.git
