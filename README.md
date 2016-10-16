@@ -17,15 +17,14 @@ you'll probably be fine. We are also leveraging Ionic CSS (rather than
 Bootstrap (for now). Other than that, the project uses GULP, Bower, and SCSS.
 
 ### Contributing
-Anybody is welcome to contribute to OpenBrews. Just check out the issues for 
+Anybody is welcome to contribute to OpenBrews. Just check out the issues for
 current bugs and tasks. If you find one you like, please try to self-assign
 the task, or leave a comment on the issue. When you're ready to start working,
 branch off develop, code a little, and submit your PR. If you end up contributing
 regularly, I can add you as a collaborator to this repository.
 
 ### Building and Running
-To run the app, clone this repository, `cd` into the repository folder, and run
-`gulp && ionic serve [--lab]`.
+To run the app, clone this repository and `cd` into the repository folder. You'll need to have [Ionic](http://ionicframework.com/) installed globally which you can do by running `npm install -g cordova ionic`. Then install the remaining dependencies with `npm install`. Finally you can run the app via `gulp && ionic serve [--lab]`.
 
 If you would like to use features which utilize the brewerydb API, please create an account and get your own API key [here](http://www.brewerydb.com/developers). This should be added to your `config.json` file.
 
