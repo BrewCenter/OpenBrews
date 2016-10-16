@@ -10,9 +10,10 @@
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
     'openbrews.noteDirective',
-    'openbrews.recipeStore'
+    'openbrews.recipeStore',
+    'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', '$http', '$filter', '$q', function($scope, $state, RecipeStore, $http, $filter, $q) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, BreweryDB, $http, $filter, $q) {
 
       const defaultRecipe = {
         name: "",
@@ -123,6 +124,27 @@
         $state.go("recipes");
       };
 
+      /////////////////////////////////////////////////////////////
+      // Smart Type Functions
+      /////////////////////////////////////////////////////////////  
+      
+      /* set the style selected */
+      $scope.setStyle = function(item){
+        $scope.recipe.style = item;
+      };
+
+      $scope.filterStyles = function(userInput) {
+        return $q(function(resolve, reject) {
+          var filter = $filter('filter');
+          var items = filter($scope.styles, userInput, false);
+          if(items.length > 0) {
+            resolve(items);
+          } else {
+            reject(items);
+          }
+        });
+      };
+
       // Initializer
       (function () {
         // Differentiate between add or edit
@@ -144,41 +166,13 @@
             $state.go("recipes");
           }
         }
+
         //load beer data
-        $http({
-          method: 'GET',
-          url: "http://api.brewerydb.com/v2/styles",
-          params: {
-            key: $scope.config.BREWERY_DB_KEY
+        BreweryDB.getStyles().then(
+          function onSuccess(styles) {
+            $scope.styles = styles;
           }
-        }).then(function successCallback(response) {
-          var styles = response.data.data;
-          $scope.styles = styles.map(function(styleObject) {
-            styleObject.readableName = styleObject.name;
-            return styleObject;
-          });
-          console.log($scope.styles);
-        }, function failureCallback(response) {
-          console.log("Failed to get styles");
-        });
-
-        /* set the style selected */
-        $scope.setStyle = function(item){
-          console.log(item);
-          $scope.recipe.style = item;
-        };
-
-        $scope.filterStyles = function(userInput) {
-          return $q(function(resolve, reject) {
-            var filter = $filter('filter');
-            var items = filter($scope.styles, userInput, false);
-            if(items.length > 0) {
-              resolve(items);
-            } else {
-              reject(items);
-            }
-          });
-        };
+        );
 
       })();
 

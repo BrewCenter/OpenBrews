@@ -11,7 +11,8 @@
       'openbrews.myRecipes',
       'openbrews.editRecipe',
       'openbrews.viewRecipe',
-      'openbrews.recipeStore'
+      'openbrews.recipeStore',
+      'openbrews.breweryDB'
     ])
 
   .constant('localStorageKey', "recipesInStorage")
