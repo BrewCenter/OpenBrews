@@ -14,12 +14,11 @@ angular.module('openbrews.breweryDB', [])
       }
     }).then(function successCallback(response) {
       var styles = response.data.data;
-      styles = styles.map(function(styleObject) {
-        styleObject.readableName = styleObject.name;
+      styles = styles.map(function(styleObject) {//map to list of strings
+        styleObject = styleObject.name;
         return styleObject;
       });
       return styles;
-      console.log($scope.styles);
     }, function failureCallback(response) {
       console.log("Failed to get styles");
       return [];
