@@ -168,11 +168,7 @@
         }
 
         //load beer data
-        BreweryDB.getStyles().then(
-          function onSuccess(styles) {
-            $scope.styles = styles;
-          }
-        );
+        $scope.styles = BreweryDB.getStyles();
 
       })();
 
