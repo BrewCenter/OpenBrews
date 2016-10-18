@@ -6,6 +6,7 @@ platforms/
 plugins/
 dist/
 openbrews/lib
+!openbrews/lib/angular-input-dropdown
 *.zip
 resources/
 www/

@@ -10,9 +10,10 @@
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
     'openbrews.noteDirective',
-    'openbrews.recipeStore'
+    'openbrews.recipeStore',
+    'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, BreweryDB, $http, $filter, $q) {
 
       const defaultRecipe = {
         name: "",
@@ -123,6 +124,27 @@
         $state.go("recipes");
       };
 
+      /////////////////////////////////////////////////////////////
+      // Smart Type Functions
+      /////////////////////////////////////////////////////////////  
+      
+      /* set the style selected */
+      $scope.setStyle = function(item){
+        $scope.recipe.style = item;
+      };
+
+      $scope.filterStyles = function(userInput) {
+        return $q(function(resolve, reject) {
+          var filter = $filter('filter');
+          var items = filter($scope.styles, userInput, false);
+          if(items.length > 0) {
+            resolve(items);
+          } else {
+            reject(items);
+          }
+        });
+      };
+
       // Initializer
       (function () {
         // Differentiate between add or edit
@@ -144,6 +166,10 @@
             $state.go("recipes");
           }
         }
+
+        //load beer data
+        $scope.styles = BreweryDB.getStyles();
+
       })();
 
     }]);

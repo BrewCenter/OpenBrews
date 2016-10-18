@@ -7,21 +7,25 @@
   angular.module('openbrews',
     [
       'ionic',
+      'inputDropdown',
       'openbrews.myRecipes',
       'openbrews.editRecipe',
       'openbrews.viewRecipe',
-      'openbrews.recipeStore'
+      'openbrews.recipeStore',
+      'openbrews.breweryDB'
     ])
 
   .constant('localStorageKey', "recipesInStorage")
 
-  .run(function($ionicPlatform, $http, $rootScope) {
+  .run(function($ionicPlatform, $http, $rootScope, BreweryDB) {
     $ionicPlatform.ready(function() {
       /* try to get the configuration file */
       $http.get('config.json')
       .then(function successCallback(response) {
         /* if successful, save the data */
         $rootScope.config = response.data;
+        /* after the config is received, sync the breweryDB */
+        BreweryDB.syncDB();
       }, function errorCallback(response) {
         /* otherwise, try to get the example config instead as a fallback for
          development to avoid errors */
