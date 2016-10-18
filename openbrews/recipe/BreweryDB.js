@@ -64,14 +64,6 @@ angular.module('openbrews.breweryDB', [])
   /* a data map of pages to fermentables received from that page */
   var fermentablesSyncing = [];
 
-  /* transform fermentable into an object we can use */
-  var parseFermentables = function(fermentables) {
-    fermentables = fermentables.map(function(fermentableObject) {//map to list of strings
-      return fermentableObject;
-    });
-    return fermentables;
-  };
-
   /* 
    * Get all beer styles from the local cache.
    * Transform them to our required format, and return them.
@@ -86,6 +78,22 @@ angular.module('openbrews.breweryDB', [])
   this.getFermentables = getFermentables;
 
   /*
+   * Transform the fermentable into an object with a name,
+   * srm, ppg, and indication of whether it must be mashed.
+   */
+  var transformFermentables = function(fermentables) {
+    fermentables = fermentables.map(function(fermentableObject) {//map to list of strings
+      fermentable = {};
+      fermentable.name = fermentableObject.name;
+      fermentable.srm = fermentableObject.srmPrecise ? fermentableObject.srmPrecise : null;
+      // convert potential to PPG. ex. if potential=1.037 => ppg = 27
+      fermentable.ppg = fermentableObject.potential ? (fermentableObject.potential * 1000) % 1000 : null;
+      return fermentable;
+    });
+    return fermentables;
+  };
+
+  /*
    * Called after all fermentables have been retrieved into the
    * fermentablesSyncing Array
    */
@@ -94,13 +102,14 @@ angular.module('openbrews.breweryDB', [])
     for(var i = 1; i <= numPages; i++) {
       fermentables = fermentables.concat(fermentablesSyncing[i])
     }
-    localStorage.setItem(FERMENTABLES_KEY, JSON.stringify(fermentables));
     console.log(fermentables);
+    localStorage.setItem(FERMENTABLES_KEY, JSON.stringify(fermentables));
   };
 
   /* 
    * Get's the fermantables page #p. Transforms the response and saves it in
-   * the syncing array.
+   * the syncing array. This will make a recursive call to syncronize the next
+   * page of results from the API if the current page isn't the first or last page.
    */
   var getFermPage = function(p) {
     return $http({
@@ -113,11 +122,14 @@ angular.module('openbrews.breweryDB', [])
     }).then(function successCallback(response) {
       var pageNum = response.data.currentPage;
       var numPages = response.data.numberOfPages;
-      fermentablesSyncing[pageNum] = parseFermentables(response.data.data);
-      if(pageNum != numPages && p > 1) {//if it's not the first or last page
-        getFermPage(pageNum+1);
-      } else {
-        onLastPage(numPages);
+      fermentablesSyncing[pageNum] = transformFermentables(response.data.data);
+
+      if(p != 1) {//if it's not the first page
+        if(pageNum != numPages) {//if it's not the last page
+          getFermPage(pageNum+1);
+        } else {
+          onLastPage(numPages);
+        }
       }
       return response;
     }, function failureCallback(response) {
@@ -126,6 +138,10 @@ angular.module('openbrews.breweryDB', [])
     });
   };
 
+  /*
+   * Pull fermentables from the database. If there is a mismatch in the number
+   * of fermentables we have and the number we get, we'll have to do a full sync.
+   */
   this.syncFermentables = function() {
     fermentablesSyncing = {};
     /* make the first request to breweryDB to see if we need to sync */
@@ -134,9 +150,9 @@ angular.module('openbrews.breweryDB', [])
       var numFermentables = response.data.totalResults;
 
       /* if there is a mismatch in lengths then we need to sync */
-      if(fermentablesInStorage.length != numFermentables) {
+      //if(fermentablesInStorage.length != numFermentables) {
         getFermPage(2);
-      }
+      //}
     }, function failureCallback(response) {
       console.log("Unable to sync fermentables.");
     });
