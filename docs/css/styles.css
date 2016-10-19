@@ -1,0 +1,36 @@
+.container {
+	max-width: 740px !important;
+	width: auto !important;
+}
+
+p {
+	font-size: 18px;
+}
+
+.img-phone {
+	max-width: 350px;
+	margin: auto;
+}
+
+.spacer-150 {
+	height: 150px;
+}
+
+.spacer-100 {
+	height: 100px;
+}
+
+
+.spacer-50 {
+	height: 50px;
+}
+
+.spacer-20 {
+	height: 20px;
+}
+
+.footer {
+	padding: 15px;
+	background-color: #eee;
+	font-size: 16px;
+}
