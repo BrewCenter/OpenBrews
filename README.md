@@ -37,6 +37,9 @@ please create an account and get your own API key
 your `openbrews/config.json` file. If you do not have a `config.json` file,
 copy and rename `openbrews/example.config.json`.
 
+**Note: To make requests to the BreweryDB API in the browser you will need to allow CORS
+in the browser you are using.**
+
 ## Developers
 
 ### Ask for a Slack Invite
