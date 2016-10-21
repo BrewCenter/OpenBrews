@@ -24,7 +24,20 @@ branch off develop, code a little, and submit your PR. If you end up contributin
 regularly, I can add you as a collaborator to this repository.
 
 ### Building and Running
-To run the app, clone this repository and `cd` into the repository folder. You'll need to have [Ionic](http://ionicframework.com/) installed globally which you can do by running `npm install -g cordova ionic`. Then install the remaining dependencies with `npm install`. Finally you can run the app via `gulp && ionic serve [--lab]`.
+#### Prereqs
+1. [Ionic](http://ionicframework.com/) installed globally
+    * `npm install -g cordova ionic`
+2. [Gulp](http://gulpjs.com/) installed globally
+    * `npm install -g gulp`
+
+#### Steps to run locally
+1. Clone this repository
+    * `git clone git@github.com:OpenBrews/OpenBrews.git`
+2. `cd` into the repository folder.
+3. Clone the repo's submodules
+    * `git submodule update --init --recursive`
+4. Install the remaining dependencies with `npm install`.
+5. Finally, you can run the app via `gulp && ionic serve [--lab]`.
 
 If you would like to use features which utilize the brewerydb API, please create an account and get your own API key [here](http://www.brewerydb.com/developers). This should be added to your `config.json` file.
 
