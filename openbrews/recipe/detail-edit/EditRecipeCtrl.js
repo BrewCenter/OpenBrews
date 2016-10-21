@@ -133,10 +133,27 @@
         $scope.recipe.style = item;
       };
 
-      $scope.filterStyles = function(userInput) {
+      /* set the style selected */
+      $scope.setFermentable = function(item, fermentable){
+        fermentable.name = item.name;
+        fermentable.srm = item.srm;
+        fermentable.ppg = item.ppg;
+      };
+
+      /* set the style selected */
+      $scope.setHop = function(item){
+        $scope.recipe.hop.name = item.name;
+      };
+
+      /* set the style selected */
+      $scope.setYeast = function(item){
+        $scope.recipe.yeast.name = item.name;
+      };
+
+      $scope.filterItems = function(styles, userInput) {
         return $q(function(resolve, reject) {
           var filter = $filter('filter');
-          var items = filter($scope.styles, userInput, false);
+          var items = filter(styles, userInput, false);
           if(items.length > 0) {
             resolve(items);
           } else {
@@ -169,7 +186,9 @@
 
         //load beer data
         $scope.styles = BreweryDB.getStyles();
-
+        $scope.fermentables = BreweryDB.getFermentables();
+        $scope.hops = BreweryDB.getHops();
+        $scope.yeasts = BreweryDB.getYeasts();
       })();
 
     }]);

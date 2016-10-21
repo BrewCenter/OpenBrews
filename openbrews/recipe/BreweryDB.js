@@ -23,12 +23,10 @@ angular.module('openbrews.breweryDB', [])
 
   /* sync all objects in the local cache with breweryDB */
   this.syncDB = function() {
-    //this.syncStyles();
-    //this.syncFermentables();
-    this.syncHops();
-    this.syncYeasts();
-    console.log(this.getHops());
-    console.log(this.getYeasts());
+    // this.syncStyles();
+    // this.syncFermentables();
+    // this.syncHops();
+    // this.syncYeasts();
   };
 
   /////////////////////////////////////
@@ -102,6 +100,7 @@ angular.module('openbrews.breweryDB', [])
   var transformFermentables = function(fermentables) {
     fermentables = fermentables.map(function(fermentableObject) {//map to list of strings
       fermentable = {};
+      fermentable.readableName = fermentableObject.name;
       fermentable.name = fermentableObject.name;
       fermentable.srm = fermentableObject.srmPrecise ? fermentableObject.srmPrecise : null;
       // convert potential to PPG. ex. if potential=1.037 => ppg = 27
