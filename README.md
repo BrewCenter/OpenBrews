@@ -51,7 +51,7 @@ for an invite.
 This app is built using [Ionic Framework](http://ionicframework.com/), which is
 built on AngularJS. If you have no idea what Ionic is, and only know AngularJS,
 you'll probably be fine. We are also leveraging Ionic CSS (rather than
-Bootstrap (for now). Other than that, the project uses GULP, Bower, and SCSS.
+Bootstrap). Other than that, the project uses GULP, Bower, and SCSS.
 
 ### Contributing
 Monitor the Issues board for tasks that need to be completed. Check the comments 
