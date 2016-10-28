@@ -141,8 +141,10 @@
       };
 
       /* set the style selected */
-      $scope.setHop = function(item){
-        $scope.recipe.hop.name = item.name;
+      $scope.setHop = function(item, hop){
+        hop.name = item.name;
+        hop.aa = item.aa;
+        console.log(item);
       };
 
       /* set the style selected */
