@@ -76,3 +76,38 @@ input::-webkit-inner-spin-button {
 		display: none;
 	}
 }
+
+// standardize heights
+ .item-select {
+	height: 47px;
+}
+
+// add hover over recipe
+.item-content:hover {
+	background-color: #dddddd;
+}
+
+// upgrade color scheme
+.bar-stable .button {
+    border-color: black;
+    background-color: #3c3c3c;
+    color: white;
+}
+
+.bar.bar-stable {
+    border-color: #b2b2b2;
+    background-color: #f48700;
+}
+
+.bar.bar-stable .title {
+    color: white;
+}
+
+.bar .title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.bar-stable .button.button-clear {
+    color: white;
+}
