@@ -1,36 +1,46 @@
 <div class="list list-inset">
-	<label for="fermentable[{{index}}].name" class="item item-input">
-		Name <input type="text" name="fermentable[{{index}}].name" ng-model="fermentable.name" class="text-right">
-	</label>
-	<label for="fermentable[{{index}}].method" class="item item-input item-select">
-		Boil Size Units
-		<select name="fermentable[{{index}}].method" ng-model="fermentable.method">
-	      <option>Mash</option>
-	      <option>Partial Mash</option>
-	      <option>Extract</option>
-	    </select>
-	</label>
-	<label for="fermentable[{{index}}].weight" class="item item-input">
-		Weight <input type="number" name="fermentable[{{index}}].weight" ng-model="fermentable.weight" class="text-right">
-	</label>
-	<label for="fermentable[{{index}}].weightUnits" class="item item-input item-select">
-		Weight Units
-		<select name="fermentable[{{index}}].weightUnits" ng-model="fermentable.weightUnits">
-	      <option>Lbs</option>
-	      <option>Kg</option>
-	    </select>
-	</label>
-	<label for="fermentable[{{index}}].addTime" class="item item-input item-input-group">
-		Add Time <input type="number" name="fermentable[{{index}}].addTime" ng-model="fermentable.addTime" class="text-right">
-		<span class="input-addon">Minutes Left</span>
-	</label>
-	<label for="fermentable[{{index}}].ppg" class="item item-input">
-		PPG <input type="number" name="fermentable[{{index}}].ppg" ng-model="fermentable.ppg" class="text-right">
-	</label>
-	<label for="fermentable[{{index}}].srm" class="item item-input">
-		SRM <input type="number" name="fermentable[{{index}}].srm" ng-model="fermentable.srm" class="text-right">
-	</label>
-	<div class="item item-button">
-		<button class="button button-assertive button-block button-full" ng-click="deleteFermentable(index)" ng-tap="deleteFermentable(index)">Delete {{fermentable.name}}</button>
-	</div>
+  <label for="fermentable[{{index}}].name" class="item item-input item-input-dropdown">
+    Name <input-dropdown
+            selected-item="fermentable.readableName"
+            default-dropdown-items="fermentables"
+            allow-custom-input="true"
+            input-name="fermentable[{{index}}].name"
+            item-selected-method="setFermentable(item, fermentable)"
+            filter-list-method="filterItems(fermentables, userInput)">
+          </input-dropdown>
+
+
+    <!-- <input type="text" name="fermentable[{{index}}].name" ng-model="fermentable.name" class="text-right"> -->
+  </label>
+  <label for="fermentable[{{index}}].method" class="item item-input item-select">
+    Boil Size Units
+    <select name="fermentable[{{index}}].method" ng-model="fermentable.method">
+        <option>Mash</option>
+        <option>Partial Mash</option>
+        <option>Extract</option>
+      </select>
+  </label>
+  <label for="fermentable[{{index}}].weight" class="item item-input">
+    Weight <input type="number" name="fermentable[{{index}}].weight" ng-model="fermentable.weight" class="text-right">
+  </label>
+  <label for="fermentable[{{index}}].weightUnits" class="item item-input item-select">
+    Weight Units
+    <select name="fermentable[{{index}}].weightUnits" ng-model="fermentable.weightUnits">
+        <option>Lbs</option>
+        <option>Kg</option>
+      </select>
+  </label>
+  <label for="fermentable[{{index}}].addTime" class="item item-input item-input-group">
+    Add Time <input type="number" name="fermentable[{{index}}].addTime" ng-model="fermentable.addTime" class="text-right">
+    <span class="input-addon">Minutes Left</span>
+  </label>
+  <label for="fermentable[{{index}}].ppg" class="item item-input">
+    PPG <input type="number" name="fermentable[{{index}}].ppg" ng-model="fermentable.ppg" class="text-right">
+  </label>
+  <label for="fermentable[{{index}}].srm" class="item item-input">
+    SRM <input type="number" name="fermentable[{{index}}].srm" ng-model="fermentable.srm" class="text-right">
+  </label>
+  <div class="item item-button">
+    <button class="button button-assertive button-block button-full" ng-click="deleteFermentable(index)" ng-tap="deleteFermentable(index)">Delete {{fermentable.name}}</button>
+  </div>
 </div>
