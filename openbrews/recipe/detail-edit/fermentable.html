@@ -1,10 +1,10 @@
 <div class="list list-inset">
   <label for="fermentable[{{index}}].name" class="item item-input item-input-dropdown">
     Name <input-dropdown
-            selected-item="fermentable.name"
+            selected-item="fermentable.readableName"
             default-dropdown-items="fermentables"
             allow-custom-input="true"
-            input-name="fermentable"
+            input-name="fermentable[{{index}}].name"
             item-selected-method="setFermentable(item, fermentable)"
             filter-list-method="filterItems(fermentables, userInput)">
           </input-dropdown>

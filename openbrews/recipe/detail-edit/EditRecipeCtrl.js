@@ -136,20 +136,28 @@
       /* set the style selected */
       $scope.setFermentable = function(item, fermentable){
         fermentable.name = item.name;
-        fermentable.srm = item.srm;
-        fermentable.ppg = item.ppg;
+        if(item.srm) {
+          fermentable.srm = item.srm;
+        }
+        if(item.ppg) {
+          fermentable.ppg = item.ppg;
+        }
       };
 
       /* set the style selected */
       $scope.setHop = function(item, hop){
         hop.name = item.name;
-        hop.aa = item.aa;
-        console.log(item);
+        if(item.alphaAcidMin) {
+          hop.aa = item.alphaAcidMin;
+        }
       };
 
       /* set the style selected */
-      $scope.setYeast = function(item){
-        $scope.recipe.yeast.name = item.name;
+      $scope.setYeast = function(item, yeast){
+        yeast.name = item.name;
+        if(item.attenuationMin) {
+          yeast.attenuation = item.attenuationMin;
+        }
       };
 
       $scope.filterItems = function(styles, userInput) {

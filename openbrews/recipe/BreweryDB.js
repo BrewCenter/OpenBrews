@@ -23,10 +23,10 @@ angular.module('openbrews.breweryDB', [])
 
   /* sync all objects in the local cache with breweryDB */
   this.syncDB = function() {
-    // this.syncStyles();
-    // this.syncFermentables();
-    // this.syncHops();
-    // this.syncYeasts();
+    this.syncStyles();
+    this.syncFermentables();
+    this.syncHops();
+    this.syncYeasts();
   };
 
   /////////////////////////////////////
@@ -194,6 +194,7 @@ angular.module('openbrews.breweryDB', [])
     hops = hops.map(function(hopObject) {//map to list of strings
       hop = {};
       hop.name = hopObject.name;
+      hop.readableName = hop.name;
       hop.alphaAcidMin = hopObject.alphaAcidMin ? hopObject.alphaAcidMin : null;
       hop.alphaAcidMax = hopObject.alphaAcidMax ? hopObject.alphaAcidMax : null;
       return hop;
@@ -283,6 +284,7 @@ angular.module('openbrews.breweryDB', [])
     yeasts = yeasts.map(function(yeastObject) {
       yeast = {};
       yeast.name = yeastObject.name;
+      yeast.readableName = yeast.name;
       yeast.attenuationMax = yeastObject.attenuationMax ? yeastObject.attenuationMax : null;
       yeast.attenuationMin = yeastObject.attenuationMin ? yeastObject.attenuationMin : null;
       yeast.fermentTempMax = yeastObject.fermentTempMax ? yeastObject.fermentTempMax : null;

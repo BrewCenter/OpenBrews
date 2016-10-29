@@ -1,6 +1,15 @@
 <div class="list list-inset">
-    <label for="hop[{{index}}].name" class="item item-input">
-        Name <input type="text" name="hop[{{index}}].name" ng-model="hop.name" class="text-right">
+    <label for="hop[{{index}}].name" class="item item-input item-input-dropdown">
+        Name <input-dropdown
+              selected-item="hop.readableName"
+              default-dropdown-items="hops"
+              allow-custom-input="true"
+              input-name="hop[{{index}}].name"
+              item-selected-method="setHop(item, hop)"
+              filter-list-method="filterItems(hops, userInput)">
+            </input-dropdown>
+
+        <!-- <input type="text" name="hop[{{index}}].name" ng-model="hop.name" class="text-right"> -->
     </label>
     <label for="hop[{{index}}].type" class="item item-input item-select">
         Hop Type
