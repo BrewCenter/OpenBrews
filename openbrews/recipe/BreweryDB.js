@@ -289,6 +289,8 @@ angular.module('openbrews.breweryDB', [])
       yeast.attenuationMin = yeastObject.attenuationMin ? yeastObject.attenuationMin : null;
       yeast.fermentTempMax = yeastObject.fermentTempMax ? yeastObject.fermentTempMax : null;
       yeast.fermentTempMin = yeastObject.fermentTempMin ? yeastObject.fermentTempMin : null;
+      yeast.alcoholToleranceMin = yeastObject.alcoholToleranceMin ? yeastObject.alcoholToleranceMin : null;
+      yeast.alcoholToleranceMax = yeastObject.alcoholToleranceMax ? yeastObject.alcoholToleranceMax : null;
       return yeast;
     });
     return yeasts;
