@@ -39,7 +39,7 @@
             method: "Mash",
             weight: 0,
             weightUnits: "Lbs",
-            addTime: 0,
+            addTime: 60,
             ppg: 0,
             srm: 0
           }
