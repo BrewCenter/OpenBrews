@@ -4,10 +4,14 @@
     <ion-content>
         <div class="container">
             <div class="space-40 hide-on-mobile"></div>
-            <form>
+            <form name="recipeForm" novalidate ng-submit="submit()">
                 <div class="list">
-                    <label for="name" class="item item-input">
-                        Name <input type="text" name="name" ng-model="recipe.name" class="text-right">
+                    <label for="name" class="item item-input" >
+                        Name
+                        <p ng-show="recipeForm.name.$invalid && !recipeForm.name.$pristine" style="color:red; padding-left: 20px">
+                            [a name is required]
+                        </p>
+                        <input type="text" name="name" ng-model="recipe.name" ng-required="true" class="text-right">
                     </label>
                     <label for="style" class="item item-input item-input-dropdown">
                         Style 
@@ -99,7 +103,7 @@
 
                 <div class="padded">
                     <button class="button button-block button-balanced"
-                        ng-click="saveRecipe()" ng-tap="saveRecipe()">
+                        ng-click="saveRecipe()" ng-tap="saveRecipe()" ng-disabled="recipeForm.$invalid">
                         Save recipe
                     </button>
                 </div>
