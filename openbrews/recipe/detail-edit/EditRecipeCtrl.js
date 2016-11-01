@@ -24,6 +24,7 @@
         estFermentationDays: 7,
         secondaryTimeDays: 0,
         mashEfficiency: 68,
+        steepEfficiency: 30,
         fermentables: [],
         hops: [],
         yeasts: [],

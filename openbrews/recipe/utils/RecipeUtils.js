@@ -13,6 +13,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       boilSizeInGallons = recipe.boilSize;
     }
     var mashEfficiency = recipe.mashEfficiency / 100;//mash efficiency as a decimal
+    var steepEfficiency = recipe.steepEfficiency / 100;//steep efficiency as a decimal
 
     /* find the total number of gravity points first */
     var totalGravityPoints = 0;
@@ -21,10 +22,14 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       if(f.weightUnits == "Kg") {
         weight = UnitConversions.KgToLbs(f.weight);
       }
-      totalGravityPoints += (f.ppg * f.weight);
+      var points = f.ppg * f.weight;
+      if(f.method == "Mash") {
+        points *= mashEfficiency;
+      } else if(f.method == "Steep") {
+
+      }
+      totalGravityPoints += points;
     });
-    // reduce the totalPPG by the mash efficiency
-    totalGravityPoints *= mashEfficiency;
 
     //divide the total by the boil size and convert from points to density relative to water
     var og = totalGravityPoints / boilSizeInGallons;

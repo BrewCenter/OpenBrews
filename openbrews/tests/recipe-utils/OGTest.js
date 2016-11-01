@@ -32,5 +32,25 @@ describe('RecipeUtils calcOG', function() {
     }
     expect(RecipeUtils.calcOG(recipe)).toEqual(1.059);
   });
+
+  it('two grain test', function() {
+    var recipe = {
+      boilSize: 5,
+      boilSizeUnits: "Gal",
+      mashEfficiency: 68,
+      fermentables: [
+        {
+          name: "American 2-Row",
+          method: "Mash",
+          weight: 11.5,
+          weightUnits: "Lbs",
+          addTime: 0,
+          ppg: 38,
+          srm: 1
+        }
+      ]
+    }
+    expect(RecipeUtils.calcOG(recipe)).toEqual(1.059);
+  });
   
 });
