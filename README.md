@@ -10,6 +10,8 @@ A brewing app for iOS and Android, built with Ionic Framework.
     * `npm install -g cordova ionic`
 2. [Gulp](http://gulpjs.com/) installed globally
     * `npm install -g gulp`
+#### Testing Prereqs
+3. npm install -g karma-cli
     
 ### Steps to run locally
 1. Clone this repository
@@ -29,6 +31,12 @@ A brewing app for iOS and Android, built with Ionic Framework.
     * If you receive an error such as `www.zip cannot be found`, press
     <kbd>Ctrl</kbd>+<kbd>c</kbd> to stop the process. Run `mv openbrews.zip www.zip`,
     and run `ionic upload` again.
+
+### Steps to run unit tests
+1. First, follow the steps to run the app locally, making sure your modules are up-to-date.
+2. Install the Testing prereqs above.
+3. `cd` into the `openbrews/` directory.
+4. Run `karma start`
 
 ### Optional Configuration
 If you would like to use features which utilize the brewerydb API, 
