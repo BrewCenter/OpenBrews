@@ -4,7 +4,7 @@
    */
 describe('RecipeUtils calcOG', function() {
   var RecipeUtils;
-  var basicRecipe,mashedFermentable1, mashedFermentable2;
+  var recipe,mashedFermentable1, mashedFermentable2, steepedFermentable1, extractFermentable1;
 
   // Before each test load our api.users module
   beforeEach(angular.mock.module('openbrews.recipeUtils'));

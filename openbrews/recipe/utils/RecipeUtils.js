@@ -43,7 +43,21 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
    * Calculate the FG (Original Gravity)
    * that the recipe should have. */
   this.calcFG = function(recipe) {
-    return 0;
+    /* first convert the OG from a density to gravity points */
+    var ogPoints = (recipe.og * 1000) - 1000;
+
+    var attenuationPercent = 0;
+    /* select the highest attenuation out of any yeast strains used */
+    angular.forEach(recipe.yeasts, function(yeast) {
+      if(yeast.attenuation > attenuationPercent) {
+        attenuationPercent = yeast.attenuation;
+      }
+    });
+    attenuationPercent /= 100; // put the percentin decimal form
+
+    /* FG is 1 + (ogPoints * (1 - attenuationPercent)) / 1000 */
+    var fg = 1 +  (ogPoints * (1 - attenuationPercent)) / 1000;
+    return fg;
   };
 
   /**
