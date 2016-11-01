@@ -5,7 +5,19 @@ angular.module('openbrews.recipeUtils', [])
    * Calculate the OG (Original Gravity)
    * that the recipe should have. */
   this.calcOG = function(recipe) {
-    return 0;
+    var boilSizeInGallons = recipe.boilSize;
+    var mashEfficiency = recipe.mashEfficiency / 100;//mash efficiency as a decimal
+
+    /* find the total number of gravity points first */
+    var totalPPG = 0;
+    angular.forEach(recipe.fermentables, function(f) {
+      totalPPG += (f.ppg * f.weight);
+    });
+    totalPPG *= mashEfficiency;
+
+    var og = totalPPG / boilSizeInGallons;
+    og = (og + 1000) / 1000; //convert OG from gravity points to density relative to water.
+    return parseFloat(og.toFixed(3)); //round the OG to 3 decimal places
   };
 
   /**

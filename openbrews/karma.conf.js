@@ -22,7 +22,7 @@ module.exports = function(config) {
       //load files we want to test
       './recipe/utils/**/*.js',
       //load tests
-      'tests/**/*isDefined.js',//Load definition checks first
+      'tests/**/*isDefinedTest.js',//Load definition checks first
       'tests/**/*.js'
     ],
 
