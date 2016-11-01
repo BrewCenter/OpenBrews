@@ -1,23 +1,37 @@
-angular.module('openbrews.recipeUtils', [])
-.service('RecipeUtils', [function () {
+angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
+.service('RecipeUtils', ['UnitConversions', function (UnitConversions) {
 
   /**
    * Calculate the OG (Original Gravity)
    * that the recipe should have. */
   this.calcOG = function(recipe) {
-    var boilSizeInGallons = recipe.boilSize;
+
+    //Convert boil size to gallons if needed
+    if(recipe.boilSizeUnits == "L") {
+      boilSizeInGallons = UnitConversions.LToGal(recipe.boilSize);
+    } else {
+      boilSizeInGallons = recipe.boilSize;
+    }
     var mashEfficiency = recipe.mashEfficiency / 100;//mash efficiency as a decimal
 
     /* find the total number of gravity points first */
-    var totalPPG = 0;
+    var totalGravityPoints = 0;
     angular.forEach(recipe.fermentables, function(f) {
-      totalPPG += (f.ppg * f.weight);
+      var weightInLbs;
+      if(f.weightUnits == "Kg") {
+        weight = UnitConversions.KgToLbs(f.weight);
+      }
+      totalGravityPoints += (f.ppg * f.weight);
     });
-    totalPPG *= mashEfficiency;
+    // reduce the totalPPG by the mash efficiency
+    totalGravityPoints *= mashEfficiency;
 
-    var og = totalPPG / boilSizeInGallons;
+    //divide the total by the boil size and convert from points to density relative to water
+    var og = totalGravityPoints / boilSizeInGallons;
     og = (og + 1000) / 1000; //convert OG from gravity points to density relative to water.
-    return parseFloat(og.toFixed(3)); //round the OG to 3 decimal places
+
+    //round the OG to 3 decimal places
+    return parseFloat(og.toFixed(3));
   };
 
   /**

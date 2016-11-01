@@ -2,7 +2,7 @@
    * Expected values calculated using online calculators such as
    * https://www.brewersfriend.com/homebrew/recipe/calculator/
    */
-describe('RecipeUtils Function Definitions', function() {
+describe('RecipeUtils calcOG', function() {
   var RecipeUtils;
 
   // Before each test load our api.users module
