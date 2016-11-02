@@ -1,13 +1,6 @@
 angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
 .service('RecipeUtils', ['$http', 'UnitConversions', function ($http, UnitConversions) {
 
-  var utilizationTable;
-  $http.get('recipe/utils/UtilizationTable.json').then(function onSuccess(response) {
-    utilizationTable = angular.fromJson(response.data);
-    console.log(utilizationTable);
-  });
-  utilizationTable[1.03][0] = 1;
-
   /**
    * Calculate the OG (Original Gravity)
    * that the recipe should have. */
@@ -101,34 +94,25 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
    /*
     * this returns the % utilization of a hop based on it's boil time.
     * A boil time in a given range has a specific % yield.
-    * values taken from http://www.homebrewing.org/International-Bittering-Units_ep_49-1.html */
-   var getHopUtilization = function(hop) {
+    * Formula from http://realbeer.com/hops/research.html */
+  var getHopUtilization = function(recipe, hop) {
      if(hop.stage != "Boil") {// only boiling utilizes hops
        return 0;
-     } else if(hop.addTime > 60) {
-       return 31;
-     } else if (hop.addTime > 50) {
-       return 30;
-     } else if (hop.addTime > 45) {
-       return 28.1;
-     } else if (hop.addTime > 40) {
-       return 22.8;
-     } else if (hop.addTime > 30) {
-       return 15.3
-     } else if (hop.addTime > 20) {
-       return 12.1
-     } else if (hop.addTime > 15) {
-       return 10.1;
-     } else if (hop.addTime > 10) {
-       return 8;
-     } else if (hop.addTime > 5) {
-       return 6;
-     } else if (hop.addTime > 0) {
-       return 5;
      } else {
-       return 0;
+       //Bigness factor = 1.65 * 0.000125^(wort gravity - 1)
+       var bignessFactor = 0;
+       if(recipe.og) {
+         bignessFactor = 1.65 * Math.pow(0.000125,recipe.og - 1);
+       }
+       //Boil Time factor = (1 - e^(-0.04 * time in mins))/4.15
+       var boilTimeFactor = 0;
+       if(recipe.boilTime) {
+         boilTimeFactor = (1 - Math.pow(Math.E, -0.04 * hop.addTime))/4.15;
+       }
+       return bignessFactor * boilTimeFactor;
      }
-   }
+  }
+  this.getHopUtilization = getHopUtilization;
 
    /**
     * Calculate the final IBU (International Bitterness Units)
@@ -149,7 +133,6 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
         return ibu;
       }
 
-
       angular.forEach(recipe.hops, function(hop) {
         /* get the hop weight in ounces */
         var weightInOz = 0;
@@ -160,8 +143,11 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
             weightInOz = hop.weight;
           }
         }
-
-        var hopIbu = hop.aa * weightInOz * getHopUtilization(hop) * 0.7489 / boilSizeInGallons;
+        // IBUs = decimal alpha acid utilization * mg/l of added alpha acids
+        // mg/l of added alpha acids = (decimal AA rating * ozs hops * 7490)/boilSize
+        // utilization => see getHopUtilization
+        var mgl = (hop.aa * weightInOz * 74.90)/boilSizeInGallons;
+        var hopIbu = getHopUtilization(recipe, hop) * mgl;
         ibu += hopIbu;
       });
       return ibu;
