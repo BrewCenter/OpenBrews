@@ -127,6 +127,81 @@
         $state.go("recipes");
       };
 
+
+      ////////////////////////////////////////////////////////////
+      // Functions that watch variables and update calculated
+      // values appropriately
+      ///////////////////////////////////////////////////////////
+
+      function updateOG () {
+        $scope.recipe.og = RecipeUtils.calcOG($scope.recipe);
+      }
+
+      function updateFG () {
+        $scope.recipe.fg = RecipeUtils.calcFG($scope.recipe);
+      }
+
+      function updateABV () {
+        $scope.recipe.abv = RecipeUtils.calcABV($scope.recipe);
+      }
+
+      function updateABW () {
+        $scope.recipe.abw = RecipeUtils.calcABW($scope.recipe);
+      }
+
+      function abwWatcher (newVals, oldVals) {
+        updateABW();
+      }
+
+      function abvWatcher (newVals, oldVals) {
+        updateABW();
+      }
+
+      function fgWatcher (newVals, oldVals) {
+        console.log("Re-calculating FG!");
+        updateFG();
+        updateABV();
+        updateABW();
+      }
+
+      function ogWatcher (newVals, oldVals) {
+        console.log("Re-calculating OG!");
+        updateOG();
+        updateFG();
+        updateABV();
+        updateABW();
+      }
+
+      $scope.$watchGroup(['recipe.boilSize',
+                          'recipe.boilSizeUnits',
+                          'recipe.mashEfficiency',
+                          'recipe.steepEfficiency'],
+                          ogWatcher);
+
+      $scope.$watchCollection('recipe.fermentables',
+                                function (newVals, oldVals) {
+                                  var i;
+                                  for(i = 0; i < newVals.length; ++i) {
+                                    $scope.$watchCollection('recipe.fermentables[' + i + ']', ogWatcher);
+                                  }
+                                });
+
+      $scope.$watchCollection('recipe.yeasts',
+                                function (newVals, oldVals) {
+                                  var i;
+                                  for(i = 0; i < newVals.length; ++i) {
+                                    $scope.$watchCollection('recipe.yeasts[' + i + ']', fgWatcher);
+                                  }
+                                });
+      $scope.$watchCollection('recipe.yeasts',
+                                function (newVals, oldVals) {
+                                  var i;
+                                  for(i = 0; i < newVals.length; ++i) {
+                                    $scope.$watchCollection('recipe.yeasts[' + i + ']', abvWatcher);
+                                  }
+                                });
+
+
       /////////////////////////////////////////////////////////////
       // Smart Type Functions
       /////////////////////////////////////////////////////////////

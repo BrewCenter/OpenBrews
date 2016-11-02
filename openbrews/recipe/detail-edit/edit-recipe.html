@@ -10,7 +10,7 @@
                         Name <input type="text" name="name" ng-model="recipe.name" class="text-right">
                     </label>
                     <label for="style" class="item item-input item-input-dropdown">
-                        Style 
+                        Style
                           <input-dropdown
                             selected-item="recipe.style"
                             default-dropdown-items="styles"
@@ -50,10 +50,23 @@
                         <input type="text" name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right">
                         <span class="input-addon">%</span>
                     </label>
-                    <label for="mashEfficency" class="item item-input item-input-group">
+                    <label for="steepEfficency" class="item item-input item-input-group">
                         Steep Efficiency
-                        <input type="text" name="steepEfficiency" ng-model="recipe.mashEfficiency" class="text-right">
+                        <input type="text" name="steepEfficiency"
+                        ng-model="recipe.steepEfficiency" class="text-right">
                         <span class="input-addon">%</span>
+                    </label>
+                    <label for="mashEfficency" class="item item-input item-input-group">
+                      <b>OG: </b>&nbsp; {{recipe.og}}
+                    </label>
+                    <label for="mashEfficency" class="item item-input item-input-group">
+                      <b>FG: </b>&nbsp; {{recipe.fg}}
+                    </label>
+                    <label for="mashEfficency" class="item item-input item-input-group">
+                      <b>ABV: </b>&nbsp; {{recipe.abv}} %
+                    </label>
+                    <label for="mashEfficency" class="item item-input">
+                      <b>ABW: </b>&nbsp; {{recipe.abw}} %
                     </label>
                 </div>
 
