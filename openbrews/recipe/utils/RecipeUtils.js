@@ -62,7 +62,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
 
   /**
    * Calculate the final ABV (Alcohol by Volumne)
-   * that the recipe should yield. 
+   * that the recipe should yield.
    * (1.05/0.79) x ((OG – FG) / FG)  x 100 */
   this.calcABV = function(recipe) {
     var abv = (1.05/0.79) * ( (recipe.og - recipe.fg)/recipe.fg) * 100;
@@ -92,6 +92,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
    /**
     * Calculate the final IBU (International Bitterness Units)
     * that the recipe should have when done. */
+   this.IBU_implemented = false;
     this.calcIBU = function(recipe) {
       return 0;
     };
@@ -99,8 +100,25 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
     /**
      * Calculate the SRM (Standard Reference Method), or
      * estimated color index of the finished product. */
+    this.SRM_implemented = false;
      this.calcSRM = function(recipe) {
        return 0;
      };
+
+  /**
+   * Call this function to update recipe with appropriate values
+   * just before saving it */
+  this.updateRecipeWithCalculatedVals = function(recipe) {
+    recipe.og = this.calcOG(recipe);
+    recipe.fg = this.calcFG(recipe);
+
+    if (this.SRM_implemented) recipe.srm = this.calcSRM(recipe);
+
+    recipe.abv = this.calcABV(recipe);
+    recipe.abw = this.calcABW(recipe);
+
+    if (this.IBU_implemented) recipe.ibu = this.calcIBU(recipe);
+    return recipe;
+  };
 
 }]);

@@ -11,9 +11,10 @@
     'openbrews.otherIngredientDirective',
     'openbrews.noteDirective',
     'openbrews.recipeStore',
+    'openbrews.recipeUtils',
     'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, BreweryDB, $http, $filter, $q) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
 
       const defaultRecipe = {
         name: "",
@@ -118,6 +119,7 @@
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
         if ($state.params.isNew) {
+          RecipeUtils.updateRecipeWithCalculatedVals($scope.recipe);
           RecipeStore.insert($scope.recipe);
         } else {
           RecipeStore.update($scope.recipe);
@@ -127,8 +129,8 @@
 
       /////////////////////////////////////////////////////////////
       // Smart Type Functions
-      /////////////////////////////////////////////////////////////  
-      
+      /////////////////////////////////////////////////////////////
+
       /* set the style selected */
       $scope.setStyle = function(item){
         $scope.recipe.style = item;
