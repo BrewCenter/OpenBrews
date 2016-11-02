@@ -11,4 +11,9 @@ angular.module('openbrews.unitConversions', [])
     return val * 2.20462;
   };
 
+  /* Converts Grams to Ounces */
+  this.GToOz = function(val) {
+  	return val * 0.035274;
+  };
+
 }]);

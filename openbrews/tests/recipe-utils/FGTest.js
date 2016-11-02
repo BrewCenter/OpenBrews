@@ -1,7 +1,7 @@
-  /*
-   * Expected values calculated using online calculators such as
-   * https://www.brewersfriend.com/homebrew/recipe/calculator/
-   */
+/*
+ * Expected values calculated using online calculators such as
+ * https://www.brewersfriend.com/homebrew/recipe/calculator/
+ */
 describe('RecipeUtils calcFG', function() {
   var RecipeUtils;
   var recipe,yeast1,yeast2;

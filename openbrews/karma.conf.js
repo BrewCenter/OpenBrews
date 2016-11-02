@@ -20,6 +20,7 @@ module.exports = function(config) {
       '../node_modules/angular-mocks/angular-mocks.js',
       './openbrews.js',   
       //load files we want to test
+      './recipe/utils/UtilizationTable.json',
       './recipe/utils/UnitConversions.js',
       './recipe/utils/RecipeUtils.js',
       //load tests
