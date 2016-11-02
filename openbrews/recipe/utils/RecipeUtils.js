@@ -62,16 +62,31 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
 
   /**
    * Calculate the final ABV (Alcohol by Volumne)
-   * that the recipe should yield. */
+   * that the recipe should yield. 
+   * (1.05/0.79) x ((OG – FG) / FG)  x 100 */
   this.calcABV = function(recipe) {
-    return 0;
+    var abv = (1.05/0.79) * ( (recipe.og - recipe.fg)/recipe.fg) * 100;
+    /* make sure the calculated abv isn't higher than our highest yeast tolerance */
+    var tolerance = null;
+    angular.forEach(recipe.yeasts, function(yeast) {
+      if(yeast.alcoholTolerance && (yeast.alcoholTolerance > tolerance || tolerance == null)) {
+        tolerance = yeast.alcoholTolerance;
+      }
+    });
+
+    /* if the abv exceeds our yeast tolerance, it's impossible */
+    if(tolerance && abv > tolerance) {
+      return tolerance;
+    } else {
+      return abv;
+    }
   };
 
   /**
    * Calculate the final ABW (Alcohol by Weight)
    * that the recipe should yield. */
    this.calcABW = function(recipe) {
-     return 0;
+     return recipe.abv * 0.8;
    };
 
    /**
