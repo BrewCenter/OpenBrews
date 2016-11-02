@@ -97,6 +97,7 @@
           {
             amount: 0,
             attenuation: 0,
+            alcoholTolerance: 0,
             flocculation: "Medium-Low",
             amountUnits: "G"
           }
