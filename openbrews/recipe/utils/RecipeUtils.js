@@ -23,8 +23,10 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       var weightInLbs;
       if(f.weightUnits == "Kg") {
         weight = UnitConversions.KgToLbs(f.weight);
+      } else {
+        weightInLbs = f.weight;
       }
-      var points = f.ppg * f.weight;
+      var points = f.ppg * weightInLbs;
       if(f.method == "Mash") {
         points *= mashEfficiency;
       } else if(f.method == "Steep") {
@@ -156,8 +158,34 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
     /**
      * Calculate the SRM (Standard Reference Method), or
      * estimated color index of the finished product. */
-     this.calcSRM = function(recipe) {
-       return 0;
-     };
+    this.calcSRM = function(recipe) {
+      var boilSizeInGallons = null;
+      if(recipe.boilSize) {
+        //Convert boil size to gallons if needed
+        if(recipe.boilSizeUnits == "L") {
+          boilSizeInGallons = UnitConversions.LToGal(recipe.boilSize);
+        } else {
+          boilSizeInGallons = recipe.boilSize;
+        }
+      } else {
+        return 0;
+      }
+
+      var srm = 0;
+      /* add the srm of each fermentable */
+      angular.forEach(recipe.fermentables, function(f) {
+        var weightInLbs;
+        if(f.weightUnits == "Kg") {
+          weight = UnitConversions.KgToLbs(f.weight);
+        } else {
+          weightInLbs = f.weight;
+        }
+        if(f.srm && weightInLbs) {
+          var mcu = (weightInLbs * f.srm) / boilSizeInGallons;
+          srm += 1.4922 * Math.pow(mcu, 0.6859);
+        }
+      });
+      return srm;
+    };
 
 }]);
