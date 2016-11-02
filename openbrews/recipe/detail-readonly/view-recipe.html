@@ -120,27 +120,27 @@
   <ion-list>
 
   <ion-item ng-if="recipe.og">
-  <b>{{recipe.og}} OG</b>
+  <b>OG: </b> {{recipe.og.toFixed(3)}}
   </ion-item>
 
   <ion-item ng-if="recipe.fg">
-  <b>{{recipe.fg}} FG</b>
+  <b>FG: </b> {{recipe.fg.toFixed(3)}}
   </ion-item>
 
   <ion-item ng-if="recipe.srm">
-  <b>SRM: </b> {{recipe.srm}}
+  <b>SRM: </b> {{recipe.srm.toFixed(0)}}
   </ion-item>
 
   <ion-item ng-if="recipe.ibu">
-  <b>IBU: </b> {{recipe.ibu}}
+  <b>IBU: </b> {{recipe.ibu.toFixed(0)}}
   </ion-item>
 
   <ion-item ng-if="recipe.abv">
-  <b>Estimated Alcohol by Volume: </b> {{recipe.abv}} %v/v
+  <b>ABV: </b> {{recipe.abv.toFixed(2)}} %
   </ion-item>
 
   <ion-item ng-if="recipe.abw">
-  <b>Estimated Alcohol by Weight: </b> {{recipe.abw}}
+  <b>ABW: </b> {{recipe.abw.toFixed(2)}} %
   </ion-item>
 
   </ion-list>
