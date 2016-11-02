@@ -36,7 +36,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
     og = (og + 1000) / 1000; //convert OG from gravity points to density relative to water.
 
     //round the OG to 3 decimal places
-    return og;
+    return parseFloat(og.toFixed(3));
   };
 
   /**
@@ -57,7 +57,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
 
     /* FG is 1 + (ogPoints * (1 - attenuationPercent)) / 1000 */
     var fg = 1 +  (ogPoints * (1 - attenuationPercent)) / 1000;
-    return fg;
+    return parseFloat(fg.toFixed(3));
   };
 
   /**
@@ -74,19 +74,21 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       }
     });
 
+    var returnedAbv = abv;
+
     /* if the abv exceeds our yeast tolerance, it's impossible */
     if(tolerance && abv > tolerance) {
-      return tolerance;
-    } else {
-      return abv;
+      returnedAbv = tolerance;
     }
+
+    return parseFloat(returnedAbv.toFixed(2));
   };
 
   /**
    * Calculate the final ABW (Alcohol by Weight)
    * that the recipe should yield. */
    this.calcABW = function(recipe) {
-     return recipe.abv * 0.8;
+     return parseFloat((recipe.abv * 0.8).toFixed(2));
    };
 
    /**
