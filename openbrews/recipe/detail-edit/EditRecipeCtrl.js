@@ -118,11 +118,11 @@
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
+        var updatedRecipe = RecipeUtils.updateRecipeWithCalculatedVals($scope.recipe);
         if ($state.params.isNew) {
-          RecipeUtils.updateRecipeWithCalculatedVals($scope.recipe);
-          RecipeStore.insert($scope.recipe);
+          RecipeStore.insert(updatedRecipe);
         } else {
-          RecipeStore.update($scope.recipe);
+          RecipeStore.update(updatedRecipe);
         }
         $state.go("recipes");
       };

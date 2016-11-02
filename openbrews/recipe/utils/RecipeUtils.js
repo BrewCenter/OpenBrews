@@ -36,7 +36,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
     og = (og + 1000) / 1000; //convert OG from gravity points to density relative to water.
 
     //round the OG to 3 decimal places
-    return parseFloat(og.toFixed(3));
+    return og;
   };
 
   /**

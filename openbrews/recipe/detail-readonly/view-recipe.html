@@ -115,6 +115,36 @@
 
   </ion-list>
 
+  <h3 ng-if="recipe.og || recipe.fg">Calculated Values</h3>
+
+  <ion-list>
+
+  <ion-item ng-if="recipe.og">
+  <b>{{recipe.og}} OG</b>
+  </ion-item>
+
+  <ion-item ng-if="recipe.fg">
+  <b>{{recipe.fg}} FG</b>
+  </ion-item>
+
+  <ion-item ng-if="recipe.srm">
+  <b>SRM: </b> {{recipe.srm}}
+  </ion-item>
+
+  <ion-item ng-if="recipe.ibu">
+  <b>IBU: </b> {{recipe.ibu}}
+  </ion-item>
+
+  <ion-item ng-if="recipe.abv">
+  <b>Estimated Alcohol by Volume: </b> {{recipe.abv}} %v/v
+  </ion-item>
+
+  <ion-item ng-if="recipe.abw">
+  <b>Estimated Alcohol by Weight: </b> {{recipe.abw}}
+  </ion-item>
+
+  </ion-list>
+
 </div>
 </ion-content>
 
