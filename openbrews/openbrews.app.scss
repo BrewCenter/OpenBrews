@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 
 
 //overwrite _variables colors
-$stable:                          #f5f5f5 !default;
+$stable:                          #f48700 !default;
 $positive:                        #2196f3 !default;
 $calm:                            #03a9f4 !default;
 $balanced:                        #4caf50 !default;
@@ -88,15 +88,22 @@ input::-webkit-inner-spin-button {
 }
 
 // upgrade color scheme
-.bar-stable .button {
-    border-color: black;
-    background-color: #3c3c3c;
+.bar-stable .button-bordered {
+    border: 2px solid white;
+    background-color: $stable;
     color: white;
+}
+
+.bar-stable .button-bordered:hover {
+    border-width: 2px;
+    border-color: darken(white, 5%);
+	color: darken(white, 5%);
+	background-color: darken($stable, 5%);
 }
 
 .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #f48700;
+    background-color: $stable;
 }
 
 .bar.bar-stable .title {
