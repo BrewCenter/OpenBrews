@@ -8,15 +8,12 @@
             item-selected-method="setFermentable(item, fermentable)"
             filter-list-method="filterItems(fermentables, userInput)">
           </input-dropdown>
-
-
-    <!-- <input type="text" name="fermentable[{{index}}].name" ng-model="fermentable.name" class="text-right"> -->
   </label>
   <label for="fermentable[{{index}}].method" class="item item-input item-select">
-    Boil Size Units
+    Method
     <select name="fermentable[{{index}}].method" ng-model="fermentable.method">
         <option>Mash</option>
-        <option>Partial Mash</option>
+        <option>Steep</option>
         <option>Extract</option>
       </select>
   </label>
