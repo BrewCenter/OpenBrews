@@ -201,35 +201,36 @@
         ],
         ogWatcher);
 
+      /* recalculate srm when it's dependencies change */
+      $scope.$watchGroup(
+        [
+          'recipe.boilSize',
+          'recipe.boilSizeUnits'
+        ],
+        srmWatcher);
+
+      /* for srm and og */
       $scope.$watchCollection(
         'recipe.fermentables',
         function (newVals, oldVals) {
           var i;
           for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.fermentables[' + i + ']', ogWatcher);
+            $scope.$watchCollection('recipe.fermentables[' + i + ']', srmWatcher);
           }
         });
 
-      /* update FG when it's dependencies change */
+      /* update FG and abv when it's dependencies change */
       $scope.$watchCollection(
         'recipe.yeasts',
         function (newVals, oldVals) {
           var i;
           for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.yeasts[' + i + ']', fgWatcher);
-          }
-        });
-
-      /* update abv when it's dependencies change */
-      $scope.$watchCollection(
-        'recipe.yeasts',
-        function (newVals, oldVals) {
-          var i;
-          for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.yeasts[' + i + ']', abvWatcher);
           }
         });
-
+      
       /* update ibu when it's dependencies change */
       $scope.$watchCollection(
         'recipe.hops',
@@ -239,25 +240,6 @@
             $scope.$watchCollection('recipe.hops[' + i + ']', ibuWatcher);
           }
         });
-
-      /* recalculate srm when it's dependencies change */
-      $scope.$watchGroup(
-        [
-          'recipe.boilSize',
-          'recipe.boilSizeUnits'
-        ],
-        srmWatcher);
-      $scope.$watchCollection(
-        'recipe.fermentables',
-        function (newVals, oldVals) {
-          var i;
-          for(i = 0; i < newVals.length; ++i) {
-            $scope.$watchCollection('recipe.fermentables[' + i + ']', srmWatcher);
-          }
-        });
-
-
-
 
       /////////////////////////////////////////////////////////////
       // Smart Type Functions
