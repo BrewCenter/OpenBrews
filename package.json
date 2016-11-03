@@ -32,6 +32,6 @@
   ],
   "cordovaPlatforms": [],
   "scripts": {
-   "test": "./node_modules/.bin/karma start ./openbrews/karma.conf.js --single-run --browsers Chrome"
+   "test": "./node_modules/.bin/karma start ./openbrews/karma.conf.js --single-run --browsers PhantomJS"
   }
 }
