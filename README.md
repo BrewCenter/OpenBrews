@@ -1,5 +1,4 @@
-<img alt="Build Status" src="https://travis-ci.org/OpenBrews/OpenBrews.svg?branch=add-travis">
-# OpenBrews
+# OpenBrews <img alt="Build Status" src="https://travis-ci.org/OpenBrews/OpenBrews.svg?branch=add-travis">
 A brewing app for iOS and Android, built with Ionic Framework.
 
 <img alt="Edit Recipe" src="/docs/img/screenshots/edit.png?raw=true" width="350">
