@@ -11,20 +11,25 @@
     'openbrews.otherIngredientDirective',
     'openbrews.noteDirective',
     'openbrews.recipeStore',
+    'openbrews.recipeUtils',
     'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, BreweryDB, $http, $filter, $q) {
+    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
 
       const defaultRecipe = {
         name: "",
         style: "",
-        boilSize: 0,
+        boilSize: 5,
         boilSizeUnits: "Gal",
         boilTime: 60,
         estFermentationDays: 7,
         secondaryTimeDays: 0,
         mashEfficiency: 68,
         steepEfficiency: 30,
+        og: 0,
+        fg: 0,
+        abv: 0,
+        abw: 0,
         fermentables: [],
         hops: [],
         yeasts: [],
@@ -126,10 +131,138 @@
         $state.go("recipes");
       };
 
+
+      ////////////////////////////////////////////////////////////
+      // Functions that watch variables and update calculated
+      // values appropriately
+      ///////////////////////////////////////////////////////////
+
+      function updateOG () {
+        $scope.recipe.og = RecipeUtils.calcOG($scope.recipe);
+      }
+
+      function updateFG () {
+        $scope.recipe.fg = RecipeUtils.calcFG($scope.recipe);
+      }
+
+      function updateABV () {
+        $scope.recipe.abv = RecipeUtils.calcABV($scope.recipe);
+      }
+
+      function updateABW () {
+        $scope.recipe.abw = RecipeUtils.calcABW($scope.recipe);
+      }
+
+      function updateIBU() {
+        $scope.recipe.ibu = RecipeUtils.calcIBU($scope.recipe);
+      }
+
+      function updateSRM() {
+        $scope.recipe.srm = RecipeUtils.calcSRM($scope.recipe);
+      }
+
+      function srmWatcher() {
+        updateSRM();
+      }
+
+      function ibuWatcher(newVals, oldVals) {
+        updateIBU();
+      }
+
+      function abwWatcher (newVals, oldVals) {
+        updateABW();
+      }
+
+      function abvWatcher (newVals, oldVals) {
+        updateABW();
+      }
+
+      function fgWatcher (newVals, oldVals) {
+        updateFG();
+        updateABV();
+        updateABW();
+      }
+
+      function ogWatcher (newVals, oldVals) {
+        updateOG();
+        updateFG();
+        updateABV();
+        updateABW();
+        updateIBU();
+      }
+
+      /* Make OG recalculate when it's dependencies change */
+      $scope.$watchGroup(
+        [
+          'recipe.boilSize',
+          'recipe.boilSizeUnits',
+          'recipe.mashEfficiency',
+          'recipe.steepEfficiency'
+        ],
+        ogWatcher);
+
+      $scope.$watchCollection(
+        'recipe.fermentables',
+        function (newVals, oldVals) {
+          var i;
+          for(i = 0; i < newVals.length; ++i) {
+            $scope.$watchCollection('recipe.fermentables[' + i + ']', ogWatcher);
+          }
+        });
+
+      /* update FG when it's dependencies change */
+      $scope.$watchCollection(
+        'recipe.yeasts',
+        function (newVals, oldVals) {
+          var i;
+          for(i = 0; i < newVals.length; ++i) {
+            $scope.$watchCollection('recipe.yeasts[' + i + ']', fgWatcher);
+          }
+        });
+
+      /* update abv when it's dependencies change */
+      $scope.$watchCollection(
+        'recipe.yeasts',
+        function (newVals, oldVals) {
+          var i;
+          for(i = 0; i < newVals.length; ++i) {
+            $scope.$watchCollection('recipe.yeasts[' + i + ']', abvWatcher);
+          }
+        });
+
+      /* update ibu when it's dependencies change */
+      $scope.$watchCollection(
+        'recipe.hops',
+        function (newVals, oldVals) {
+          var i;
+          for(i = 0; i < newVals.length; ++i) {
+            $scope.$watchCollection('recipe.hops[' + i + ']', ibuWatcher);
+          }
+        });
+
+      /* recalculate srm when it's dependencies change */
+      $scope.$watchGroup(
+        [
+          'recipe.boilSize',
+          'recipe.boilSizeUnits'
+        ],
+        srmWatcher);
+      $scope.$watchCollection(
+        'recipe.fermentables',
+        function (newVals, oldVals) {
+          var i;
+          for(i = 0; i < newVals.length; ++i) {
+            $scope.$watchCollection('recipe.fermentables[' + i + ']', srmWatcher);
+          }
+        });
+
+
+
+
       /////////////////////////////////////////////////////////////
       // Smart Type Functions
-      /////////////////////////////////////////////////////////////  
-      
+      /////////////////////////////////////////////////////////////
+
       /* set the style selected */
       $scope.setStyle = function(item){
         $scope.recipe.style = item;

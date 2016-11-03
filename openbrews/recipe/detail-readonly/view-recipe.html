@@ -33,8 +33,25 @@
   <ion-item>
   <span class="view-label">Steep efficiency:</span> {{recipe.steepEfficiency}}%
   </ion-item>
+  <ion-item>
+  <span class="view-label">OG:</span> {{recipe.og}}
+  </ion-item>
+  <ion-item>
+  <span class="view-label">FG:</span> {{recipe.fg}}%
+  </ion-item>
+  <ion-item>
+  <span class="view-label">ABV:</span> {{recipe.abv}}%
+  </ion-item>
+  <ion-item>
+  <span class="view-label">ABW:</span> {{recipe.abw}}%
+  </ion-item>
+  <ion-item>
+  <span class="view-label">IBU:</span> {{recipe.ibu}}
+  </ion-item>
+  <ion-item>
+  <span class="view-label">SRM:</span> {{recipe.srm}}
+  </ion-item>
 
-  </ion-list>
 
   <h3 ng-if="(recipe.fermentables.length + recipe.yeasts.length +
     recipe.hops.length + recipe.others.length) > 0">Ingredients</h3>

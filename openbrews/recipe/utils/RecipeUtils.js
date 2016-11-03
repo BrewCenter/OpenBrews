@@ -13,6 +13,8 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       } else {
         boilSizeInGallons = recipe.boilSize;
       }
+    } else {
+      return 0;
     }
     var mashEfficiency = recipe.mashEfficiency / 100;//mash efficiency as a decimal
     var steepEfficiency = recipe.steepEfficiency / 100;//steep efficiency as a decimal
@@ -61,12 +63,12 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
 
     /* FG is 1 + (ogPoints * (1 - attenuationPercent)) / 1000 */
     var fg = 1 +  (ogPoints * (1 - attenuationPercent)) / 1000;
-    return fg;
+    return parseFloat(fg.toFixed(3));
   };
 
   /**
    * Calculate the final ABV (Alcohol by Volumne)
-   * that the recipe should yield. 
+   * that the recipe should yield.
    * (1.05/0.79) x ((OG – FG) / FG)  x 100 */
   this.calcABV = function(recipe) {
     var abv = (1.05/0.79) * ( (recipe.og - recipe.fg)/recipe.fg) * 100;
@@ -78,19 +80,21 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
       }
     });
 
+    var returnedAbv = abv;
+
     /* if the abv exceeds our yeast tolerance, it's impossible */
     if(tolerance && abv > tolerance) {
-      return tolerance;
-    } else {
-      return abv;
+      returnedAbv = tolerance;
     }
+
+    return parseFloat(returnedAbv.toFixed(2));
   };
 
   /**
    * Calculate the final ABW (Alcohol by Weight)
    * that the recipe should yield. */
    this.calcABW = function(recipe) {
-     return recipe.abv * 0.8;
+     return parseFloat((recipe.abv * 0.8).toFixed(2));
    };
 
    /*
@@ -152,7 +156,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
         var hopIbu = getHopUtilization(recipe, hop) * mgl;
         ibu += hopIbu;
       });
-      return ibu;
+    return parseFloat(ibu.toFixed(1));
     };
 
     /**
@@ -185,7 +189,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
           srm += 1.4922 * Math.pow(mcu, 0.6859);
         }
       });
-      return srm;
+    return parseFloat(srm.toFixed(2));
     };
 
 }]);
