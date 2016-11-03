@@ -30,5 +30,8 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "scripts": {
+   "test": "./node_modules/.bin/karma start ./openbrews/karma.conf.js --single-run --browsers PhantomJS"
+  }
 }
