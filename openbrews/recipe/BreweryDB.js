@@ -9,6 +9,22 @@ angular.module('openbrews.breweryDB', [])
   var YEASTS_KEY = 'yeastsInStorage';
 
   /*
+   * This will return the average of the two values. If one of
+   * the values doesn't exist, the existing one will be returned.
+   * if no values exist, null will be returned. */
+  var getBestAverage = function(n, m) {
+    if(!n && !m) {
+      return null;
+    } else if (!m) {
+      return n;
+    } else if (!n) {
+      return m;
+    } else {
+      return (n + m) / 2;
+    }
+  }
+
+  /*
    * Called after all objects have been retrieved into their respective
    * sync arrays
    */
@@ -23,19 +39,17 @@ angular.module('openbrews.breweryDB', [])
 
   /* sync all objects in the local cache with breweryDB */
   this.syncDB = function() {
-    //this.syncStyles();
-    //this.syncFermentables();
+    this.syncStyles();
+    this.syncFermentables();
     this.syncHops();
     this.syncYeasts();
-    console.log(this.getHops());
-    console.log(this.getYeasts());
   };
 
   /////////////////////////////////////
   // Beer Styles
   /////////////////////////////////////
 
-  /* 
+  /*
    * Get all beer styles from the local cache.
    * Transform them to our required format, and return them.
    */
@@ -48,7 +62,7 @@ angular.module('openbrews.breweryDB', [])
   };
   this.getStyles = getStyles;
 
-  this.syncStyles = function() {
+  this.syncStyles = function(force) {
     $http({
       method: 'GET',
       url: URL + '/styles',
@@ -56,19 +70,21 @@ angular.module('openbrews.breweryDB', [])
         key: $rootScope.config.BREWERY_DB_KEY
       }
     }).then(function successCallback(response) {
-      var styles = response.data.data;
-      var stylesInStorage = getStyles();
-      /* 
-       * if there are not the same number of styles in local storage,
-       * then save the new styles in our cache */
-      if(styles.length != stylesInStorage.length) {
-        styles = styles.map(function(styleObject) {//map to list of strings
-          styleObject = styleObject.name;
-          return styleObject;
-        });
-        //save to the local styles cache
-        localStorage.setItem(STYLES_KEY, JSON.stringify(styles));
-        stylesInStorage = styles;
+      if(response.data) {
+        var styles = response.data.data;
+        var stylesInStorage = getStyles();
+        /*
+         * if there are not the same number of styles in local storage,
+         * then save the new styles in our cache */
+        if(styles.length != stylesInStorage.length || force) {
+          styles = styles.map(function(styleObject) {//map to list of strings
+            styleObject = styleObject.name;
+            return styleObject;
+          });
+          //save to the local styles cache
+          localStorage.setItem(STYLES_KEY, JSON.stringify(styles));
+          stylesInStorage = styles;
+        }
       }
     }, function failureCallback(response) {
       console.log("Unable to sync styles.");
@@ -82,7 +98,7 @@ angular.module('openbrews.breweryDB', [])
   /* a data map of pages to fermentables received from that page */
   var fermentablesSyncing = [];
 
-  /* 
+  /*
    * Get all beer styles from the local cache.
    * Transform them to our required format, and return them.
    */
@@ -102,6 +118,7 @@ angular.module('openbrews.breweryDB', [])
   var transformFermentables = function(fermentables) {
     fermentables = fermentables.map(function(fermentableObject) {//map to list of strings
       fermentable = {};
+      fermentable.readableName = fermentableObject.name;
       fermentable.name = fermentableObject.name;
       fermentable.srm = fermentableObject.srmPrecise ? fermentableObject.srmPrecise : null;
       // convert potential to PPG. ex. if potential=1.037 => ppg = 27
@@ -111,7 +128,7 @@ angular.module('openbrews.breweryDB', [])
     return fermentables;
   };
 
-  /* 
+  /*
    * Get's the fermantables page #p. Transforms the response and saves it in
    * the syncing array. This will make a recursive call to syncronize the next
    * page of results from the API if the current page isn't the first or last page.
@@ -147,16 +164,18 @@ angular.module('openbrews.breweryDB', [])
    * Pull fermentables from the database. If there is a mismatch in the number
    * of fermentables we have and the number we get, we'll have to do a full sync.
    */
-  this.syncFermentables = function() {
+  this.syncFermentables = function(force) {
     fermentablesSyncing = {};
     /* make the first request to breweryDB to see if we need to sync */
     getFermPage(1).then(function successCallback(response) {
-      var fermentablesInStorage = getFermentables();
-      var numFermentables = response.data.totalResults;
+      if(response.data) {
+        var fermentablesInStorage = getFermentables();
+        var numFermentables = response.data.totalResults;
 
-      /* if there is a mismatch in lengths then we need to sync */
-      if(fermentablesInStorage.length != numFermentables) {
-        getFermPage(2);
+        /* if there is a mismatch in lengths then we need to sync */
+        if(fermentablesInStorage.length != numFermentables || force) {
+          getFermPage(2);
+        }
       }
     }, function failureCallback(response) {
       console.log("Unable to sync fermentables.");
@@ -170,7 +189,7 @@ angular.module('openbrews.breweryDB', [])
   /* a data map of pages to hops received from that page */
   var hopsSyncing = [];
 
-  /* 
+  /*
    * Get all beer styles from the local cache.
    * Transform them to our required format, and return them.
    */
@@ -191,14 +210,14 @@ angular.module('openbrews.breweryDB', [])
     hops = hops.map(function(hopObject) {//map to list of strings
       hop = {};
       hop.name = hopObject.name;
-      hop.alphaAcidMin = hopObject.alphaAcidMin ? hopObject.alphaAcidMin : null;
-      hop.alphaAcidMax = hopObject.alphaAcidMax ? hopObject.alphaAcidMax : null;
+      hop.readableName = hop.name;
+      hop.alphaAcid = getBestAverage(hopObject.alphaAcidMin, hopObject.alphaAcidMax);
       return hop;
     });
     return hops;
   };
 
-  /* 
+  /*
    * Get's the fermantables page #p. Transforms the response and saves it in
    * the syncing array. This will make a recursive call to syncronize the next
    * page of results from the API if the current page isn't the first or last page.
@@ -234,16 +253,18 @@ angular.module('openbrews.breweryDB', [])
    * Pull hops from the database. If there is a mismatch in the number
    * of hops we have and the number we get, we'll have to do a full sync.
    */
-  this.syncHops = function() {
+  this.syncHops = function(force) {
     hopsSyncing = {};
     /* make the first request to breweryDB to see if we need to sync */
     getHopsPage(1).then(function successCallback(response) {
-      var hopsInStorage = getHops();
-      var numHops = response.data.totalResults;
+      if(response.data) {
+        var hopsInStorage = getHops();
+        var numHops = response.data.totalResults;
 
-      /* if there is a mismatch in lengths then we need to sync */
-      if(hopsInStorage.length != numHops) {
-        getHopsPage(2);
+        /* if there is a mismatch in lengths then we need to sync */
+        if(hopsInStorage.length != numHops || force) {
+          getHopsPage(2);
+        }
       }
     }, function failureCallback(response) {
       console.log("Unable to sync hops.");
@@ -257,7 +278,7 @@ angular.module('openbrews.breweryDB', [])
   /* a data map of pages to yeasts received from that page */
   var yeastsSyncing = [];
 
-  /* 
+  /*
    * Get all beer styles from the local cache.
    * Transform them to our required format, and return them.
    */
@@ -278,16 +299,16 @@ angular.module('openbrews.breweryDB', [])
     yeasts = yeasts.map(function(yeastObject) {
       yeast = {};
       yeast.name = yeastObject.name;
-      yeast.attenuationMax = yeastObject.attenuationMax ? yeastObject.attenuationMax : null;
-      yeast.attenuationMin = yeastObject.attenuationMin ? yeastObject.attenuationMin : null;
-      yeast.fermentTempMax = yeastObject.fermentTempMax ? yeastObject.fermentTempMax : null;
-      yeast.fermentTempMin = yeastObject.fermentTempMin ? yeastObject.fermentTempMin : null;
+      yeast.readableName = yeast.name;
+      yeast.attenuation = getBestAverage(yeastObject.attenuationMax, yeastObject.attenuationMin);
+      yeast.fermentTemp = getBestAverage(yeastObject.fermentTempMax, yeastObject.fermentTempMin);
+      yeast.alcoholTolerance = getBestAverage(yeastObject.alcoholToleranceMax, yeastObject.alcoholToleranceMin);
       return yeast;
     });
     return yeasts;
   };
 
-  /* 
+  /*
    * Get's the fermantables page #p. Transforms the response and saves it in
    * the syncing array. This will make a recursive call to syncronize the next
    * page of results from the API if the current page isn't the first or last page.
@@ -323,16 +344,18 @@ angular.module('openbrews.breweryDB', [])
    * Pull yeasts from the database. If there is a mismatch in the number
    * of yeasts we have and the number we get, we'll have to do a full sync.
    */
-  this.syncYeasts = function() {
+  this.syncYeasts = function(force) {
     yeastsSyncing = {};
     /* make the first request to breweryDB to see if we need to sync */
     getYeastsPage(1).then(function successCallback(response) {
-      var yeastsInStorage = getYeasts();
-      var numYeasts = response.data.totalResults;
+      if(response.data) {
+        var yeastsInStorage = getYeasts();
+        var numYeasts = response.data.totalResults;
 
-      /* if there is a mismatch in lengths then we need to sync */
-      if(yeastsInStorage.length != numYeasts) {
-        getYeastsPage(2);
+        /* if there is a mismatch in lengths then we need to sync */
+        if(yeastsInStorage.length != numYeasts || force) {
+          getYeastsPage(2);
+        }
       }
     }, function failureCallback(response) {
       console.log("Unable to sync yeasts.");

@@ -14,14 +14,14 @@
                         <input type="text" name="name" ng-model="recipe.name" ng-required="true" class="text-right">
                     </label>
                     <label for="style" class="item item-input item-input-dropdown">
-                        Style 
+                        Style
                           <input-dropdown
                             selected-item="recipe.style"
                             default-dropdown-items="styles"
                             allow-custom-input="true"
                             input-name="style"
                             item-selected-method="setStyle(item)"
-                            filter-list-method="filterStyles(userInput)">
+                            filter-list-method="filterItems(styles, userInput)">
                           </input-dropdown>
                     </label>
                     <label for="boilSize" class="item item-input">
@@ -53,6 +53,39 @@
                         Mash Efficiency
                         <input type="text" name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right">
                         <span class="input-addon">%</span>
+                    </label>
+                    <label for="steepEfficiency" class="item item-input item-input-group">
+                        Steep Efficiency
+                        <input type="text" name="steepEfficiency"
+                        ng-model="recipe.steepEfficiency" class="text-right">
+                        <span class="input-addon">%</span>
+                    </label>
+
+                    <label for="og" class="item item-input">
+                        OG
+                        <input type="text" name="og" ng-model="recipe.og" class="text-right">
+                    </label>
+                    <label for="fg" class="item item-input">
+                        FG
+                        <input type="text" name="fg" ng-model="recipe.fg" class="text-right">
+                    </label>
+                    <label for="abv" class="item item-input item-input-group">
+                        ABV
+                        <input type="text" name="abv" ng-model="recipe.abv" class="text-right">
+                        <span class="input-addon">%</span>
+                    </label>
+                    <label for="abw" class="item item-input item-input-group">
+                        ABW
+                        <input type="text" name="abw" ng-model="recipe.abw" class="text-right">
+                        <span class="input-addon">%</span>
+                    </label>
+                    <label for="ibu" class="item item-input">
+                        IBU
+                        <input type="text" name="ibu" ng-model="recipe.ibu" class="text-right">
+                    </label>
+                    <label for="srm" class="item item-input">
+                        SRM
+                        <input type="text" name="srm" ng-model="recipe.srm" class="text-right">
                     </label>
                 </div>
 

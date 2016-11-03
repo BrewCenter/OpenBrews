@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 
 
 //overwrite _variables colors
-$stable:                          #f5f5f5 !default;
+$stable:                          #f48700 !default;
 $positive:                        #2196f3 !default;
 $calm:                            #03a9f4 !default;
 $balanced:                        #4caf50 !default;
@@ -75,4 +75,46 @@ input::-webkit-inner-spin-button {
 	.hide-on-mobile {
 		display: none;
 	}
+}
+
+// standardize heights
+ .item-select {
+	height: 47px;
+}
+
+// add hover over recipe
+.item-content:hover {
+	background-color: #dddddd;
+}
+
+// upgrade color scheme
+.bar-stable .button-bordered {
+    border: 2px solid white;
+    background-color: $stable;
+    color: white;
+}
+
+.bar-stable .button-bordered:hover {
+    border-width: 2px;
+    border-color: darken(white, 5%);
+	color: darken(white, 5%);
+	background-color: darken($stable, 5%);
+}
+
+.bar.bar-stable {
+    border-color: #b2b2b2;
+    background-color: $stable;
+}
+
+.bar.bar-stable .title {
+    color: white;
+}
+
+.bar .title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.bar-stable .button.button-clear {
+    color: white;
 }

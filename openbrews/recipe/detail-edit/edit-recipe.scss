@@ -29,9 +29,11 @@
 	.list-inset .item-button button {
 		margin: 0px;
 	}
+	.item {
+		z-index: inherit;
+	}
 
-	.list .item-input-dropdown {
-		overflow: visible;
+	.list .item-input-dropdown ul {
 		z-index: 10;
 	}
 
@@ -42,11 +44,21 @@
 		text-align: right;
 		width: 100%;
 	}
+
+
 	.list .item-input-dropdown .input-dropdown ul {
 		position: fixed !important;
-		left: 0;
+		left: 0px;
+		right: 0px;
+		width: auto;
 		border: #E0E0E0;
 	}
+
+	.list-inset .item-input-dropdown .input-dropdown ul {
+		left: 10px;
+		right: 10px;
+	}
+
 	.list .item-input-dropdown .input-dropdown li {
 		border: 1px solid #F0F0F0;
 	}
