@@ -16,14 +16,14 @@
                             ng-class="{ 'form-error' : (recipeForm.style.$invalid && !recipeForm.style.$pristine) }">
                         Style
                           <input-dropdown
-                            input-required="true"
                             selected-item="recipe.style"
                             default-dropdown-items="styles"
                             allow-custom-input="true"
                             input-name="style"
                             item-selected-method="setStyle(item)"
                             filter-list-method="filterItems(styles, userInput)"
-                            input-ng-attr-placeholder="Required">
+                            input-required="true"
+                            input-ng-attr-placeholder="{{(recipeForm.style.$invalid && !recipeForm.style.$pristine) ? 'Required' : ''}}">
                           </input-dropdown>
                     </label>
                     <label for="boilSize" class="item item-input" 
