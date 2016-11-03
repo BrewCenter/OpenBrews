@@ -156,7 +156,7 @@ angular.module('openbrews.recipeUtils', ['openbrews.unitConversions'])
         var hopIbu = getHopUtilization(recipe, hop) * mgl;
         ibu += hopIbu;
       });
-    return parseFloat(ibu.toFixed(1));
+    return parseFloat(ibu.toFixed(2));
     };
 
     /**

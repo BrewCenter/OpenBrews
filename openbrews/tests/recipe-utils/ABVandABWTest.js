@@ -62,9 +62,9 @@ describe('RecipeUtils ABV and ABW Functions', function() {
     recipe.abv = 0;
     expect(RecipeUtils.calcABW(recipe)).toEqual(0);
     recipe.abv = 5.91;
-    expect(roundTo(RecipeUtils.calcABW(recipe), 3)).toEqual(4.728);
+    expect(roundTo(RecipeUtils.calcABW(recipe), 3)).toEqual(4.73);
     recipe.abv = 6.56;
-    expect(roundTo(RecipeUtils.calcABW(recipe), 3)).toEqual(5.248);
+    expect(roundTo(RecipeUtils.calcABW(recipe), 3)).toEqual(5.25);
   });
 
 });
