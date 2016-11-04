@@ -27,8 +27,8 @@ var paths = {
     '!./openbrews/**/*.js',
     '!./openbrews/**/*.scss',
     '!./openbrews/tests',
-    '!./openbrews/*.json',
     './openbrews/config.json',
+    '!./openbrews/(example|manifest)*.json',
     '!./openbrews/karma.conf.js'
   ]
 };

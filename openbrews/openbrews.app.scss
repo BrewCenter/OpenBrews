@@ -65,18 +65,8 @@ input::-webkit-inner-spin-button {
 	height: 40px;
 }
 
-/* responsive classes */
-@media screen and (min-width: 1080px) {
-	.container {
-		width: 60%;
-		margin-left: 20%;
-	}
-}
-
-@media screen and (max-width: 1080px) {
-	.hide-on-mobile {
-		display: none;
-	}
+.input-align-right {
+	text-align: right;
 }
 
 // standardize heights
@@ -128,4 +118,10 @@ input::-webkit-inner-spin-button {
 
 .bar-stable .button.button-clear {
     color: white;
+}
+
+.fixed-bottom {
+	position: fixed;
+	bottom: 0;
+	margin: 0 !important;
 }
