@@ -11,18 +11,37 @@ var jshint = require('gulp-jshint');
 
 var paths = {
   sass: ['./openbrews/**/*.scss'],
-  js: ['./openbrews/**/*.js', '!./openbrews/lib/**']
+  appJs: [
+    './openbrews/**/*.js',
+    '!./openbrews/karma.conf.js',
+    '!./openbrews/lib/**',
+    '!./openbrews/tests/**'
+  ],
+  js: [
+     './openbrews/**/*.js',
+    '!./openbrews/karma.conf.js',
+    '!./openbrews/tests/**'
+  ],
+  static: [
+    './openbrews/**/*',
+    '!./openbrews/**/*.js',
+    '!./openbrews/**/*.scss',
+    '!./openbrews/tests',
+    '!./openbrews/*.json',
+    './openbrews/config.json',
+    '!./openbrews/karma.conf.js'
+  ]
 };
 
 gulp.task('clean', function() {
-  gulp.src('./dist')
+  gulp.src('./www')
     .pipe(clean());
 });
 
 gulp.task('default', ['sass', 'js', 'static']);
 
 gulp.task('jshint', [], function(done) {
-  gulp.src(paths.js)
+  gulp.src(paths.appJs)
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .on('end', done);
@@ -33,26 +52,26 @@ gulp.task('sass', function(done) {
     .pipe(sass())
     .on('error', sass.logError)
     .pipe(gulp.dest('./openbrews/'))
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./www/'))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./openbrews/'))
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./www/'))
     .on('end', done);
 });
 
 gulp.task('js', function(done) {
-  gulp.src('./openbrews/**/*.js')
-      .pipe(gulp.dest('./dist/'))
+  gulp.src(paths.js)
+      .pipe(gulp.dest('./www/'))
       .on('end', done);
 
 });
 
 gulp.task('static', function(done) {
-  gulp.src(['./openbrews/**/*','!./openbrews/**/*.js', '!./openbrews/**/*.scss'])
-      .pipe(gulp.dest('./dist/'))
+  gulp.src(paths.static)
+      .pipe(gulp.dest('./www/'))
       .on('end', done);
 });
 
