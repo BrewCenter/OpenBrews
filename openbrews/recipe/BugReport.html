@@ -3,18 +3,20 @@
     <button class="button button-icon icon ion-close" ng-click="closeBugReport()" ng-tap="closeBugReport()"></button>
     <h1 class="title">Bug Report</h1>
   </ion-header-bar>
-  <ion-content>
-    <div class="list list-inset">
-      <label class="item item-input">
-        Email
-        <input type="email" class="input-align-right" placeholder="you@youremail.com" ng-model="bugReportForm.email" ng-required="true">
-      </label>
-      <label class="item item-input">
-        <textarea placeholder="Please describe your issue..." ng-model="bugReportForm.report" rows="16" ng-required="true"></textarea>
-      </label>
-    </div>
-  </ion-content>
-  <button class="button button-full button-balanced button-large fixed-bottom" ng-click="sendBugReport()" ng-tap="sendBugReport()">
-    Send
-  </button>
+  <form name="bugForm" ng-submit="sendBugReport(bugForm.$valid)" novalidate>
+    <ion-content>
+      <div class="list list-inset">
+        <label class="item item-input" ng-class="{ 'form-error' : (bugForm.email.$invalid && !bugForm.email.$pristine) }">
+          Email
+          <input name="email" type="email" class="input-align-right" placeholder="you@youremail.com" ng-model="bugReportForm.email" ng-required="true">
+        </label>
+        <label class="item item-input" ng-class="{ 'form-error' : (bugForm.report.$invalid && !bugForm.report.$pristine) }">
+          <textarea name="report" placeholder="Please describe your issue..." ng-model="bugReportForm.report" rows="16" ng-required="true"></textarea>
+        </label>
+      </div>
+    </ion-content>
+    <button type="submit" class="button button-full button-balanced button-large fixed-bottom" ng-click="sendBugReport()" ng-tap="sendBugReport()">
+      Send
+    </button>
+  </form>
 </ion-modal-view>

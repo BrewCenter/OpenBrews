@@ -36,28 +36,30 @@
         $scope.bugReportModal.show();
       };
 
-      $scope.sendBugReport = function(bugReportForm) {
-        if($scope.bugReportForm.report.$valid && $scope.bugReportForm.email.$valid && window.plugins && window.plugins.emailComposer) {
-            var body = 
-              'From: ' + 
-              $scope.bugReportForm.email + 
-              '<br/><br/>Report:<br/>' + 
-              $scope.bugReportForm.report;
+      $scope.sendBugReport = function(valid) {
+        if(valid) {
+          if(window.plugins && window.plugins.emailComposer) {
+              var body = 
+                'From: ' + 
+                $scope.bugReportForm.email + 
+                '<br/><br/>Report:<br/>' + 
+                $scope.bugReportForm.report;
 
-            window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
-                console.log("Response -> " + result);
-            }, 
-            "OpenBrews Bug Report",      // Subject
-            body,                        // Body
-            ["mdw7326@rit.edu"],         // To
-            null,                        // CC
-            null,                        // BCC
-            true,                        // isHTML
-            null,                        // Attachments
-            null);                       // Attachment Data
+              window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
+                  console.log("Response -> " + result);
+              }, 
+              "OpenBrews Bug Report",      // Subject
+              body,                        // Body
+              ["mdw7326@rit.edu"],         // To
+              null,                        // CC
+              null,                        // BCC
+              true,                        // isHTML
+              null,                        // Attachments
+              null);                       // Attachment Data
+          }
+          $scope.bugReportForm = {};
+          $scope.closeBugReport();
         }
-        $scope.bugReportForm = {};
-        $scope.closeBugReport();
       };
 
       $scope.closeBugReport = function() {
