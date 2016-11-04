@@ -90,17 +90,26 @@ input::-webkit-inner-spin-button {
 }
 
 // upgrade color scheme
-.bar-stable .button-bordered {
+.bar-stable .button-clear-bordered {
     border: 2px solid white;
     background-color: $stable;
     color: white;
 }
 
-.bar-stable .button-bordered:hover {
+.bar-stable .button-clear-bordered:hover, 
+.bar-stable .button-clear-bordered:active {
     border-width: 2px;
     border-color: darken(white, 5%);
 	color: darken(white, 5%);
 	background-color: darken($stable, 5%);
+}
+
+.bar-stable .button-icon {
+	color: white;
+}
+
+.bar-stable .button-icon:hover {
+	color: darken(white, 5%);
 }
 
 .bar.bar-stable {

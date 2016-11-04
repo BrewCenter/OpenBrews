@@ -75,9 +75,18 @@ gulp.task('static', function(done) {
       .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass', 'js', 'static']);
+/* watchers */
+gulp.task('watchSass', function() {
+  gulp.watch(paths.sass, ['sass']);
 });
+gulp.task('watchJs', function() {
+  gulp.watch(paths.js, ['js']);
+});
+gulp.task('watchStatic', function() {
+  gulp.watch(paths.static, ['static']);
+});
+gulp.task('watch', ['watchSass', 'watchStatic', 'watchJs']);
+
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
