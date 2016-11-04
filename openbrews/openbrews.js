@@ -37,6 +37,7 @@
          });
       });
 
+      console.log(window.LogRocket.recordingURL);
       
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
