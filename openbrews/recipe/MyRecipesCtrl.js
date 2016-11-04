@@ -36,8 +36,8 @@
         $scope.bugReportModal.show();
       };
 
-      $scope.sendBugReport = function(valid) {
-        if(valid) {
+      $scope.sendBugReport = function(form) {
+        if(form.$valid) {
           if(window.plugins && window.plugins.emailComposer) {
               var body = 
                 'From: ' + 
@@ -59,6 +59,7 @@
           }
           $scope.bugReportForm = {};
           $scope.closeBugReport();
+          form.$setPristine();
         }
       };
 

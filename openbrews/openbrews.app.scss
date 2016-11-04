@@ -80,18 +80,19 @@ input::-webkit-inner-spin-button {
 }
 
 // upgrade color scheme
-.bar-stable .button-clear-bordered {
+.bar .button-clear-bordered {
     border: 2px solid white;
-    background-color: $stable;
+    border-color: white !important;
+    background-color: transparent;
     color: white;
 }
 
-.bar-stable .button-clear-bordered:hover, 
-.bar-stable .button-clear-bordered:active {
+.bar .button-clear-bordered:hover, 
+.bar .button-clear-bordered:active {
     border-width: 2px;
     border-color: darken(white, 5%);
 	color: darken(white, 5%);
-	background-color: darken($stable, 5%);
+	background-color: rgba(0,0,0,0.1);
 }
 
 .bar-stable .button-icon {

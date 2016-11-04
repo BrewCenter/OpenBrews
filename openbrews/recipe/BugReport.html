@@ -1,9 +1,10 @@
 <ion-modal-view>
+  <form name="bugForm" ng-submit="sendBugReport(bugForm)" novalidate>
   <ion-header-bar class="bar-assertive"  align-title="center">
     <button class="button button-icon icon ion-close" ng-click="closeBugReport()" ng-tap="closeBugReport()"></button>
     <h1 class="title">Bug Report</h1>
+    <button type="submit" class="button button-clear-bordered"><b>Send</b></button>
   </ion-header-bar>
-  <form name="bugForm" ng-submit="sendBugReport(bugForm.$valid)" novalidate>
     <ion-content>
       <div class="list list-inset">
         <label class="item item-input" ng-class="{ 'form-error' : (bugForm.email.$invalid && !bugForm.email.$pristine) }">
@@ -15,7 +16,7 @@
         </label>
       </div>
     </ion-content>
-    <button type="submit" class="button button-full button-balanced button-large fixed-bottom" ng-click="sendBugReport()" ng-tap="sendBugReport()">
+    <button type="submit" class="button button-full button-balanced button-large fixed-bottom"">
       Send
     </button>
   </form>
