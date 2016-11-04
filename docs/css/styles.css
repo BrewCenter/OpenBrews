@@ -3,6 +3,20 @@
 	width: auto !important;
 }
 
+.btn-orange {
+	background-color: #f48700;
+	border-color: #d77a06;
+	color: #FFF;
+}
+
+.btn-orange:hover,
+.btn-orange:active,
+.btn-orange:focus {
+	background-color: #d77a06;
+	border-color: #b86906;
+	color: #DDD;
+}
+
 p {
 	font-size: 18px;
 }

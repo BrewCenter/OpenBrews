@@ -95,6 +95,10 @@ input::-webkit-inner-spin-button {
 	background-color: rgba(0,0,0,0.1);
 }
 
+.bar .back-button .back-text {
+	display: none;
+}
+
 .bar-stable .button-icon {
 	color: white;
 }
