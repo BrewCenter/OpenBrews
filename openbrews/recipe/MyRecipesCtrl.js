@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
   angular.module('openbrews.myRecipes', ['openbrews.recipeStore'])
-    .controller('MyRecipesCtrl', function($scope, $state, RecipeStore) {
+    .controller('MyRecipesCtrl', function($scope, $state, $http, $ionicModal, $ionicPopup, RecipeStore) {
 
       $scope.recipes = RecipeStore.all()
       $scope.bugReportModal = null;
@@ -27,30 +27,6 @@
       $scope.viewRecipe = function(recipe) {
         $state.go("view-recipe", { recipeId: recipe.id });
       };
-
-      /****************************************************
-       * Bug Report Modal Code
-       ****************************************************/
-
-      $scope.sendBugReport = function(form) {
-        if(form.$valid) {
-          if(window.plugins && window.plugins.email) {
-            var body = 
-              'Session ID: ' + window.LogRocket.recordingURL +
-              '<br/>Report:<br/>' + 
-              $scope.bugReportForm.report;
-            cordova.plugins.email.open({
-                subject: 'OpenBrews Bug Report',
-                recipients: 'mdw7326@rit.edu',
-                body: body,
-                isHTML: true
-            });
-            $scope.bugReportForm = {};
-            $scope.closeBugReport();
-            form.$setPristine();
-          }
-        }
-      };
-
+      
     });
 })();

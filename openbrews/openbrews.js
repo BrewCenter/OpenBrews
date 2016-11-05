@@ -38,7 +38,12 @@
       });
 
       if(window.cordova) {
-        mixpanel.track(window.LogRocket.recordingURL);
+        mixpanel.track("Session", {
+          "recordingUrl" : window.LogRocket.recordingURL,
+          "device" : ionic.Platform.device(),
+          "platform": ionic.Platform.platform(),
+          "platformVersion": ionic.Platform.version()
+        });
       }
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
