@@ -42,7 +42,8 @@
               var body = 
                 'From: ' + 
                 $scope.bugReportForm.email + 
-                '<br/><br/>Report:<br/>' + 
+                '<br/>Session link: <a href="' + window.LogRocket.recordingURL + '">' + window.LogRocket.recordingURL + '</a>' +
+                '<br/>Report:<br/>' + 
                 $scope.bugReportForm.report;
 
               window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
