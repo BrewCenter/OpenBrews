@@ -10,8 +10,10 @@ A brewing app for iOS and Android, built with Ionic Framework.
     * `npm install -g cordova ionic`
 2. [Gulp](http://gulpjs.com/) installed globally
     * `npm install -g gulp`
+
 #### Testing Prereqs
-3. npm install -g karma-cli
+3. [Karma](https://karma-runner.github.io/1.0/index.html) installed globally
+	* `npm install -g karma-cli`
     
 ### Steps to run locally
 1. Clone this repository
