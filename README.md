@@ -69,11 +69,10 @@ and submit a PR. Please note that changes may be requested. If you become a
 regular contributor, I may add you as a collaborator to this repository.
 
 ## Goals
-### Alpha Pre-Release
-We are currently trying to work through our remaining issues so that we can
-build an Android package for an Alpha Release. We need to elicit feedback
-from the community as early as possible. There are about 50 people signed up
-to be notified when we release this.
+### Beta Pre-Release
+We now have an Alpha release out, and we're working hard to deliver updates
+as fast as we can. Once the app is more stable and polished, we will release
+a Beta version on Android.
 
 ### Release 1
 Release 1 will focus on delivering a core Recipe Builder app. It will be
