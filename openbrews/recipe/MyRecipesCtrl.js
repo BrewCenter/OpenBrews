@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
   angular.module('openbrews.myRecipes', ['openbrews.recipeStore'])
-    .controller('MyRecipesCtrl', function($scope, $state, $http, $ionicModal, $ionicPopup, RecipeStore) {
+    .controller('MyRecipesCtrl', function($scope, $state, RecipeStore) {
 
       $scope.recipes = RecipeStore.all()
       $scope.bugReportModal = null;
