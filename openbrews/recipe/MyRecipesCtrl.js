@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
   angular.module('openbrews.myRecipes', ['openbrews.recipeStore'])
-    .controller('MyRecipesCtrl', function($scope, $state, $ionicModal, RecipeStore) {
+    .controller('MyRecipesCtrl', function($scope, $state, RecipeStore) {
 
       $scope.recipes = RecipeStore.all()
       $scope.bugReportModal = null;
@@ -32,60 +32,25 @@
        * Bug Report Modal Code
        ****************************************************/
 
-      $scope.openBugReport = function() {
-        $scope.bugReportModal.show();
-      };
-
       $scope.sendBugReport = function(form) {
         if(form.$valid) {
-          if(window.plugins && window.plugins.emailComposer) {
-              var body = 
-                'From: ' + 
-                $scope.bugReportForm.email + 
-                '<br/>Session link: <a href="' + window.LogRocket.recordingURL + '">' + window.LogRocket.recordingURL + '</a>' +
-                '<br/>Report:<br/>' + 
-                $scope.bugReportForm.report;
-
-              window.plugins.emailComposer.showEmailComposerWithCallback(function(result) {
-                  console.log("Response -> " + result);
-              }, 
-              "OpenBrews Bug Report",      // Subject
-              body,                        // Body
-              ["mdw7326@rit.edu"],         // To
-              null,                        // CC
-              null,                        // BCC
-              true,                        // isHTML
-              null,                        // Attachments
-              null);                       // Attachment Data
+          if(window.plugins && window.plugins.email) {
+            var body = 
+              'Session ID: ' + window.LogRocket.recordingURL +
+              '<br/>Report:<br/>' + 
+              $scope.bugReportForm.report;
+            cordova.plugins.email.open({
+                subject: 'OpenBrews Bug Report',
+                recipients: 'mdw7326@rit.edu',
+                body: body,
+                isHTML: true
+            });
+            $scope.bugReportForm = {};
+            $scope.closeBugReport();
+            form.$setPristine();
           }
-          $scope.bugReportForm = {};
-          $scope.closeBugReport();
-          form.$setPristine();
         }
       };
-
-      $scope.closeBugReport = function() {
-        $scope.bugReportModal.hide();
-      };
-      // Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.bugReportModal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('bugReportModal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('bugReportModal.removed', function() {
-        // Execute action
-      });
-
-      $ionicModal.fromTemplateUrl('recipe/BugReport.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(bugReportModal) {
-        $scope.bugReportModal = bugReportModal;
-      });
 
     });
 })();

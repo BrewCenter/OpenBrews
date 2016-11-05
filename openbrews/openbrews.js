@@ -37,8 +37,9 @@
          });
       });
 
-      console.log(window.LogRocket.recordingURL);
-      
+      if(window.cordova) {
+        mixpanel.track(window.LogRocket.recordingURL);
+      }
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

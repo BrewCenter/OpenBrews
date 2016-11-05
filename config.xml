@@ -46,4 +46,5 @@
     </platform>
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
     <plugin name="com.jcjee.plugins.emailcomposer" spec="https://github.com/jcjee/email-composer.git" />
+    <plugin name="cordova-plugin-email-composer" spec="https://github.com/katzer/cordova-plugin-email-composer.git" />
 </widget>
