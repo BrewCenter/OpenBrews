@@ -4,6 +4,10 @@ A brewing app for iOS and Android, built with Ionic Framework.
 <img alt="Edit Recipe" src="/docs/img/screenshots/edit.png?raw=true" width="350">
 <img alt="Edit Recipe" src="/docs/img/screenshots/smart-type.png?raw=true" width="350">
 
+## Alpha Release
+Go to our [Releases](https://github.com/OpenBrews/OpenBrews/releases) page to download our
+Alpha release. This supports Android 4.1 and up.
+
 ## Setup/Usage
 ### Prereqs
 1. [Ionic](http://ionicframework.com/) installed globally
