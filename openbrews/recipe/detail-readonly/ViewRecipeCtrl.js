@@ -9,7 +9,7 @@
 
       // Initializer
       (function() {
-        const recipe = RecipeStore.get($state.params.recipeId);
+        var recipe = RecipeStore.get($state.params.recipeId);
         if (recipe) {
           $scope.recipe = recipe;
         } else {

@@ -13,7 +13,7 @@
   ])
     .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
 
-      const defaultRecipe = {
+      var defaultRecipe = {
         name: '',
         style: '',
         boilSize: 5,
@@ -286,7 +286,7 @@
       (function () {
         // Differentiate between add or edit
         if ($state.params.recipeId) {
-            const recipe = RecipeStore.get($state.params.recipeId);
+            var recipe = RecipeStore.get($state.params.recipeId);
             if (recipe) {
               $scope.recipe = recipe;
               $scope.pageTitle = 'Edit Recipe';
