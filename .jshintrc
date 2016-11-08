@@ -1,6 +1,6 @@
 {
+    "esversion": 5,
     "node": true,
-    "esnext": true,
     "bitwise": true,
     "camelcase": true,
     "curly": true,
@@ -17,5 +17,6 @@
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "white": true
+    "white": true,
+    "predef": ["angular", "ionic", "mixpanel", "localStorage"]
 }
