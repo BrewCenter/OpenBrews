@@ -1,6 +1,3 @@
-/*global
-  angular
-*/
 //AddRecipe shows a list of recipes saved to the users device or profile
 (function(){
   'use strict';
@@ -17,10 +14,10 @@
     .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
 
       const defaultRecipe = {
-        name: "",
-        style: "",
+        name: '',
+        style: '',
         boilSize: 5,
-        boilSizeUnits: "Gal",
+        boilSizeUnits: 'Gal',
         boilTime: 60,
         estFermentationDays: 7,
         secondaryTimeDays: 0,
@@ -41,9 +38,9 @@
       $scope.addFermentable = function() {
         $scope.recipe.fermentables.push(
           {
-            method: "Mash",
+            method: 'Mash',
             weight: 0,
-            weightUnits: "Lbs",
+            weightUnits: 'Lbs',
             addTime: 60,
             ppg: 0,
             srm: 0
@@ -59,10 +56,10 @@
       /* Add other ingredient. */
       $scope.addOther = function() {
         $scope.recipe.others.push({
-          name: "",
+          name: '',
           amount: 0,
-          amountUnits: "oz",
-          stage: "Boil",
+          amountUnits: 'oz',
+          stage: 'Boil',
           addTime: 0
         });
       };
@@ -77,10 +74,10 @@
         $scope.recipe.hops.push(
           {
             weight: 0,
-            weightUnits: "oz",
-            type: "Pellet",
+            weightUnits: 'oz',
+            type: 'Pellet',
             aa: 0,
-            stage: "Boil",
+            stage: 'Boil',
             addTime: 0
           }
         );
@@ -103,8 +100,8 @@
             amount: 0,
             attenuation: 0,
             alcoholTolerance: 0,
-            flocculation: "Medium-Low",
-            amountUnits: "G"
+            flocculation: 'Medium-Low',
+            amountUnits: 'G'
           }
         );
       };
@@ -112,14 +109,14 @@
       /* Add a new note */
       $scope.addNote = function() {
         $scope.recipe.notes.push({
-          "text": ""
+          'text': ''
         });
-      }
+      };
 
       /* Delete the given note */
       $scope.deleteNote = function(index) {
         $scope.recipe.notes.splice(index, 1);
-      }
+      };
 
       /* Save a recipe in LocalStorage */
       $scope.saveRecipe = function() {
@@ -128,7 +125,7 @@
         } else {
           RecipeStore.update($scope.recipe);
         }
-        $state.go("recipes");
+        $state.go('recipes');
       };
 
 
@@ -165,25 +162,21 @@
         updateSRM();
       }
 
-      function ibuWatcher(newVals, oldVals) {
+      function ibuWatcher() {
         updateIBU();
       }
 
-      function abwWatcher (newVals, oldVals) {
+      function abvWatcher () {
         updateABW();
       }
 
-      function abvWatcher (newVals, oldVals) {
-        updateABW();
-      }
-
-      function fgWatcher (newVals, oldVals) {
+      function fgWatcher () {
         updateFG();
         updateABV();
         updateABW();
       }
 
-      function ogWatcher (newVals, oldVals) {
+      function ogWatcher () {
         updateOG();
         updateFG();
         updateABV();
@@ -212,7 +205,7 @@
       /* for srm and og */
       $scope.$watchCollection(
         'recipe.fermentables',
-        function (newVals, oldVals) {
+        function (newVals) {
           var i;
           for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.fermentables[' + i + ']', ogWatcher);
@@ -223,7 +216,7 @@
       /* update FG and abv when it's dependencies change */
       $scope.$watchCollection(
         'recipe.yeasts',
-        function (newVals, oldVals) {
+        function (newVals) {
           var i;
           for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.yeasts[' + i + ']', fgWatcher);
@@ -234,7 +227,7 @@
       /* update ibu when it's dependencies change */
       $scope.$watchCollection(
         'recipe.hops',
-        function (newVals, oldVals) {
+        function (newVals) {
           var i;
           for(i = 0; i < newVals.length; ++i) {
             $scope.$watchCollection('recipe.hops[' + i + ']', ibuWatcher);
@@ -299,7 +292,7 @@
               $scope.pageTitle = 'Edit Recipe';
             } else {
               // This Recipe doesn't exist
-              $state.go("recipes");
+              $state.go('recipes');
             }
         } else {
           if ($state.params.isNew) {
@@ -307,7 +300,7 @@
             $scope.pageTitle = 'Add Recipe';
           } else {
             // Wrong state: Has no recipe id and is not new
-            $state.go("recipes");
+            $state.go('recipes');
           }
         }
 

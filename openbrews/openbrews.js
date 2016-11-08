@@ -15,7 +15,7 @@
       'openbrews.breweryDB'
     ])
 
-  .constant('localStorageKey', "recipesInStorage")
+  .constant('localStorageKey', 'recipesInStorage')
 
   .run(function($ionicPlatform, $http, $rootScope, BreweryDB) {
     $ionicPlatform.ready(function() {
@@ -26,23 +26,23 @@
         $rootScope.config = response.data;
         /* after the config is received, sync the breweryDB */
         BreweryDB.syncDB();
-      }, function errorCallback(response) {
+      }, function errorCallback() {
         /* otherwise, try to get the example config instead as a fallback for
          development to avoid errors */
          $http.get('example.config.json')
          .then(function successCallback(response) {
            $rootScope.config = response.data;
-         }, function errorCallback(response) {
-           console.log("Missing Configuration File 'config.json'");
+         }, function errorCallback() {
+           console.log('Missing Configuration File "config.json"');
          });
       });
 
-      if(window.cordova) {
-        mixpanel.track("Session", {
-          "recordingUrl" : window.LogRocket.recordingURL,
-          "device" : ionic.Platform.device(),
-          "platform": ionic.Platform.platform(),
-          "platformVersion": ionic.Platform.version()
+      if(window.cordova && mixpanel && window.LogRocket) {
+        mixpanel.track('Session', {
+          'recordingUrl' : window.LogRocket.recordingURL,
+          'device' : ionic.Platform.device(),
+          'platform': ionic.Platform.platform(),
+          'platformVersion': ionic.Platform.version()
         });
       }
 

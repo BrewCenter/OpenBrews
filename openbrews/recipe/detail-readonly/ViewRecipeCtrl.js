@@ -5,7 +5,7 @@
 (function() {
   'use strict';
   angular.module('openbrews.viewRecipe', ['openbrews.recipeStore'])
-    .controller('ViewRecipeCtrl', ["$scope", "$state", 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('ViewRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
 
       // Initializer
       (function() {
@@ -14,7 +14,7 @@
           $scope.recipe = recipe;
         } else {
           // This Recipe doesn't exist
-          $state.go("recipes");
+          $state.go('recipes');
         }
       })();
 
