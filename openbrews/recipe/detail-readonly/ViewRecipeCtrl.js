@@ -5,16 +5,16 @@
 (function() {
   'use strict';
   angular.module('openbrews.viewRecipe', ['openbrews.recipeStore'])
-    .controller('ViewRecipeCtrl', ["$scope", "$state", 'RecipeStore', function($scope, $state, RecipeStore) {
+    .controller('ViewRecipeCtrl', ['$scope', '$state', 'RecipeStore', function($scope, $state, RecipeStore) {
 
       // Initializer
       (function() {
-        const recipe = RecipeStore.get($state.params.recipeId);
+        var recipe = RecipeStore.get($state.params.recipeId);
         if (recipe) {
           $scope.recipe = recipe;
         } else {
           // This Recipe doesn't exist
-          $state.go("recipes");
+          $state.go('recipes');
         }
       })();
 
