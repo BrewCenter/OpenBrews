@@ -1,6 +1,3 @@
-/*
-  window, cordova, StatusBar
-*/
 (function() {
   'use strict';
 
@@ -37,14 +34,21 @@
          });
       });
 
-      if(window.cordova && mixpanel && window.LogRocket) {
-        mixpanel.track('Session', {
-          'recordingUrl' : window.LogRocket.recordingURL,
-          'device' : ionic.Platform.device(),
-          'platform': ionic.Platform.platform(),
-          'platformVersion': ionic.Platform.version()
-        });
-      }
+      // if(mixpanel && window.LogRocket) {
+      //   mixpanel.track('Session', {
+      //     'recordingUrl' : window.LogRocket.recordingURL,
+      //     'device' : ionic.Platform.device(),
+      //     'platform': ionic.Platform.platform(),
+      //     'platformVersion': ionic.Platform.version()
+      //   });
+      // } else if(mixpanel) {
+      //   mixpanel.track('Session', {
+      //     'recordingUrl' : 'LogRocket not supported in ES5',
+      //     'device' : ionic.Platform.device(),
+      //     'platform': ionic.Platform.platform(),
+      //     'platformVersion': ionic.Platform.version()
+      //   });
+      // }
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
