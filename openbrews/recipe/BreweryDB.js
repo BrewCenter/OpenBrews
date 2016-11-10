@@ -88,7 +88,7 @@
             stylesInStorage = styles;
           }
         }
-      }, function failureCallback() {
+      }, function failureCallback(response) {
         console.log('Unable to sync styles.');
       });
     };

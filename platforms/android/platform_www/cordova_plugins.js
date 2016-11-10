@@ -21,8 +21,8 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-device": "1.1.3",
-    "cordova-plugin-whitelist": "1.3.0",
-    "cordova-plugin-splashscreen": "4.0.0"
+    "cordova-plugin-splashscreen": "4.0.0",
+    "cordova-plugin-whitelist": "1.3.0"
 };
 // BOTTOM OF METADATA
 });

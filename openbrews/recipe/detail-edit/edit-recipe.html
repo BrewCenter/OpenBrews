@@ -3,7 +3,7 @@
     </ion-nav-buttons>
     <ion-content>
         <div class="container">
-            <form name="recipeForm" novalidate ng-submit="submit()">
+            <form name="recipeForm" novalidate ng-submit="saveRecipe(recipeForm.$valid)">
                 <div class="list">
                     <label for="name" class="item item-input" 
                             ng-class="{ 'form-error' : (recipeForm.name.$invalid && !recipeForm.name.$pristine) }">
@@ -28,7 +28,7 @@
                     <label for="boilSize" class="item item-input" 
                             ng-class="{ 'form-error' : (recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) }">
                         Boil Size 
-                        <input type="number" name="boilSize" ng-model="recipe.boilSize" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="boilSize" ng-model="recipe.boilSize" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) ? 'Required' : ''}}">
                     </label>
                     <label for="boilSizeUnits" class="item item-input item-select">
@@ -41,35 +41,35 @@
                     <label for="boilTime" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.boilTime.$invalid && !recipeForm.boilTime.$pristine) }">
                         Boil Time
-                        <input type="number" name="boilTime" ng-model="recipe.boilTime" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="boilTime" ng-model="recipe.boilTime" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.boilTime.$invalid && !recipeForm.boilTime.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">Minutes</span>
                     </label>
                     <label for="estFermentationDays" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) }">
                         Estimated Fermentation Time
-                        <input type="number" name="estFermentationDays" ng-model="recipe.estFermentationDays" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="estFermentationDays" ng-model="recipe.estFermentationDays" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">Days</span>
                     </label>
                     <label for="secondaryTimeDays" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.secondaryTimeDays.$invalid && !recipeForm.secondaryTimeDays.$pristine) }">
                         Secondary Fermentation Time
-                        <input type="number" name="secondaryTimeDays" ng-model="recipe.secondaryTimeDays" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="secondaryTimeDays" ng-model="recipe.secondaryTimeDays" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.secondaryTimeDays.$invalid && !recipeForm.secondaryTimeDays.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">Days</span>
                     </label>
                     <label for="mashEfficiency" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.mashEfficiency.$invalid && !recipeForm.mashEfficiency.$pristine) }">
                         Mash Efficiency
-                        <input type="number" name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.mashEfficiency.$invalid && !recipeForm.mashEfficiency.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">%</span>
                     </label>
                     <label for="steepEfficiency" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.steepEfficiency.$invalid && !recipeForm.steepEfficiency.$pristine) }">
                         Steep Efficiency
-                        <input type="number" name="steepEfficiency" ng-model="recipe.steepEfficiency" class="text-right" ng-required="true"
+                        <input type="number" string-to-number name="steepEfficiency" ng-model="recipe.steepEfficiency" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.steepEfficiency.$invalid && !recipeForm.steepEfficiency.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">%</span>
                     </label>
@@ -160,8 +160,7 @@
                 </div>
 
                 <div class="padded">
-                    <button class="button button-block button-balanced"
-                        ng-click="saveRecipe()" ng-tap="saveRecipe()" ng-disabled="recipeForm.$invalid">
+                    <button class="button button-block button-balanced" type="submit">
                         Save recipe
                     </button>
                 </div>
