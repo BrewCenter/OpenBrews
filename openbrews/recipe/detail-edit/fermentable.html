@@ -18,7 +18,7 @@
       </select>
   </label>
   <label for="fermentable[{{index}}].weight" class="item item-input">
-    Weight <input type="number" name="fermentable[{{index}}].weight" ng-model="fermentable.weight" class="text-right">
+    Weight <input type="number" string-to-number name="fermentable[{{index}}].weight" ng-model="fermentable.weight" class="text-right">
   </label>
   <label for="fermentable[{{index}}].weightUnits" class="item item-input item-select">
     Weight Units
@@ -28,14 +28,14 @@
       </select>
   </label>
   <label for="fermentable[{{index}}].addTime" class="item item-input item-input-group">
-    Add Time <input type="number" name="fermentable[{{index}}].addTime" ng-model="fermentable.addTime" class="text-right">
+    Add Time <input type="number" string-to-number name="fermentable[{{index}}].addTime" ng-model="fermentable.addTime" class="text-right">
     <span class="input-addon">Minutes Left</span>
   </label>
   <label for="fermentable[{{index}}].ppg" class="item item-input">
-    PPG <input type="number" name="fermentable[{{index}}].ppg" ng-model="fermentable.ppg" class="text-right">
+    PPG <input type="number" string-to-number name="fermentable[{{index}}].ppg" ng-model="fermentable.ppg" class="text-right">
   </label>
   <label for="fermentable[{{index}}].srm" class="item item-input">
-    SRM <input type="number" name="fermentable[{{index}}].srm" ng-model="fermentable.srm" class="text-right">
+    SRM <input type="number" string-to-number name="fermentable[{{index}}].srm" ng-model="fermentable.srm" class="text-right">
   </label>
   <div class="item item-button">
     <button class="button button-assertive button-block button-full" ng-click="deleteFermentable(index)" ng-tap="deleteFermentable(index)">Delete {{fermentable.name}}</button>

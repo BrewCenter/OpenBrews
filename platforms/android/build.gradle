@@ -193,12 +193,6 @@ android {
                     abiFilters "x86", ""
                 }
             }
-            x86_64 {
-                versionCode defaultConfig.versionCode*10 + 4
-                ndk {
-                    abiFilters "x86_64", ""
-                }
-            }
             all {
                 ndk {
                     abiFilters "all", ""

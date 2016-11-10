@@ -119,13 +119,15 @@
       };
 
       /* Save a recipe in LocalStorage */
-      $scope.saveRecipe = function() {
-        if ($state.params.isNew) {
-          RecipeStore.insert($scope.recipe);
-        } else {
-          RecipeStore.update($scope.recipe);
+      $scope.saveRecipe = function(valid) {
+        if(valid) {
+          if ($state.params.isNew) {
+            RecipeStore.insert($scope.recipe);
+          } else {
+            RecipeStore.update($scope.recipe);
+          }
+          $state.go('recipes');
         }
-        $state.go('recipes');
       };
 
 

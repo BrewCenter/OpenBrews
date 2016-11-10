@@ -12,11 +12,11 @@
     <!-- <input type="text" name="yeast[{{index}}].name" ng-model="yeast.name" class="text-right"> -->
 	</label>
 	<label for="yeast[{{index}}].attenuation" class="item item-input">
-    Attenuation <input type="number" step="any" name="yeast[{{index}}].attenuation" ng-model="yeast.attenuation" class="text-right">
+    Attenuation <input type="number" string-to-number step="any" name="yeast[{{index}}].attenuation" ng-model="yeast.attenuation" class="text-right">
   </label>
   <label for="yeast[{{index}}].alcoholTolerance" class="item item-input">
     Alcohol Tolerance
-    <input type="number" step="any" name="yeast[{{index}}].alcoholTolerance" ng-model="yeast.alcoholTolerance" class="text-right">
+    <input type="number" string-to-number step="any" name="yeast[{{index}}].alcoholTolerance" ng-model="yeast.alcoholTolerance" class="text-right">
     <span class="input-addon">%</span>
   </label>
 	<label for="yeast[{{index}}].flocculation" class="item item-input
@@ -33,7 +33,7 @@
     </select>
 	</label>
 	<label for="yeast[{{index}}].amount" class="item item-input">
-		Amount <input type="number" name="yeast[{{index}}].amount" ng-model="yeast.amount" class="text-right">
+		Amount <input type="number" string-to-number name="yeast[{{index}}].amount" ng-model="yeast.amount" class="text-right">
 	</label>
 	<label for="yeast[{{index}}].amountUnits" class="item item-input
     item-select">
