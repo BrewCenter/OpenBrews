@@ -2,8 +2,10 @@
 # http://git-scm.com/docs/gitignore
 
 node_modules/
-platforms/
+build/
+outputs/
 plugins/
+platforms/
 dist/
 openbrews/lib
 !openbrews/lib/angular-input-dropdown
@@ -14,3 +16,4 @@ www/
 *.css
 *.min.css
 openbrews/config.json
+res/

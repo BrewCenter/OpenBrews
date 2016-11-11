@@ -1,14 +1,14 @@
 {
   "name": "openbrews",
   "app_id": "c84e2b24",
-  "documentRoot": "./openbrews",
+  "documentRoot": "./www",
   "gulpStartupTasks": [
     "sass",
     "watch"
   ],
   "watchPatterns": [
-    "openbrews/**/*.js",
-    "openbrews/openbrews.app.css",
-    "openbrews/**/*.html"
+    "www/**/*.js",
+    "www/openbrews.app.css",
+    "www/**/*.html"
   ]
 }

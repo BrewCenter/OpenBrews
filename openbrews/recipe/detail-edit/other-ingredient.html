@@ -3,7 +3,7 @@
 		Name <input type="text" name="other[{{$index}}].name" ng-model="other.name" class="text-right">
 	</label>
 	<label for="other[{{$index}}].amount" class="item item-input">
-		Amount <input type="number" name="other[{{$index}}].amount" ng-model="other.amount" class="text-right">
+		Amount <input type="number" string-to-number name="other[{{$index}}].amount" ng-model="other.amount" class="text-right">
 	</label>
     <label for="other[{{$index}}].amountUnits" class="item item-input item-select">
         Amount Units
