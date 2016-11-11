@@ -5,6 +5,7 @@ node_modules/
 build/
 outputs/
 plugins/
+platforms/
 dist/
 openbrews/lib
 !openbrews/lib/angular-input-dropdown
