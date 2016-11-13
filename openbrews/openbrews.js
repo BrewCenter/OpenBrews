@@ -16,6 +16,12 @@
 
   .run(function($ionicPlatform, $http, $rootScope, BreweryDB) {
     $ionicPlatform.ready(function() {
+      // add device to root scope for conditionally showing elements
+      $rootScope.platform = ionic.Platform.platform();
+      $rootScope.isIOS = ionic.Platform.platform() == 'ios';
+      $rootScope.isAndroid = ionic.Platform.platform() == 'android';
+
+
       /* try to get the configuration file */
       $http.get('config.json')
       .then(function successCallback(response) {
