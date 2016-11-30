@@ -25,15 +25,12 @@
                             input-ng-attr-placeholder="{{(recipeForm.style.$invalid && !recipeForm.style.$pristine) ? 'Required' : ''}}">
                           </input-dropdown>
                     </label>
-                    <label for="boilSize" class="item item-input" 
+                    <label for="boilSize" class="item item-input item-input-group item-select" 
                             ng-class="{ 'form-error' : (recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) }">
                         Boil Size 
                         <input type="number" string-to-number name="boilSize" ng-model="recipe.boilSize" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="boilSizeUnits" class="item item-input item-select">
-                        Boil Size Units
-                        <select name="boilSizeUnits" ng-model="recipe.boilSizeUnits">
+                        <select name="boilSizeUnits" ng-model="recipe.boilSizeUnits" class="item-input-group-select">
                           <option>Gal</option>
                           <option>L</option>
                         </select>
@@ -47,7 +44,7 @@
                     </label>
                     <label for="estFermentationDays" class="item item-input item-input-group" 
                             ng-class="{ 'form-error' : (recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) }">
-                        Estimated Fermentation Time
+                        Primary Fermentation Time
                         <input type="number" string-to-number name="estFermentationDays" ng-model="recipe.estFermentationDays" class="text-right" ng-required="true"
                                 ng-attr-placeholder="{{(recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">Days</span>
@@ -73,45 +70,62 @@
                                 ng-attr-placeholder="{{(recipeForm.steepEfficiency.$invalid && !recipeForm.steepEfficiency.$pristine) ? 'Required' : ''}}">
                         <span class="input-addon">%</span>
                     </label>
-
-                    <label for="og" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.og.$invalid && !recipeForm.og.$pristine) }">
-                        OG
-                        <input type="text" name="og" ng-model="recipe.og" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.og.$invalid && !recipeForm.og.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="fg" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.fg.$invalid && !recipeForm.fg.$pristine) }">
-                        FG
-                        <input type="text" name="fg" ng-model="recipe.fg" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.fg.$invalid && !recipeForm.fg.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="abv" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.abv.$invalid && !recipeForm.abv.$pristine) }">
-                        ABV
-                        <input type="text" name="abv" ng-model="recipe.abv" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.abv.$invalid && !recipeForm.abv.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
-                    <label for="abw" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.abw.$invalid && !recipeForm.abw.$pristine) }">
-                        ABW
-                        <input type="text" name="abw" ng-model="recipe.abw" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.abw.$invalid && !recipeForm.abw.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
-                    <label for="ibu" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) }">
-                        IBU
-                        <input type="text" name="ibu" ng-model="recipe.ibu" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="srm" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.srm.$invalid && !recipeForm.srm.$pristine) }">
-                        SRM
-                        <input type="text" name="srm" ng-model="recipe.srm" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.srm.$invalid && !recipeForm.srm.$pristine) ? 'Required' : ''}}">
-                    </label>
+                    <div class="row item-row">
+                        <div class="col item-col">
+                            <label for="og" class="item item-input" 
+                                    ng-class="{ 'form-error' : (recipeForm.og.$invalid && !recipeForm.og.$pristine) }">
+                                OG
+                                <input type="text" name="og" ng-model="recipe.og" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.og.$invalid && !recipeForm.og.$pristine) ? 'Required' : ''}}">
+                            </label>
+                        </div>
+                        <div class="col item-col">
+                            <label for="fg" class="item item-input" 
+                                    ng-class="{ 'form-error' : (recipeForm.fg.$invalid && !recipeForm.fg.$pristine) }">
+                                FG
+                                <input type="text" name="fg" ng-model="recipe.fg" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.fg.$invalid && !recipeForm.fg.$pristine) ? 'Required' : ''}}">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item-row">
+                        <div class="col item-col">
+                            <label for="abv" class="item item-input item-input-group" 
+                                    ng-class="{ 'form-error' : (recipeForm.abv.$invalid && !recipeForm.abv.$pristine) }">
+                                ABV
+                                <input type="text" name="abv" ng-model="recipe.abv" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.abv.$invalid && !recipeForm.abv.$pristine) ? 'Required' : ''}}">
+                                <span class="input-addon">%</span>
+                            </label>
+                        </div>
+                        <div class="col item-col">
+                            <label for="abw" class="item item-input item-input-group" 
+                                    ng-class="{ 'form-error' : (recipeForm.abw.$invalid && !recipeForm.abw.$pristine) }">
+                                ABW
+                                <input type="text" name="abw" ng-model="recipe.abw" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.abw.$invalid && !recipeForm.abw.$pristine) ? 'Required' : ''}}">
+                                <span class="input-addon">%</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item-row">
+                        <div class="col item-col">
+                            <label for="ibu" class="item item-input" 
+                                    ng-class="{ 'form-error' : (recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) }">
+                                IBU
+                                <input type="text" name="ibu" ng-model="recipe.ibu" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) ? 'Required' : ''}}">
+                            </label>
+                        </div>
+                        <div class="col item-col">
+                            <label for="srm" class="item item-input" 
+                                    ng-class="{ 'form-error' : (recipeForm.srm.$invalid && !recipeForm.srm.$pristine) }">
+                                SRM
+                                <input type="text" name="srm" ng-model="recipe.srm" class="text-right" ng-required="true"
+                                        ng-attr-placeholder="{{(recipeForm.srm.$invalid && !recipeForm.srm.$pristine) ? 'Required' : ''}}">
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <h4>Fermentables</h4>
