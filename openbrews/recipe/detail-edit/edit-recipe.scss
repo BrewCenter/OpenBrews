@@ -1,7 +1,11 @@
 .edit-recipe {
 
-	.tabs-standard .container {
+	.tabs-standard .tab-content {
 		margin-top: 42px;
+	}
+
+	.tabs-top .tab-content {
+		top: 90px;
 	}
 
 	.item, .item-select {

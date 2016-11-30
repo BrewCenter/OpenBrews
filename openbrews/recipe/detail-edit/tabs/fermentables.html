@@ -1,0 +1,7 @@
+<h4>Fermentables</h4>
+<fermentable ng-repeat="fermentable in recipe.fermentables" model="fermentable" index="$index"></fermentable>
+<div class="padded">
+    <button class="button button-block button-balanced" ng-click="addFermentable()" ng-tap="addFermentable()">
+      Add Fermentable
+    </button>
+</div>
