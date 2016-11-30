@@ -119,8 +119,14 @@
       };
 
       /* Save a recipe in LocalStorage */
-      $scope.saveRecipe = function(valid) {
-        if(valid) {
+      $scope.saveRecipe = function() {
+        angular.forEach($scope.recipeForm.$error, function (field) {
+            angular.forEach(field, function(errorField){
+                errorField.$setTouched();
+                errorField.$setDirty();
+            })
+        });
+        if($scope.recipeForm.$valid) {
           if ($state.params.isNew) {
             RecipeStore.insert($scope.recipe);
           } else {

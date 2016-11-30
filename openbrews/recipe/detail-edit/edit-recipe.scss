@@ -1,10 +1,12 @@
 .edit-recipe {
 
+	.tabs-standard .container {
+		margin-top: 42px;
+	}
+
 	.item, .item-select {
-		padding: 0px;
 		padding-left: 10px;
 		padding-right: 10px;
-		height: 34px;
 		input {
 			padding-left: 20px !important;
 		}
@@ -12,7 +14,7 @@
 
 	.item-input-group.item-select select {
 		position: relative;
-		height: 34px;
+		height: 44px;
 	}
 
 	.row.item-row, .row.item-row .col.item-col {
