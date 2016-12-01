@@ -38,6 +38,10 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 @import "./recipe/detail-edit/edit-recipe";
 @import "./recipe/detail-readonly/view-recipe";
 
+.bold {
+	font-weight: 400 !important;
+}
+
 /* form styles */
 .list .item.item-input.item-input-group input {
 	padding-right: 5px !important;
@@ -79,20 +83,8 @@ input::-webkit-inner-spin-button {
 	background-color: #dddddd;
 }
 
-// upgrade color scheme
-.bar .button-clear-bordered {
-    border: 2px solid white;
-    border-color: white !important;
-    background-color: transparent;
-    color: white;
-}
-
-.bar .button-clear-bordered:hover, 
-.bar .button-clear-bordered:active {
-    border-width: 2px;
-    border-color: darken(white, 5%);
-	color: darken(white, 5%);
-	background-color: rgba(0,0,0,0.1);
+.bar-stable .button-clear {
+	color: white;
 }
 
 .bar .back-button .back-text {

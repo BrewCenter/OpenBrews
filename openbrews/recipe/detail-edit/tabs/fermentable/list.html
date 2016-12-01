@@ -1,20 +1,50 @@
 <div class="container">
-	<div class="list">
+	<ion-list>
 		<div class="item item-divider">
 			Fermentables
 		</div>
-		<div class="item fermentable-item clickable" ng-repeat="fermentable in recipe.fermentables"
-				ng-click="editFermentable($index)" ng-tap="editFermentable($index)">
-			<div class="fermentable-item-name">{{fermentable.name}}</div>
-			<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
-			<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
-			<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
-			<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
-		</div>
+
+		<ion-item class="clickable" ng-repeat="fermentable in recipe.fermentables"
+				ng-click="editFermentable($index)" ng-tap="editFermentable($index)"
+				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
+
+			<div ng-if="isIOS">
+				<div class="fermentable-item">
+					<div class="fermentable-item-name">{{fermentable.name}}</div>
+					<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
+					<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
+					<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
+					<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
+				</div>
+	            <ion-option-button class="button-assertive" 
+	            		ng-click="deleteFermentable($index)"
+	            		ng-tap="deleteFermentable($index)">
+	                Delete
+	            </ion-option-button>
+	        </div>
+
+	        <div ng-if="!isIOS" class="row">
+	            <div class="col-75 list-item-text">
+	                <div class="fermentable-item">
+						<div class="fermentable-item-name">{{fermentable.name}}</div>
+						<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
+						<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
+						<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
+						<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
+					</div>
+	            </div>
+	            <div class="col list-item-buttons">
+	                <button class="button button-small button-assertive icon ion-trash-a" 
+	                	ng-click="deleteFermentable($index); $event.stopPropagation();"
+	                	ng-tap="deleteFermentable($index); $event.stopPropagation();"></button>
+	            </div>
+	        </div>
+        </ion-item>
+        
 		<div class="item item-button">
 		    <button class="button button-block button-balanced" ng-click="addFermentable()" ng-tap="addFermentable()">
 		      Add Fermentable
 		    </button>
 		</div>
-	</div>
+	</ion-list>
 </div>

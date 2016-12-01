@@ -19,6 +19,7 @@
         '$filter', 
         '$q',
         '$ionicModal',
+        '$ionicTabsDelegate',
         'RecipeStore', 
         'RecipeUtils', 
         'BreweryDB', 
@@ -29,10 +30,18 @@
         $filter, 
         $q,
         $ionicModal,
+        $ionicTabsDelegate,
         RecipeStore, 
         RecipeUtils, 
         BreweryDB
       ) {
+
+      $scope.tab = 0;
+
+      $scope.setTab = function(tab) {
+        $scope.tab = tab;
+        $ionicTabsDelegate.select(tab);
+      }
 
       var defaultRecipe = {
         name: '',
