@@ -2,7 +2,6 @@
 (function(){
   'use strict';
   angular.module('openbrews.editRecipe', [
-    'openbrews.fermentableDirective',
     'openbrews.hopDirective',
     'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
