@@ -2,7 +2,6 @@
 (function(){
   'use strict';
   angular.module('openbrews.editRecipe', [
-    'openbrews.yeastDirective',
     'openbrews.otherIngredientDirective',
     'openbrews.noteDirective',
     'openbrews.recipeStore',
@@ -211,6 +210,80 @@
         $scope.closeModal();
       };
 
+      /************************************************************************
+       * Yeast
+       ************************************************************************/  
+
+      /* 
+       * Helper function for adding a yeast instead of 
+       * editing an existing yeast. */
+      $scope.addYeast = function() {
+        return $scope.editYeast();
+      };
+
+      /* Add a new yeast */
+      $scope.editYeast = function(index) {
+        /* inhitialize the yeast object */
+        var yeast;
+        if(index !== undefined) {
+          yeast = $scope.recipe.yeasts[index];
+        } else {
+          yeast = {
+            amount: 0,
+            attenuation: 0,
+            alcoholTolerance: 0,
+            flocculation: 'Medium-Low',
+            amountUnits: 'G'
+          }
+        }
+
+        // save tmp variables for use in the modal
+        $scope.yeastIndex = index;
+        $scope.yeastTmp = yeast;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/yeast/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      };
+
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      };
+
+      /* set the style selected */
+      $scope.setYeast = function(item, yeast){
+        if(typeof(item) == "string") {
+          yeast.name = item;
+        } else {
+          yeast.name = item.name;
+          if(item.attenuationMin) {
+            yeast.attenuation = item.attenuationMin;
+          }
+        }
+      };
+
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveYeast = function(yeast, index) {
+        if(index !== undefined) {
+          $scope.recipe.yeasts[index] = yeast;
+        } else {
+          $scope.recipe.yeasts.push(yeast);
+        }
+        $scope.closeModal();
+      };
+
+      /************************************************************************
+       * Other/Basic Info functions
+       ************************************************************************/
+
       /* Add other ingredient. */
       $scope.addOther = function() {
         $scope.recipe.others.push({
@@ -227,23 +300,6 @@
         $scope.recipe.others.splice(index,1);
       };
 
-      /* Delete the yeast at supplied index */
-      $scope.deleteYeast = function(index) {
-        $scope.recipe.yeasts.splice(index, 1);
-      };
-
-      /* Add a new yeast */
-      $scope.addYeast = function() {
-        $scope.recipe.yeasts.push(
-          {
-            amount: 0,
-            attenuation: 0,
-            alcoholTolerance: 0,
-            flocculation: 'Medium-Low',
-            amountUnits: 'G'
-          }
-        );
-      };
 
       /* Add a new note */
       $scope.addNote = function() {
@@ -388,14 +444,6 @@
       /* set the style selected */
       $scope.setStyle = function(item){
         $scope.recipe.style = item;
-      };
-
-      /* set the style selected */
-      $scope.setYeast = function(item, yeast){
-        yeast.name = item.name;
-        if(item.attenuationMin) {
-          yeast.attenuation = item.attenuationMin;
-        }
       };
 
       $scope.filterItems = function(styles, userInput) {
