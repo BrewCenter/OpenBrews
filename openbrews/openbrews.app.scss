@@ -38,6 +38,10 @@ $ionicons-font-path: "./lib/ionic/fonts" !default;
 @import "./recipe/detail-edit/edit-recipe";
 @import "./recipe/detail-readonly/view-recipe";
 
+.center {
+	text-align: center;
+}
+
 .bold {
 	font-weight: 400 !important;
 }

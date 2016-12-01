@@ -4,17 +4,21 @@
 			Fermentables
 		</div>
 
+		<ion-item ng-if="recipe.fermentables.length == 0">
+			<span>There are no fermentables here.</span>
+		</ion-item>
+
 		<ion-item class="clickable" ng-repeat="fermentable in recipe.fermentables"
 				ng-click="editFermentable($index)" ng-tap="editFermentable($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
 			<div ng-if="isIOS">
-				<div class="fermentable-item">
-					<div class="fermentable-item-name">{{fermentable.name}}</div>
-					<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
-					<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
-					<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
-					<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
+				<div class="ingredient-item">
+					<div class="ingredient-item-name">{{fermentable.name}}</div>
+					<div class="ingredient-item">Add Time: {{fermentable.addTime}} M,</div>
+					<div class="ingredient-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
+					<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
+					<div class="ingredient-item">PPG: {{fermentable.ppg}}</div>
 				</div>
 	            <ion-option-button class="button-assertive" 
 	            		ng-click="deleteFermentable($index)"
@@ -25,12 +29,12 @@
 
 	        <div ng-if="!isIOS" class="row">
 	            <div class="col-75 list-item-text">
-	                <div class="fermentable-item">
-						<div class="fermentable-item-name">{{fermentable.name}}</div>
-						<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
-						<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
-						<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
-						<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
+	                <div class="ingredient-item">
+						<div class="ingredient-item-name">{{fermentable.name}}</div>
+						<div class="ingredient-item">Add Time: {{fermentable.addTime}} M,</div>
+						<div class="ingredient-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
+						<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
+						<div class="ingredient-item">PPG: {{fermentable.ppg}}</div>
 					</div>
 	            </div>
 	            <div class="col list-item-buttons">

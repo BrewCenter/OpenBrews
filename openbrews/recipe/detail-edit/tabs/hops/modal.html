@@ -1,0 +1,61 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+    <div class="buttons buttons-left">
+      <button class="button button-icon icon ion-close"
+        ng-click="closeModal()"
+        ng-tap="closeModal()"></button>
+    </div>
+    <h1 class="title">Hop</h1>
+    <div class="buttons buttons-right">
+      <button class="button button-icon icon ion-checkmark"
+        ng-click="saveHop(hopTmp, hopIndex)"
+        ng-tap="saveHop(hopTmp, hopIndex)"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+        <label for="hop[{{index}}].name" class="item item-input item-input-dropdown">
+            Name <input-dropdown
+                  selected-item="hopTmp.readableName"
+                  default-dropdown-items="hops"
+                  allow-custom-input="true"
+                  input-name="hop[{{index}}].name"
+                  item-selected-method="setHop(item, hopTmp)"
+                  filter-list-method="filterItems(hops, userInput)">
+                </input-dropdown>
+        </label>
+        <label for="hop[{{index}}].type" class="item item-input item-select">
+            Hop Type
+        <select name="hop[{{index}}].type" ng-model="hopTmp.type">
+          <option>Leaf</option>
+          <option>Pellet</option>
+          <option>Plug</option>
+        </select>
+        </label>
+        <label for="hop[{{index}}].weight" class="item item-input">
+            Weight <input type="number" string-to-number name="hop[{{index}}].weight" ng-model="hopTmp.weight" class="text-right">
+        </label>
+        <label for="hop[{{index}}].weightUnits" class="item item-input item-select">
+            Weight Units
+            <select name="hop[{{index}}].weightUnits" ng-model="hopTmp.weightUnits">
+              <option>oz</option>
+              <option>G</option>
+            </select>
+        </label>
+        <label for="hop[{{index}}].aa" class="item item-input">
+            Alpha Acid <input type="number" string-to-number name="hop[{{index}}].aa" ng-model="hopTmp.aa" class="text-right">
+        </label>
+        <label for="hop[{{index}}].stage" class="item item-input item-select">
+            Stage
+            <select name="hop[{{index}}].stage" ng-model="hopTmp.stage">
+              <option>Boil</option>
+              <option>Secondary</option>
+            </select>
+        </label>
+        <label ng-if="hopTmp.stage.toLowerCase() === 'boil'" for="hop[{{index}}].addTime" class="item item-input item-input-group">
+            Add Time <input type="number" string-to-number name="hop[{{index}}].addTime" ng-model="hopTmp.addTime" class="text-right">
+            <span class="input-addon">Minutes Left</span>
+        </label>
+    </div>
+  </ion-content>
+</ion-modal-view>

@@ -32,12 +32,12 @@
 	}
 
 	/* define a pretty inline representation of a fermentable */
-	.fermentable-item {
-		.fermentable-item-name {
+	.ingredient {
+		.ingredient-item-name {
 			width: 100%;
 			float: left;
 		}
-		.fermentable-item {
+		.ingredient-item {
 			float: left;
 			margin-right: 5px;
 			font-size: 10px;
