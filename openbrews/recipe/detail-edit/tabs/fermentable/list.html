@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="list">
+		<div class="item item-divider">
+			Fermentables
+		</div>
+		<div class="item fermentable-item clickable" ng-repeat="fermentable in recipe.fermentables"
+				ng-click="editFermentable($index)" ng-tap="editFermentable($index)">
+			<div class="fermentable-item-name">{{fermentable.name}}</div>
+			<div class="fermentable-item">Add Time: {{fermentable.addTime}} M,</div>
+			<div class="fermentable-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
+			<div class="fermentable-item">SRM: {{fermentable.srm}},</div>
+			<div class="fermentable-item">PPG: {{fermentable.ppg}}</div>
+		</div>
+		<div class="item item-button">
+		    <button class="button button-block button-balanced" ng-click="addFermentable()" ng-tap="addFermentable()">
+		      Add Fermentable
+		    </button>
+		</div>
+	</div>
+</div>

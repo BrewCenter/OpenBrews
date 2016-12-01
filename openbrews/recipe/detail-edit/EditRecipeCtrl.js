@@ -11,7 +11,28 @@
     'openbrews.recipeUtils',
     'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
+    .controller('EditRecipeCtrl', 
+      [
+        '$scope', 
+        '$state', 
+        '$http', 
+        '$filter', 
+        '$q',
+        '$ionicModal',
+        'RecipeStore', 
+        'RecipeUtils', 
+        'BreweryDB', 
+      function(
+        $scope, 
+        $state, 
+        $http, 
+        $filter, 
+        $q,
+        $ionicModal,
+        RecipeStore, 
+        RecipeUtils, 
+        BreweryDB
+      ) {
 
       var defaultRecipe = {
         name: '',
@@ -34,18 +55,62 @@
         notes: []
       };
 
-      /* Add a new fermentable */
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove();
+      }
+
       $scope.addFermentable = function() {
-        $scope.recipe.fermentables.push(
-          {
+        return $scope.editFermentable();
+      }
+      /* Add a new fermentable */
+      $scope.editFermentable = function(index) {
+        var fermentable;
+        if(index !== undefined) {
+          fermentable = $scope.recipe.fermentables[index];
+        } else {
+          fermentable = {
             method: 'Mash',
             weight: 0,
             weightUnits: 'Lbs',
             addTime: 60,
             ppg: 0,
             srm: 0
+          };
+        }
+        $scope.fermentableIndex = index;
+        $scope.fermentableTmp = fermentable;
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/fermentable/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      };
+
+      $scope.saveFermentable = function(fermentable, index) {
+        if(index !== undefined) {
+          $scope.recipe.fermentables[index] = fermentable;
+        } else {
+          $scope.recipe.fermentables.push(fermentable);
+        }
+        $scope.closeModal();
+      };
+
+      /* set the style selected */
+      $scope.setFermentableName = function(item, fermentable){
+        if(typeof(item) == "string") {
+          fermentable.name = item;
+        } else {
+          fermentable.name = item.name;
+          if(item.srm) {
+            fermentable.srm = item.srm;
           }
-        );
+          if(item.ppg) {
+            fermentable.ppg = item.ppg;
+          }
+        }
       };
 
       /* remove the fermentable at the given index */
@@ -249,17 +314,6 @@
       /* set the style selected */
       $scope.setStyle = function(item){
         $scope.recipe.style = item;
-      };
-
-      /* set the style selected */
-      $scope.setFermentable = function(item, fermentable){
-        fermentable.name = item.name;
-        if(item.srm) {
-          fermentable.srm = item.srm;
-        }
-        if(item.ppg) {
-          fermentable.ppg = item.ppg;
-        }
       };
 
       /* set the style selected */
