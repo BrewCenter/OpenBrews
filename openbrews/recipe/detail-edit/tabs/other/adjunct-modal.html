@@ -1,0 +1,46 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+    <div class="buttons buttons-left">
+      <button class="button button-icon icon ion-close"
+        ng-click="closeModal()"
+        ng-tap="closeModal()"></button>
+    </div>
+    <h1 class="title">Adjunct</h1>
+    <div class="buttons buttons-right">
+      <button class="button button-icon icon ion-checkmark"
+        ng-click="saveAdjunct(adjunctTmp, adjunctIndex)"
+        ng-tap="saveAdjunct(adjunctTmp, adjunctIndex)"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <label for="other[{{$index}}].name" class="item item-input">
+        Name <input type="text" name="other[{{$index}}].name" ng-model="adjunctTmp.name" class="text-right">
+      </label>
+      <label for="other[{{$index}}].amount" class="item item-input">
+        Amount <input type="number" string-to-number name="other[{{$index}}].amount" ng-model="adjunctTmp.amount" class="text-right">
+      </label>
+        <label for="other[{{$index}}].amountUnits" class="item item-input item-select">
+            Amount Units
+            <select name="other[{{$index}}].amountUnits" ng-model="adjunctTmp.amountUnits">
+              <option>oz</option>
+              <option>fl oz</option>
+              <option>G</option>
+              <option>mL</option>
+            </select>
+        </label>
+        <label for="other[{{$index}}].stage" class="item item-input item-select">
+            Stage
+            <select name="other[{{$index}}].stage" ng-model="adjunctTmp.stage">
+              <option>Boil</option>
+              <option>Secondary</option>
+            </select>
+        </label>
+        <label ng-if="adjunctTmp.stage.toLowerCase() === 'boil'" for="other[{{$index}}].addTime" class="item item-input item-input-group">
+            Add Time
+            <input type="text" name="other[{{$index}}].addTime" ng-model="adjunctTmp.addTime" class="text-right">
+            <span class="input-addon">Minutes Left</span>
+        </label>
+    </div>
+  </ion-content>
+</ion-modal-view>

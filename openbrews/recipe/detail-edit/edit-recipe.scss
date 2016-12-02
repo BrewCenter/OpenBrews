@@ -132,3 +132,9 @@
 	  color: lighten($assertive, 15%);
 	}
 }
+
+.full-screen-textarea {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+}

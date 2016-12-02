@@ -2,8 +2,6 @@
 (function(){
   'use strict';
   angular.module('openbrews.editRecipe', [
-    'openbrews.otherIngredientDirective',
-    'openbrews.noteDirective',
     'openbrews.recipeStore',
     'openbrews.recipeUtils',
     'openbrews.breweryDB'
@@ -284,33 +282,103 @@
        * Other/Basic Info functions
        ************************************************************************/
 
+      $scope.addAdjunct = function() {
+        return $scope.editAdjunct();
+      }
+
       /* Add other ingredient. */
-      $scope.addOther = function() {
-        $scope.recipe.others.push({
-          name: '',
-          amount: 0,
-          amountUnits: 'oz',
-          stage: 'Boil',
-          addTime: 0
+      $scope.editAdjunct = function(index) {
+        /* inhitialize the other object */
+        var other;
+        if(index !== undefined) {
+          other = $scope.recipe.others[index];
+        } else {
+          other = {
+            name: '',
+            amount: 0,
+            amountUnits: 'oz',
+            stage: 'Boil',
+            addTime: 0
+          }
+        }
+
+        // save tmp variables for use in the modal
+        $scope.adjunctIndex = index;
+        $scope.adjunctTmp = other;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/other/adjunct-modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
         });
       };
 
       /* Delete other ingredient. */
-      $scope.deleteOther = function(index) {
+      $scope.deleteAdjunct = function(index) {
         $scope.recipe.others.splice(index,1);
+      };
+
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveAdjunct = function(other, index) {
+        if(index !== undefined) {
+          $scope.recipe.others[index] = other;
+        } else {
+          $scope.recipe.others.push(other);
+        }
+        $scope.closeModal();
       };
 
 
       /* Add a new note */
       $scope.addNote = function() {
-        $scope.recipe.notes.push({
-          'text': ''
+        return $scope.editNote();
+      };
+
+      /* edit a note */
+      $scope.editNote = function(index) {
+        var note;
+        if(index !== undefined) {
+          note = $scope.recipe.notes[index];
+        } else {
+          note = {
+            'text': ''
+          }
+        }
+
+        // save tmp variables for use in the modal
+        $scope.noteIndex = index;
+        $scope.noteTmp = note;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/other/note-modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
         });
       };
 
       /* Delete the given note */
       $scope.deleteNote = function(index) {
         $scope.recipe.notes.splice(index, 1);
+      };
+
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveNote = function(note, index) {
+        if(index !== undefined) {
+          $scope.recipe.notes[index] = note;
+        } else {
+          $scope.recipe.notes.push(note);
+        }
+        $scope.closeModal();
       };
 
       /* Save a recipe in LocalStorage */

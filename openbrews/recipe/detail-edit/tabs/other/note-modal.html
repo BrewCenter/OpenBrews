@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+    <div class="buttons buttons-left">
+      <button class="button button-icon icon ion-close"
+        ng-click="closeModal()"
+        ng-tap="closeModal()"></button>
+    </div>
+    <h1 class="title">Note</h1>
+    <div class="buttons buttons-right">
+      <button class="button button-icon icon ion-checkmark"
+        ng-click="saveNote(noteTmp, noteIndex)"
+        ng-tap="saveNote(noteTmp, noteIndex)"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <textarea class="full-screen-textarea" type="text" text="note[{{index}}].text" ng-model="noteTmp.text"
+      placeholder="Enter note text here" rows="5"></textarea>
+  </ion-content>
+</ion-modal-view>
