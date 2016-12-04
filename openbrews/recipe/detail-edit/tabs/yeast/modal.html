@@ -1,0 +1,66 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+    <div class="buttons buttons-left">
+      <button class="button button-icon icon ion-close"
+        ng-click="closeModal()"
+        ng-tap="closeModal()"></button>
+    </div>
+    <h1 class="title">Yeast</h1>
+    <div class="buttons buttons-right">
+      <button class="button button-icon icon ion-checkmark"
+        ng-click="saveYeast(yeastTmp, yeastIndex)"
+        ng-tap="saveYeast(yeastTmp, yeastIndex)"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+    	<label for="yeast[{{index}}].name" class="item item-input item-input-dropdown">
+    		Name <input-dropdown
+              selected-item="yeastTmp.readableName"
+              default-dropdown-items="yeasts"
+              allow-custom-input="true"
+              input-name="yeast[{{index}}].name"
+              item-selected-method="setYeast(item, yeastTmp)"
+              filter-list-method="filterItems(yeasts, userInput)">
+            </input-dropdown>
+
+        <!-- <input type="text" name="yeast[{{index}}].name" ng-model="yeastTmp.name" class="text-right"> -->
+    	</label>
+    	<label for="yeast[{{index}}].attenuation" class="item item-input">
+        Attenuation <input type="number" string-to-number step="any" name="yeast[{{index}}].attenuation" ng-model="yeastTmp.attenuation" class="text-right">
+      </label>
+      <label for="yeast[{{index}}].alcoholTolerance" class="item item-input item-input-group">
+        Alcohol Tolerance
+        <input type="number" string-to-number step="any" name="yeast[{{index}}].alcoholTolerance" ng-model="yeastTmp.alcoholTolerance" class="text-right">
+        <span class="input-addon">%</span>
+      </label>
+    	<label for="yeast[{{index}}].flocculation" class="item item-input
+        item-select">
+    		Flocculation
+        <select name="yeast[{{index}}].flocculation" ng-model="yeastTmp.flocculation"
+          class="text-right">
+          <option>Low to Medium</option>
+          <option>Medium</option>
+          <option>Medium-Low</option>
+          <option>Medium to High</option>
+          <option>High</option>
+          <option>Very High</option>
+        </select>
+    	</label>
+    	<label for="yeast[{{index}}].amount" class="item item-input">
+    		Amount <input type="number" string-to-number name="yeast[{{index}}].amount" ng-model="yeastTmp.amount" class="text-right">
+    	</label>
+    	<label for="yeast[{{index}}].amountUnits" class="item item-input
+        item-select">
+    		Amount Units
+        <select name="yeast[{{index}}].amountUnits" ng-model="yeastTmp.amountUnits"
+          class="text-right">
+          <option>oz</option>
+          <option>fl oz</option>
+          <option>G</option>
+          <option>mL</option>
+        </select>
+    	</label>
+    </div>
+  </ion-content>
+</ion-modal-view>

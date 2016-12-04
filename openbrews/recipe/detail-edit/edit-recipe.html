@@ -1,170 +1,32 @@
 <ion-view title="{{pageTitle}}" class="edit-recipe">
-    <ion-nav-buttons side="right">
+    <ion-nav-buttons side="right" >
+        <button class="button button-clear bold" ng-click="saveRecipe()" ng-tap="saveRecipe()">Save</button>
     </ion-nav-buttons>
-    <ion-content>
-        <div class="container">
-            <form name="recipeForm" novalidate ng-submit="saveRecipe(recipeForm.$valid)">
-                <div class="list">
-                    <label for="name" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.name.$invalid && !recipeForm.name.$pristine) }">
-                        Name 
-                        <input type="text" name="name" ng-model="recipe.name" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.name.$invalid && !recipeForm.name.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="style" class="item item-input item-input-dropdown" 
-                            ng-class="{ 'form-error' : (recipeForm.style.$invalid && !recipeForm.style.$pristine) }">
-                        Style
-                          <input-dropdown
-                            selected-item="recipe.style"
-                            default-dropdown-items="styles"
-                            allow-custom-input="true"
-                            input-name="style"
-                            item-selected-method="setStyle(item)"
-                            filter-list-method="filterItems(styles, userInput)"
-                            input-required="true"
-                            input-ng-attr-placeholder="{{(recipeForm.style.$invalid && !recipeForm.style.$pristine) ? 'Required' : ''}}">
-                          </input-dropdown>
-                    </label>
-                    <label for="boilSize" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) }">
-                        Boil Size 
-                        <input type="number" string-to-number name="boilSize" ng-model="recipe.boilSize" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.boilSize.$invalid && !recipeForm.boilSize.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="boilSizeUnits" class="item item-input item-select">
-                        Boil Size Units
-                        <select name="boilSizeUnits" ng-model="recipe.boilSizeUnits">
-                          <option>Gal</option>
-                          <option>L</option>
-                        </select>
-                    </label>
-                    <label for="boilTime" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.boilTime.$invalid && !recipeForm.boilTime.$pristine) }">
-                        Boil Time
-                        <input type="number" string-to-number name="boilTime" ng-model="recipe.boilTime" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.boilTime.$invalid && !recipeForm.boilTime.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">Minutes</span>
-                    </label>
-                    <label for="estFermentationDays" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) }">
-                        Estimated Fermentation Time
-                        <input type="number" string-to-number name="estFermentationDays" ng-model="recipe.estFermentationDays" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.estFermentationDays.$invalid && !recipeForm.estFermentationDays.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">Days</span>
-                    </label>
-                    <label for="secondaryTimeDays" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.secondaryTimeDays.$invalid && !recipeForm.secondaryTimeDays.$pristine) }">
-                        Secondary Fermentation Time
-                        <input type="number" string-to-number name="secondaryTimeDays" ng-model="recipe.secondaryTimeDays" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.secondaryTimeDays.$invalid && !recipeForm.secondaryTimeDays.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">Days</span>
-                    </label>
-                    <label for="mashEfficiency" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.mashEfficiency.$invalid && !recipeForm.mashEfficiency.$pristine) }">
-                        Mash Efficiency
-                        <input type="number" string-to-number name="mashEfficiency" ng-model="recipe.mashEfficiency" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.mashEfficiency.$invalid && !recipeForm.mashEfficiency.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
-                    <label for="steepEfficiency" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.steepEfficiency.$invalid && !recipeForm.steepEfficiency.$pristine) }">
-                        Steep Efficiency
-                        <input type="number" string-to-number name="steepEfficiency" ng-model="recipe.steepEfficiency" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.steepEfficiency.$invalid && !recipeForm.steepEfficiency.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
+    <ion-pane>
+    <form name="recipeForm" novalidate>
+    <ion-tabs class="tabs-light tabs-icon-top">
 
-                    <label for="og" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.og.$invalid && !recipeForm.og.$pristine) }">
-                        OG
-                        <input type="text" name="og" ng-model="recipe.og" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.og.$invalid && !recipeForm.og.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="fg" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.fg.$invalid && !recipeForm.fg.$pristine) }">
-                        FG
-                        <input type="text" name="fg" ng-model="recipe.fg" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.fg.$invalid && !recipeForm.fg.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="abv" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.abv.$invalid && !recipeForm.abv.$pristine) }">
-                        ABV
-                        <input type="text" name="abv" ng-model="recipe.abv" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.abv.$invalid && !recipeForm.abv.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
-                    <label for="abw" class="item item-input item-input-group" 
-                            ng-class="{ 'form-error' : (recipeForm.abw.$invalid && !recipeForm.abw.$pristine) }">
-                        ABW
-                        <input type="text" name="abw" ng-model="recipe.abw" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.abw.$invalid && !recipeForm.abw.$pristine) ? 'Required' : ''}}">
-                        <span class="input-addon">%</span>
-                    </label>
-                    <label for="ibu" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) }">
-                        IBU
-                        <input type="text" name="ibu" ng-model="recipe.ibu" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.ibu.$invalid && !recipeForm.ibu.$pristine) ? 'Required' : ''}}">
-                    </label>
-                    <label for="srm" class="item item-input" 
-                            ng-class="{ 'form-error' : (recipeForm.srm.$invalid && !recipeForm.srm.$pristine) }">
-                        SRM
-                        <input type="text" name="srm" ng-model="recipe.srm" class="text-right" ng-required="true"
-                                ng-attr-placeholder="{{(recipeForm.srm.$invalid && !recipeForm.srm.$pristine) ? 'Required' : ''}}">
-                    </label>
-                </div>
+        <ion-tab title="Info" icon-on="ion-information" icon-off="ion-information" ng-click="setTab(0)" ng-tab="setTab(0)">
+            <ion-view><ng-include src="'recipe/detail-edit/tabs/info.html'"></ng-include></ion-view>
+        </ion-tab>
 
-                <h4>Fermentables</h4>
-                <fermentable ng-repeat="fermentable in recipe.fermentables" model="fermentable" index="$index"></fermentable>
-                <div class="padded">
-                    <button class="button button-block button-balanced" ng-click="addFermentable()" ng-tap="addFermentable()">
-                      Add Fermentable
-                    </button>
-                </div>
+        <ion-tab title="Fermentables" icon-on="icon-wheat" icon-off="icon-wheat" ng-click="setTab(1)" ng-tab="setTab(1)">
+            <ion-view><ng-include src="'recipe/detail-edit/tabs/fermentables/list.html'"></ng-include></ion-view>
+        </ion-tab>
 
-                <h4>Hops</h4>
-                <hop ng-repeat="hop in recipe.hops" model="hop" index="$index"></hop>
-                <div class="padded">
-                    <button class="button button-block button-balanced"
-                        ng-click="addHop()" ng-tap="addHop()">
-                      Add Hop
-                    </button>
-                </div>
+        <ion-tab title="Hops" icon-on="icon-hop" icon-off="icon-hop" ng-click="setTab(2)" ng-tab="setTab(2)">   
+            <ion-view><ng-include src="'recipe/detail-edit/tabs/hops/list.html'"></ng-include></ion-view>
+        </ion-tab>
 
-                <h4>Yeasts</h4>
-                <yeast ng-repeat="yeast in recipe.yeasts" info="yeast" index="$index"></yeast>
-                <div class="padded">
-                    <button class="button button-block button-balanced"
-                        ng-click="addYeast()" ng-tap="addYeast()">
-                      Add Yeast
-                    </button>
-                </div>
+        <ion-tab title="Yeast" icon-on="icon-yeast" icon-off="icon-yeast" ng-click="setTab(3)" ng-tab="setTab(3)">   
+            <ion-view><ng-include src="'recipe/detail-edit/tabs/yeast/list.html'"></ng-include></ion-view>
+        </ion-tab>
 
-                <h4>Others</h4>
-                <other-ingredient ng-repeat="other in recipe.others track by $index" model="other"></other-ingredient>
-                <div class="padded">
-                    <button class="button button-block button-balanced"
-                        ng-click="addOther()" ng-tap="addOther()">
-                      Add Other Ingredient
-                    </button>
-                  </div>
+        <ion-tab title="Other" icon-on="ion-more" icon-off="ion-more" ng-click="setTab(4)" ng-tab="setTab(4)">   
+            <ion-view><ng-include src="'recipe/detail-edit/tabs/other/list.html'"></ng-include></ion-view>
+        </ion-tab>
 
-                <h4>Notes</h4>
-                <note ng-repeat="note in recipe.notes track by $index"
-                model="note"></note>
-                <div class="padded">
-                    <button class="button button-block button-balanced"
-                        ng-click="addNote()" ng-tap="addNote()">
-                      Add Note
-                    </button>
-                </div>
-
-                <div class="padded">
-                    <button class="button button-block button-balanced" type="submit">
-                        Save recipe
-                    </button>
-                </div>
-            </form>
-        </div>
-    </ion-content>
+    </ion-tabs>
+    </form>
+    </ion-pane>
 </ion-view>

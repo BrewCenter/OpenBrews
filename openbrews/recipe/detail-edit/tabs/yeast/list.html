@@ -1,0 +1,53 @@
+<div class="container">
+	<ion-list>
+		<div class="item item-divider">
+			Yeast
+		</div>
+
+		<ion-item ng-if="recipe.yeasts.length == 0">
+			<span>There is no yeast here.</span>
+		</ion-item>
+
+
+		<ion-item class="clickable" ng-repeat="yeast in recipe.yeasts"
+				ng-click="editYeast($index)" ng-tap="editYeast($index)"
+				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
+
+			<div ng-if="isIOS">
+				<div class="ingredient">
+					<div class="ingredient-item-name">{{yeast.name}}</div>
+					<div class="ingredient-item">Amount: {{yeast.amount}} {{yeast.amountUnits}},</div>
+					<div class="ingredient-item">Attenuation: {{yeast.attenuation}},</div>
+					<div class="ingredient-item">Flocculation: {{yeast.flocculation}}</div>
+				</div>
+	            <ion-option-button class="button-assertive" 
+	            		ng-click="deleteYeast($index)"
+	            		ng-tap="deleteYeast($index)">
+	                Delete
+	            </ion-option-button>
+	        </div>
+
+	        <div ng-if="!isIOS" class="row">
+	            <div class="col-75 list-item-text">
+	            	<div class="ingredient">
+						<div class="ingredient-item-name">{{yeast.name}}</div>
+						<div class="ingredient-item">Weight: {{yeast.amount}} {{yeast.amountUnits}},</div>
+					<div class="ingredient-item">Attenuation: {{yeast.attenuation}},</div>
+					<div class="ingredient-item">Flocculation: {{yeast.flocculation}}</div>
+					</div>
+	            </div>
+	            <div class="col list-item-buttons">
+	                <button class="button button-small button-assertive icon ion-trash-a" 
+	                	ng-click="deleteYeast($index); $event.stopPropagation();"
+	                	ng-tap="deleteYeast($index); $event.stopPropagation();"></button>
+	            </div>
+	        </div>
+        </ion-item>
+        
+		<div class="item item-button">
+		    <button class="button button-block button-balanced" ng-click="addYeast()" ng-tap="addYeast()">
+		      Add yeast
+		    </button>
+		</div>
+	</ion-list>
+</div>
