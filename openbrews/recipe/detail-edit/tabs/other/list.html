@@ -9,7 +9,7 @@
 		</ion-item>
 
 
-		<ion-item class="clickable" ng-repeat="other in recipe.others"
+		<ion-item class="clickable" ng-repeat="other in recipe.others track by $index"
 				ng-click="editAdjunct($index)" ng-tap="editAdjunct($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
@@ -66,7 +66,7 @@
 		</ion-item>
 
 
-		<ion-item class="clickable" ng-repeat="note in recipe.notes"
+		<ion-item class="clickable" ng-repeat="note in recipe.notes track by $index"
 				ng-click="editNote($index)" ng-tap="editNote($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 

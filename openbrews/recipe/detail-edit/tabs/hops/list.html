@@ -9,7 +9,7 @@
 		</ion-item>
 
 
-		<ion-item class="clickable" ng-repeat="hop in recipe.hops"
+		<ion-item class="clickable" ng-repeat="hop in recipe.hops track by $index"
 				ng-click="editHop($index)" ng-tap="editHop($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
@@ -23,7 +23,7 @@
 					</div>
 					<div class="ingredient-item">Type: {{hop.type}},</div>
 					<div class="ingredient-item">Weight: {{hop.weight}} {{hop.weightUnits}},</div>
-					<div class="ingredient-item">AA: {{hop.aa}},</div>
+					<div class="ingredient-item">AA: {{hop.aa}}</div>
 				</div>
 	            <ion-option-button class="button-assertive" 
 	            		ng-click="deleteHop($index)"
@@ -43,7 +43,7 @@
 						</div>
 						<div class="ingredient-item">Type: {{hop.type}},</div>
 						<div class="ingredient-item">Weight: {{hop.weight}} {{hop.weightUnits}},</div>
-						<div class="ingredient-item">AA: {{hop.aa}},</div>
+						<div class="ingredient-item">AA: {{hop.aa}}</div>
 					</div>
 	            </div>
 	            <div class="col list-item-buttons">
