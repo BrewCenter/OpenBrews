@@ -13,12 +13,12 @@
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
 			<div ng-if="isIOS">
-				<div class="ingredient-item">
+				<div class="ingredient">
 					<div class="ingredient-item-name">{{fermentable.name}}</div>
 					<div class="ingredient-item">Add Time: {{fermentable.addTime}} M,</div>
 					<div class="ingredient-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
-					<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
 					<div class="ingredient-item">PPG: {{fermentable.ppg}}</div>
+					<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
 				</div>
 	            <ion-option-button class="button-assertive" 
 	            		ng-click="deleteFermentable($index)"
@@ -29,12 +29,12 @@
 
 	        <div ng-if="!isIOS" class="row">
 	            <div class="col-75 list-item-text">
-	                <div class="ingredient-item">
+	                <div class="ingredient">
 						<div class="ingredient-item-name">{{fermentable.name}}</div>
 						<div class="ingredient-item">Add Time: {{fermentable.addTime}} M,</div>
 						<div class="ingredient-item">Weight: {{fermentable.weight}} {{fermentable.weightUnits}},</div>
-						<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
 						<div class="ingredient-item">PPG: {{fermentable.ppg}}</div>
+						<div class="ingredient-item">SRM: {{fermentable.srm}},</div>
 					</div>
 	            </div>
 	            <div class="col list-item-buttons">

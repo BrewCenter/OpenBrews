@@ -31,18 +31,6 @@
 		padding-right: 10px;
 	}
 
-	/* define a pretty inline representation of a fermentable */
-	.ingredient {
-		.ingredient-item-name {
-			width: 100%;
-			float: left;
-		}
-		.ingredient-item {
-			float: left;
-			margin-right: 5px;
-			font-size: 10px;
-		}
-	}
 
 	.item-button {
 		padding: 0;
@@ -137,4 +125,17 @@
 	width: 100%;
 	height: 100%;
 	padding: 10px;
+}
+
+/* define a pretty inline representation of a fermentable */
+.ingredient {
+	.ingredient-item-name {
+		width: 100%;
+		float: left;
+	}
+	.ingredient-item {
+		float: left;
+		margin-right: 5px;
+		font-size: 10px !important;
+	}
 }
