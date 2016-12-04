@@ -9,7 +9,7 @@
 		</ion-item>
 
 
-		<ion-item class="clickable" ng-repeat="yeast in recipe.yeasts"
+		<ion-item class="clickable" ng-repeat="yeast in recipe.yeasts track by $index"
 				ng-click="editYeast($index)" ng-tap="editYeast($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 

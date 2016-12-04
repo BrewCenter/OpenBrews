@@ -40,27 +40,14 @@
 		}
 	}
 
-	/* fix inset lists */
-	.list-inset {
-		margin-top: 0;
-		margin-bottom: 20;
-	}
-	.list-inset:last-child {
-		margin-bottom: 20px;
-	}
-	.list-inset .item.item-input input {
-		padding-right: 15px !important;
-	}
-	.list-inset .item-button {
-		padding: 0px;
-	}
-	.list-inset .item-button button {
-		margin: 0px;
-	}
 	.item {
 		z-index: inherit;
 	}
 
+}
+
+.list-inset .item.item-input input {
+	padding-right: 15px !important;
 }
 
 .list-inset, .list-inset .item-input-dropdown {
@@ -136,6 +123,6 @@
 	.ingredient-item {
 		float: left;
 		margin-right: 5px;
-		font-size: 10px !important;
+		font-size: 11px !important;
 	}
 }

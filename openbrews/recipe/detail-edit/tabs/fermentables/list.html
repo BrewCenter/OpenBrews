@@ -8,7 +8,7 @@
 			<span>There are no fermentables here.</span>
 		</ion-item>
 
-		<ion-item class="clickable" ng-repeat="fermentable in recipe.fermentables"
+		<ion-item class="clickable" ng-repeat="fermentable in recipe.fermentables track by $index"
 				ng-click="editFermentable($index)" ng-tap="editFermentable($index)"
 				ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
