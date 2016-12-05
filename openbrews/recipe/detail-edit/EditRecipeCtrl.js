@@ -78,7 +78,6 @@
        * in the template to show the edit fermentable modal. If one
        * exists, it will fill the form with existing data. */
       $scope.editFermentable = function(index) {
-        console.log("Editing " + index);
         /* initialize the fermentable object */
         var fermentable;
         if(index !== undefined) {
@@ -112,7 +111,6 @@
        * Saves a fermentable. If index is null it will save
        * a new instance. */
       $scope.saveFermentable = function(fermentable, index) {
-        console.log("Saving " + index);
         if(index !== undefined) {
           $scope.recipe.fermentables[index] = fermentable;
         } else {
