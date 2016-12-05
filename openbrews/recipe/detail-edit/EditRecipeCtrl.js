@@ -78,6 +78,7 @@
        * in the template to show the edit fermentable modal. If one
        * exists, it will fill the form with existing data. */
       $scope.editFermentable = function(index) {
+        console.log("Editing " + index);
         /* initialize the fermentable object */
         var fermentable;
         if(index !== undefined) {
@@ -95,6 +96,7 @@
 
         // save tmp variables for use in the modal
         $scope.fermentableTmp = fermentable;
+        $scope.fermentableIndex = index;
 
         //show the modal
         $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/fermentables/modal.html', {
@@ -110,6 +112,7 @@
        * Saves a fermentable. If index is null it will save
        * a new instance. */
       $scope.saveFermentable = function(fermentable, index) {
+        console.log("Saving " + index);
         if(index !== undefined) {
           $scope.recipe.fermentables[index] = fermentable;
         } else {
