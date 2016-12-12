@@ -1,29 +1,36 @@
 <ion-view title="OpenBrews">
 	<ion-nav-buttons side="right">
-		<button class="button icon ion-plus button-clear-bordered" ng-click="addRecipe()" ng-tap="addRecipe()"></button>
+		<button class="button button-icon icon ion-plus" ng-click="addRecipe()" ng-tap="addRecipe()"></button>
 	</ion-nav-buttons>
 	<ion-content>
 
 		<ion-list>
-            <ion-item ng-repeat="recipe in recipes" ng-tap="viewRecipe(recipe)"
-            ng-click="viewRecipe(recipe)">
+            <ion-item ng-repeat="recipe in recipes" 
+                ng-tap="viewRecipe(recipe)"
+                ng-click="viewRecipe(recipe)" 
+                ng-class="{ 'list-item-inline-buttons' : !isIOS }">
 
-                <div class="row">
-					<div class="col text-left">
-						{{recipe.name}}
-					</div>
-					<div class="col text-right">
-						{{recipe.type}}
-					</div>
-				</div>
+                <div ng-if="isIOS">
+					{{recipe.name}}
+                    <ion-option-button class="button-calm" ng-click="editRecipe(recipe)">
+                        Edit
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive" ng-click="deleteRecipe(recipe)">
+                        Delete
+                    </ion-option-button>
+                </div>
 
-                <ion-option-button class="button-calm" ng-click="editRecipe(recipe)">
-                    Edit
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="deleteRecipe(recipe)">
-                    Delete
-                </ion-option-button>
-                </ion-item>
+                <div ng-if="!isIOS" class="row">
+                    <div class="col-75 list-item-text">
+                        {{recipe.name}}
+                    </div>
+                    <div class="col list-item-buttons">
+                        <button class="button button-small button-assertive icon ion-trash-a" ng-click="deleteRecipe(recipe); $event.stopPropagation();"></button>
+                        <button class="button button-small button-calm icon ion-edit" ng-click="editRecipe(recipe); $event.stopPropagation();"></button>
+                    </div>
+                </div>
+
+            </ion-item>
 
         </ion-list>
 

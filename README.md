@@ -28,7 +28,7 @@ Alpha release. This supports Android 4.1 and up.
 4. Install the remaining dependencies with `npm install`.
 5. Finally, you can run the app via `gulp && ionic serve [--lab]`.
 
-### Steps to run on your phone
+### Steps to run on your phone (with Ionic view)
 1. First, follow the steps above to run the app locally.
 2. Download the [Ionic View](http://view.ionic.io/) App on your mobile device.
 3. Create an Ionic View account.
@@ -43,6 +43,17 @@ Alpha release. This supports Android 4.1 and up.
 2. Install the Testing prereqs above.
 3. `cd` into the `openbrews/` directory.
 4. Run `karma start`
+
+## Deploying the App
+### Android
+1. Follow the steps to run locally above.
+2. Download the [Android SDK](https://developer.android.com/studio/index.html)
+3. `cd` into the `OpenBrews/` folder.
+4. Run `ionic build android`
+  - This will build an APK for debugging. To release an official version you need to use the `--release` flag, and I (Mike) need to sign it with my private key.
+
+### iOS
+TODO
 
 ### Optional Configuration
 If you would like to use features which utilize the brewerydb API, 

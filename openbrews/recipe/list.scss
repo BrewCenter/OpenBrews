@@ -1,3 +1,20 @@
 .recipe-row:hover {
 	background-color: #EEE;
 }
+
+.list-item-inline-buttons .item-content{
+
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-right: 16px;
+
+	.list-item-text {
+		padding-top: 10px;
+	}
+
+	.list-item-buttons button {
+		float: right;
+		margin-left: 5px;
+	}
+
+}

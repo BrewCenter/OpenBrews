@@ -1,0 +1,57 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+    <div class="buttons buttons-left">
+      <button class="button button-icon icon ion-close"
+        ng-click="closeModal()"
+        ng-tap="closeModal()"></button>
+    </div>
+    <h1 class="title">Fermentable</h1>
+    <div class="buttons buttons-right">
+      <button class="button button-icon icon ion-checkmark"
+        ng-click="saveFermentable(fermentableTmp, fermentableIndex)"
+        ng-tap="saveFermentable(fermentableTmp, fermentableIndex)"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <label for="fermentable.name" class="item item-input item-input-dropdown">
+        Name <input-dropdown
+                selected-item="fermentableTmp.name"
+                default-dropdown-items="fermentables"
+                allow-custom-input="true"
+                input-name="fermentable.name"
+                item-selected-method="setFermentableName(item, fermentableTmp)"
+                filter-list-method="filterItems(fermentables, userInput)">
+              </input-dropdown>
+      </label>
+      <label for="fermentable.method" class="item item-input item-select">
+        Method
+        <select name="fermentable.method" ng-model="fermentableTmp.method">
+            <option>Mash</option>
+            <option>Steep</option>
+            <option>Extract</option>
+          </select>
+      </label>
+      <label for="fermentable.weight" class="item item-input">
+        Weight <input type="number" string-to-number name="fermentable.weight" ng-model="fermentableTmp.weight" class="text-right">
+      </label>
+      <label for="fermentable.weightUnits" class="item item-input item-select">
+        Weight Units
+        <select name="fermentable.weightUnits" ng-model="fermentableTmp.weightUnits">
+            <option>Lbs</option>
+            <option>Kg</option>
+          </select>
+      </label>
+      <label for="fermentable.addTime" class="item item-input item-input-group">
+        Add Time <input type="number" string-to-number name="fermentable.addTime" ng-model="fermentableTmp.addTime" class="text-right">
+        <span class="input-addon">Minutes Left</span>
+      </label>
+      <label for="fermentable.ppg" class="item item-input">
+        PPG <input type="number" string-to-number name="fermentable.ppg" ng-model="fermentableTmp.ppg" class="text-right">
+      </label>
+      <label for="fermentable.srm" class="item item-input">
+        SRM <input type="number" string-to-number name="fermentable.srm" ng-model="fermentableTmp.srm" class="text-right">
+      </label>
+    </div>
+  </ion-content>
+</ion-modal-view>

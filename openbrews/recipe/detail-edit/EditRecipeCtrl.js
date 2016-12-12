@@ -2,16 +2,41 @@
 (function(){
   'use strict';
   angular.module('openbrews.editRecipe', [
-    'openbrews.fermentableDirective',
-    'openbrews.hopDirective',
-    'openbrews.yeastDirective',
-    'openbrews.otherIngredientDirective',
-    'openbrews.noteDirective',
     'openbrews.recipeStore',
     'openbrews.recipeUtils',
     'openbrews.breweryDB'
   ])
-    .controller('EditRecipeCtrl', ['$scope', '$state', 'RecipeStore', 'RecipeUtils', 'BreweryDB', '$http', '$filter', '$q', function($scope, $state, RecipeStore, RecipeUtils, BreweryDB, $http, $filter, $q) {
+    .controller('EditRecipeCtrl', 
+      [
+        '$scope', 
+        '$state', 
+        '$http', 
+        '$filter', 
+        '$q',
+        '$ionicModal',
+        '$ionicTabsDelegate',
+        'RecipeStore', 
+        'RecipeUtils', 
+        'BreweryDB', 
+      function(
+        $scope, 
+        $state, 
+        $http, 
+        $filter, 
+        $q,
+        $ionicModal,
+        $ionicTabsDelegate,
+        RecipeStore, 
+        RecipeUtils, 
+        BreweryDB
+      ) {
+
+      $scope.tab = 0;
+
+      $scope.setTab = function(tab) {
+        $scope.tab = tab;
+        $ionicTabsDelegate.select(tab);
+      }
 
       var defaultRecipe = {
         name: '',
@@ -34,18 +59,82 @@
         notes: []
       };
 
-      /* Add a new fermentable */
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove();
+      }
+
+      /************************************************************************
+       * Fermentables
+       ************************************************************************/
+
+       /*
+        * Helper function for adding a new fermentable. */
       $scope.addFermentable = function() {
-        $scope.recipe.fermentables.push(
-          {
+        return $scope.editFermentable();
+      }      
+      /*
+       * Adds a new fermentable or edits an existing one. Called
+       * in the template to show the edit fermentable modal. If one
+       * exists, it will fill the form with existing data. */
+      $scope.editFermentable = function(index) {
+        /* initialize the fermentable object */
+        var fermentable;
+        if(index !== undefined) {
+          fermentable = $scope.recipe.fermentables[index];
+        } else {
+          fermentable = {
             method: 'Mash',
             weight: 0,
             weightUnits: 'Lbs',
             addTime: 60,
             ppg: 0,
             srm: 0
+          };
+        }
+
+        // save tmp variables for use in the modal
+        $scope.fermentableTmp = fermentable;
+        $scope.fermentableIndex = index;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/fermentables/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      };
+
+      /*
+       * Saves a fermentable. If index is null it will save
+       * a new instance. */
+      $scope.saveFermentable = function(fermentable, index) {
+        if(index !== undefined) {
+          $scope.recipe.fermentables[index] = fermentable;
+        } else {
+          $scope.recipe.fermentables.push(fermentable);
+        }
+        $scope.closeModal();
+      };
+
+      /* 
+       * Sets the selected fermentable name. If it was selected
+       * from a smart type field, it will look for additional data
+       * to save. */
+      $scope.setFermentableName = function(item, fermentable){
+        if(typeof(item) == "string") {
+          fermentable.name = item;
+        } else {
+          fermentable.name = item.name;
+          if(item.srm) {
+            fermentable.srm = item.srm;
           }
-        );
+          if(item.ppg) {
+            fermentable.ppg = item.ppg;
+          }
+        }
       };
 
       /* remove the fermentable at the given index */
@@ -53,26 +142,21 @@
         $scope.recipe.fermentables.splice(index,1);
       };
 
-      /* Add other ingredient. */
-      $scope.addOther = function() {
-        $scope.recipe.others.push({
-          name: '',
-          amount: 0,
-          amountUnits: 'oz',
-          stage: 'Boil',
-          addTime: 0
-        });
-      };
-
-      /* Delete other ingredient. */
-      $scope.deleteOther = function(index) {
-        $scope.recipe.others.splice(index,1);
-      };
+      /************************************************************************
+       * Hops
+       ************************************************************************/   
 
       /* Add a new Hop */
       $scope.addHop = function() {
-        $scope.recipe.hops.push(
-          {
+        return $scope.editHop();
+      }
+      $scope.editHop = function(index) {
+        /* initialize the hop object */
+        var hop;
+        if(index !== undefined) {
+          hop = $scope.recipe.hops[index];
+        } else {
+          hop = {
             weight: 0,
             weightUnits: 'oz',
             type: 'Pellet',
@@ -80,7 +164,20 @@
             stage: 'Boil',
             addTime: 0
           }
-        );
+        }
+
+        // save tmp variables for use in the modal
+        $scope.hopIndex = index;
+        $scope.hopTmp = hop;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/hops/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
       };
 
       /* remove the Hop at the given index */
@@ -88,28 +185,183 @@
         $scope.recipe.hops.splice(index,1);
       };
 
-      /* Delete the yeast at supplied index */
-      $scope.deleteYeast = function(index) {
-        $scope.recipe.yeasts.splice(index, 1);
+      /* set the style selected */
+      $scope.setHop = function(item, hop){
+        if(typeof(item) == "string") {
+          hop.name = item;
+        } else {
+          hop.name = item.name;
+          if(item.alphaAcidMin) {
+            hop.aa = item.alphaAcidMin;
+          }
+        }
+      };
+
+      /*
+       * Saves a hop. If index is null it will save
+       * a new instance. */
+      $scope.saveHop = function(hop, index) {
+        if(index !== undefined) {
+          $scope.recipe.hops[index] = hop;
+        } else {
+          $scope.recipe.hops.push(hop);
+        }
+        $scope.closeModal();
+      };
+
+      /************************************************************************
+       * Yeast
+       ************************************************************************/  
+
+      /* 
+       * Helper function for adding a yeast instead of 
+       * editing an existing yeast. */
+      $scope.addYeast = function() {
+        return $scope.editYeast();
       };
 
       /* Add a new yeast */
-      $scope.addYeast = function() {
-        $scope.recipe.yeasts.push(
-          {
+      $scope.editYeast = function(index) {
+        /* inhitialize the yeast object */
+        var yeast;
+        if(index !== undefined) {
+          yeast = $scope.recipe.yeasts[index];
+        } else {
+          yeast = {
             amount: 0,
             attenuation: 0,
             alcoholTolerance: 0,
             flocculation: 'Medium-Low',
             amountUnits: 'G'
           }
-        );
+        }
+
+        // save tmp variables for use in the modal
+        $scope.yeastIndex = index;
+        $scope.yeastTmp = yeast;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/yeast/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
       };
+
+      /* Delete the yeast at supplied index */
+      $scope.deleteYeast = function(index) {
+        $scope.recipe.yeasts.splice(index, 1);
+      };
+
+      /* set the style selected */
+      $scope.setYeast = function(item, yeast){
+        if(typeof(item) == "string") {
+          yeast.name = item;
+        } else {
+          yeast.name = item.name;
+          if(item.attenuationMin) {
+            yeast.attenuation = item.attenuationMin;
+          }
+        }
+      };
+
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveYeast = function(yeast, index) {
+        if(index !== undefined) {
+          $scope.recipe.yeasts[index] = yeast;
+        } else {
+          $scope.recipe.yeasts.push(yeast);
+        }
+        $scope.closeModal();
+      };
+
+      /************************************************************************
+       * Other/Basic Info functions
+       ************************************************************************/
+
+      $scope.addAdjunct = function() {
+        return $scope.editAdjunct();
+      }
+
+      /* Add other ingredient. */
+      $scope.editAdjunct = function(index) {
+        /* inhitialize the other object */
+        var other;
+        if(index !== undefined) {
+          other = $scope.recipe.others[index];
+        } else {
+          other = {
+            name: '',
+            amount: 0,
+            amountUnits: 'oz',
+            stage: 'Boil',
+            addTime: 0
+          }
+        }
+
+        // save tmp variables for use in the modal
+        $scope.adjunctIndex = index;
+        $scope.adjunctTmp = other;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/other/adjunct-modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      };
+
+      /* Delete other ingredient. */
+      $scope.deleteAdjunct = function(index) {
+        $scope.recipe.others.splice(index,1);
+      };
+
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveAdjunct = function(other, index) {
+        if(index !== undefined) {
+          $scope.recipe.others[index] = other;
+        } else {
+          $scope.recipe.others.push(other);
+        }
+        $scope.closeModal();
+      };
+
 
       /* Add a new note */
       $scope.addNote = function() {
-        $scope.recipe.notes.push({
-          'text': ''
+        return $scope.editNote();
+      };
+
+      /* edit a note */
+      $scope.editNote = function(index) {
+        var note;
+        if(index !== undefined) {
+          note = $scope.recipe.notes[index];
+        } else {
+          note = {
+            'text': ''
+          }
+        }
+
+        // save tmp variables for use in the modal
+        $scope.noteIndex = index;
+        $scope.noteTmp = note;
+
+        //show the modal
+        $ionicModal.fromTemplateUrl('recipe/detail-edit/tabs/other/note-modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
         });
       };
 
@@ -118,9 +370,27 @@
         $scope.recipe.notes.splice(index, 1);
       };
 
+      /*
+       * Saves a yeast. If index is null it will save
+       * a new instance. */
+      $scope.saveNote = function(note, index) {
+        if(index !== undefined) {
+          $scope.recipe.notes[index] = note;
+        } else {
+          $scope.recipe.notes.push(note);
+        }
+        $scope.closeModal();
+      };
+
       /* Save a recipe in LocalStorage */
-      $scope.saveRecipe = function(valid) {
-        if(valid) {
+      $scope.saveRecipe = function() {
+        angular.forEach($scope.recipeForm.$error, function (field) {
+            angular.forEach(field, function(errorField){
+                errorField.$setTouched();
+                errorField.$setDirty();
+            })
+        });
+        if($scope.recipeForm.$valid) {
           if ($state.params.isNew) {
             RecipeStore.insert($scope.recipe);
           } else {
@@ -243,33 +513,6 @@
       /* set the style selected */
       $scope.setStyle = function(item){
         $scope.recipe.style = item;
-      };
-
-      /* set the style selected */
-      $scope.setFermentable = function(item, fermentable){
-        fermentable.name = item.name;
-        if(item.srm) {
-          fermentable.srm = item.srm;
-        }
-        if(item.ppg) {
-          fermentable.ppg = item.ppg;
-        }
-      };
-
-      /* set the style selected */
-      $scope.setHop = function(item, hop){
-        hop.name = item.name;
-        if(item.alphaAcidMin) {
-          hop.aa = item.alphaAcidMin;
-        }
-      };
-
-      /* set the style selected */
-      $scope.setYeast = function(item, yeast){
-        yeast.name = item.name;
-        if(item.attenuationMin) {
-          yeast.attenuation = item.attenuationMin;
-        }
       };
 
       $scope.filterItems = function(styles, userInput) {

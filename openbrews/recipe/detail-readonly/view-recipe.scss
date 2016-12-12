@@ -1,11 +1,42 @@
 .view-recipe {
+
+  margin-top: 10px;
+
+  .scroll-content {
+    margin-bottom: 9px;
+  }
+
+  h3 {
+    padding-left: 10px;
+  }
+
   .view-label {
     font-weight: bold;
   }
-  h3 {
-    padding-left: 15px;
+
+  .item {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
-  h4 {
-    padding-left: 20px;
+
+  .item.item-split {
+    padding: 0px;
+
+    .row {
+      padding: 0px;
+    }
+
+    .col {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .col:nth-child(2) {
+      border-left: 1px solid #DDD;
+    }
+
   }
+
 }

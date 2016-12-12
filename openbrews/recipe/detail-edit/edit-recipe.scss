@@ -1,10 +1,29 @@
 .edit-recipe {
-	.item input {
-		padding-left: 20px !important;
+
+	.tabs-standard .tab-content {
+		margin-top: 42px;
 	}
 
-	h4 {
-		padding-left: 20px;
+	.tabs-top .tab-content {
+		top: 90px;
+	}
+
+	.item, .item-select {
+
+		input {
+			padding-left: 20px !important;
+		}
+	}
+
+	.item-input-group.item-select select {
+		position: relative;
+		height: 44px;
+	}
+
+	.row.item-row, .row.item-row .col.item-col {
+		padding: 0;
+		border-left: none;
+		border-right: none;
 	}
 
 	.padded {
@@ -12,81 +31,98 @@
 		padding-right: 10px;
 	}
 
-	.item-input-dropdown.form-error {
-		border-bottom: 3px solid $assertive;
-		padding-bottom: 3px;
-		color: $assertive;
 
-		li {
-			color: $font-color;
-		}
-
-		ul>li:first-child {
-			border-top: 3px solid $assertive;
-		}
-
-		::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-		  color: lighten($assertive, 15%);
-		}
-		::-moz-placeholder { /* Firefox 19+ */
-		  color: lighten($assertive, 15%);
-		}
-		:-ms-input-placeholder { /* IE 10+ */
-		  color: lighten($assertive, 15%);
-		}
-		:-moz-placeholder { /* Firefox 18- */
-		  color: lighten($assertive, 15%);
+	.item-button {
+		padding: 0;
+		.button-block {
+			margin: 0;
+			border-radius: 0;
 		}
 	}
 
-	/* fix inset lists */
-	.list-inset {
-		margin-top: 0;
-		margin-bottom: 20;
-	}
-	.list-inset:last-child {
-		margin-bottom: 20px;
-	}
-	.list-inset .item.item-input input {
-		padding-right: 15px !important;
-	}
-	.list-inset .item-button {
-		padding: 0px;
-	}
-	.list-inset .item-button button {
-		margin: 0px;
-	}
 	.item {
 		z-index: inherit;
 	}
 
-	.list .item-input-dropdown ul {
-		z-index: 10;
+}
+
+.list-inset .item.item-input input {
+	padding-right: 15px !important;
+}
+
+.list-inset, .list-inset .item-input-dropdown {
+	z-index: 10;
+	overflow: visible;
+}
+
+.list .item-input-dropdown input-dropdown,
+.list .item-input-dropdown .input-dropdown,
+.list .item-input-dropdown .input-dropdown input,
+ {
+	text-align: right;
+	width: 100%;
+}
+
+
+.list .item-input-dropdown .input-dropdown ul {
+	position: fixed !important;
+	left: 0px;
+	right: 0px;
+	width: auto;
+	border: #E0E0E0;
+}
+
+.list-inset .item-input-dropdown .input-dropdown ul {
+	left: 10px;
+	right: 10px;
+}
+
+.list .item-input-dropdown .input-dropdown li {
+	border: 1px solid #F0F0F0;
+}
+
+.item-input-dropdown.form-error {
+	border-bottom: 3px solid $assertive;
+	padding-bottom: 3px;
+	color: $assertive;
+
+	li {
+		color: $font-color;
 	}
 
-	.list .item-input-dropdown input-dropdown,
-	.list .item-input-dropdown .input-dropdown,
-	.list .item-input-dropdown .input-dropdown input,
-	 {
-		text-align: right;
+	ul>li:first-child {
+		border-top: 3px solid $assertive;
+	}
+
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: lighten($assertive, 15%);
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: lighten($assertive, 15%);
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color: lighten($assertive, 15%);
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: lighten($assertive, 15%);
+	}
+}
+
+.full-screen-textarea {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+}
+
+/* define a pretty inline representation of a fermentable */
+.ingredient {
+	.ingredient-item-name {
 		width: 100%;
+		float: left;
 	}
-
-
-	.list .item-input-dropdown .input-dropdown ul {
-		position: fixed !important;
-		left: 0px;
-		right: 0px;
-		width: auto;
-		border: #E0E0E0;
-	}
-
-	.list-inset .item-input-dropdown .input-dropdown ul {
-		left: 10px;
-		right: 10px;
-	}
-
-	.list .item-input-dropdown .input-dropdown li {
-		border: 1px solid #F0F0F0;
+	.ingredient-item {
+		float: left;
+		margin-right: 5px;
+		font-size: 11px !important;
 	}
 }

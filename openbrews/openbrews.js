@@ -16,6 +16,21 @@
 
   .run(function($ionicPlatform, $http, $rootScope, BreweryDB) {
     $ionicPlatform.ready(function() {
+      // add device to root scope for conditionally showing elements
+      $rootScope.platform = ionic.Platform.platform();
+      $rootScope.isIOS = ionic.Platform.platform() == 'ios';
+      $rootScope.isAndroid = ionic.Platform.platform() == 'android';
+
+      if(window.cordova) {
+        $rootScope.isWebView = false;
+        if(window.LogRocket) {
+          window.LogRocket.init('openbrews/openbrews');
+        }
+      } else {
+        $rootScope.isWebView = true;
+      }
+
+
       /* try to get the configuration file */
       $http.get('config.json')
       .then(function successCallback(response) {
@@ -34,14 +49,14 @@
          });
       });
 
-      if(mixpanel && window.LogRocket) {
+      if(window.cordova && mixpanel && window.LogRocket) {
         mixpanel.track('Session', {
           'recordingUrl' : window.LogRocket.recordingURL,
           'device' : ionic.Platform.device(),
           'platform': ionic.Platform.platform(),
           'platformVersion': ionic.Platform.version()
         });
-      } else if(mixpanel) {
+      } else if(window.cordova && mixpanel) {
         mixpanel.track('Session', {
           'recordingUrl' : 'LogRocket not supported in ES5',
           'device' : ionic.Platform.device(),
